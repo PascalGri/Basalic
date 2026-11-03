@@ -1,0 +1,38 @@
+Kundencheckliste – bestehende Website basalic.de
+Stand: 03.11.2026
+
+„Korrigieren“ bezeichnet sichtbare Probleme; „Prüfen“ erfordert zusätzliche Angaben oder eine technische Prüfung.
+
+☐ Korrigieren: Geschäftsanschrift vereinheitlichen – Impressum nennt Dürnau, Datenschutz Heiningen. Platzhaltertelefonnummer 555-555-5555 durch die richtige Nummer ersetzen.
+
+☐ Korrigieren/prüfen: Impressum aktualisieren: alte TMG-Verweise überarbeiten, persönliche Steuernummer entfernen. Falls eine Registereintragung besteht, Registerart und Nummer vollständig angeben.
+
+☐ Prüfen: Erlaubnisse, Registerdaten und zuständige Aufsicht für jede Tätigkeit bestätigen; besonders Mietverwaltung und Privatkreditvermittlung berücksichtigen.
+
+☐ Prüfen/ergänzen: Erstinformationen für Versicherungs- und Darlehensvermittlung vervollständigen, einschließlich Vergütung, Beteiligungen und gegebenenfalls Bankbindungen. Rechtzeitig in vorgeschriebener Form übermitteln; ein Website-Link allein genügt dafür nicht automatisch.
+
+☐ Prüfen/überarbeiten: Datenschutzerklärung auf die tatsächliche Website abstimmen: Hosting, Kontaktformular, Dienstleister/Empfänger, Verarbeitungszwecke und Speicherdauer verständlich erklären.
+
+☐ Prüfen: Tatsächliche Cookies und eingebundene Dienste erfassen. Falls einwilligungspflichtige Cookies oder Dienste eingesetzt werden, die Einwilligung vor deren Start einholen und Widerruf ermöglichen.
+
+☐ Prüfen/aktualisieren: Immobilienbestand und Objektangaben bestätigen. Verkaufte Objekte klar ins Referenzarchiv einordnen; beworbene Preise und Provisionen vollständig und eindeutig darstellen.
+
+☐ Prüfen/ergänzen: Bei Immobilienanzeigen die erforderlichen Energieangaben aufnehmen, sofern ein Energieausweis vorliegt. Ausweisstatus und Daten je Objekt klären.
+
+☐ Prüfen: Nutzungsrechte für sämtliche Objektfotos, Porträts und sonstigen Bilder nachweisen; erforderliche Bildnachweise und Freigaben festhalten.
+
+☐ Prüfen/aktualisieren: Angaben zu Schlichtungsstellen und Kontaktdaten aktualisieren; erforderliche Erklärung zur Teilnahme an Verbraucherstreitbeilegung ergänzen.
+
+☐ Prüfen: Anwendbarkeit des Barrierefreiheitsstärkungsgesetzes auf das konkrete Angebot einschließlich möglicher Ausnahmen klären; gegebenenfalls erforderliche Informationen und Anpassungen umsetzen.
+
+Offizielle Quellen:
+Impressum: https://www.gesetze-im-internet.de/ddg/__5.html
+Tätigkeitserlaubnisse: https://www.gesetze-im-internet.de/gewo/
+Versicherungsinformationen: https://www.gesetze-im-internet.de/versvermv_2018/__15.html
+Darlehensinformationen: https://www.gesetze-im-internet.de/bgbeg/art_247__13.html
+Datenschutz: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+Cookie-Einwilligung: https://www.gesetze-im-internet.de/ttdsg/__25.html
+Energieangaben: https://www.gesetze-im-internet.de/geg/__87.html
+Barrierefreiheit: https://www.gesetze-im-internet.de/bfsg/__1.html
+
+Die Rechtstexte und tatsächliche Technik abschließend fachlich prüfen lassen; diese Checkliste ersetzt keine rechtliche Einzelfallprüfung.

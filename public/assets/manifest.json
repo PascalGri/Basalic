@@ -1,0 +1,542 @@
+{
+  "checked": "2026-11-03",
+  "assets": [
+    {
+      "file": "faurndau.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1766087092",
+      "propertyId": "faurndau",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1+Haus+Front.jpg",
+      "expose": "https://www.immobilienscout24.de/expose/171049343",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "muehlhausen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1514467580",
+      "propertyId": "muehlhausen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/001+Aussen.jpg",
+      "expose": "https://www.immobilienscout24.de/expose/169662545",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "neidlingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1432507334",
+      "propertyId": "neidlingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/L1240182-instagram.jpg",
+      "expose": "https://www.immobilienscout24.de/expose/169930109",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "bezgenriet.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1246193212",
+      "propertyId": "bezgenriet",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/0001+Front.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "schwaebisch-hall.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1172901170",
+      "propertyId": "schwaebisch-hall",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/002.jpeg",
+      "expose": "https://www.immobilienscout24.de/expose/168406677",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "plochingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1236925600",
+      "propertyId": "plochingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/001.jpeg",
+      "expose": "https://www.immobilienscout24.de/expose/166340253",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-plochingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1107683856",
+      "propertyId": "referenz-plochingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/001-dbc46219.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "istrien.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1963576162",
+      "propertyId": "istrien",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Istra1.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "sarajevo.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1488694642",
+      "propertyId": "sarajevo",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/2.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1652934967",
+      "propertyId": "referenz-eislingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/001.jpg",
+      "expose": "https://www.immobilienscout24.de/expose/158137015",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-uhingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1074637887",
+      "propertyId": "referenz-uhingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/001.JPG",
+      "expose": "https://www.immobilienscout24.de/expose/158477048",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-garten.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1821346797",
+      "propertyId": "referenz-eislingen-garten",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1-cc3ea4e8.jpg",
+      "expose": "https://www.immobilienscout24.de/expose/158165783",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-waldenbuch-wohnung.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1600318677",
+      "propertyId": "referenz-waldenbuch-wohnung",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/7+Balkon.jpeg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-74.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1041976400",
+      "propertyId": "referenz-eislingen-74",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1-134d4b28.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-ditzingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1073398324",
+      "propertyId": "referenz-ditzingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1+wohnen+l.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-waldenbuch-haus.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1047145304",
+      "propertyId": "referenz-waldenbuch-haus",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_1117.JPG",
+      "expose": "https://www.immobilienscout24.de/expose/144454899",
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-nordstadt-74.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1330675682",
+      "propertyId": "referenz-goeppingen-nordstadt-74",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/0003.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-ebersbach.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1893814691",
+      "propertyId": "referenz-ebersbach",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/9+Wohnen+li-47ce9120.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-leinfelden-echterdingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1843971558",
+      "propertyId": "referenz-leinfelden-echterdingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/2+Wohnzimmer.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-wangen-oberwaelden.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1924244566",
+      "propertyId": "referenz-wangen-oberwaelden",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1-373dd2b0.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-gingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1326889703",
+      "propertyId": "referenz-gingen",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1-0476fcbd.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-ludwigsburg.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1291541169",
+      "propertyId": "referenz-ludwigsburg",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_0907.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-nordstadt-garten.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1141031938",
+      "propertyId": "referenz-goeppingen-nordstadt-garten",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/10+Terrasse+Garten.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-penthouse-123.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1053840471",
+      "propertyId": "referenz-eislingen-penthouse-123",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1.jpeg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-faurndau-wohnung.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1477060526",
+      "propertyId": "referenz-faurndau-wohnung",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Titelbild.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-plattenhardt-penthouse.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1498127006",
+      "propertyId": "referenz-plattenhardt-penthouse",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/OG+Ausblick.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-wangen-zweifamilienhaus.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1674750184",
+      "propertyId": "referenz-wangen-zweifamilienhaus",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/FIDU8480.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-gartenwohnung-88.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1953026017",
+      "propertyId": "referenz-gartenwohnung-88",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMAG0094+%28Mittel%29.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-75.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1323306606",
+      "propertyId": "referenz-goeppingen-75",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Wohnzimmer.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-103.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1971343620",
+      "propertyId": "referenz-goeppingen-103",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1+Wohnzimmer.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-101.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1682627020",
+      "propertyId": "referenz-eislingen-101",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/5.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-plattenhardt-erdgeschoss.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1591988186",
+      "propertyId": "referenz-plattenhardt-erdgeschoss",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/EG+Wintergarten.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-penthouse-44.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1770445873",
+      "propertyId": "referenz-eislingen-penthouse-44",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_0657.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-plattenhardt-appartement.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1481795156",
+      "propertyId": "referenz-plattenhardt-appartement",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/UG+Carport.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-tamm.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1842596248",
+      "propertyId": "referenz-tamm",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Aussicht_2.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-plattenhardt-79.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1690104026",
+      "propertyId": "referenz-plattenhardt-79",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/OG+Ausblick.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-metzingen.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1712897407",
+      "propertyId": "referenz-metzingen",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Anlage.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-duernau.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1086425521",
+      "propertyId": "referenz-duernau",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Aussen.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-appartement.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1205736916",
+      "propertyId": "referenz-goeppingen-appartement",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Aussen-de7579d2.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-wangen-bungalow-95.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1386546194",
+      "propertyId": "referenz-wangen-bungalow-95",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/1.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-zell.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1332314411",
+      "propertyId": "referenz-zell",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Essbereich.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-wangen-grundstueck.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1850588193",
+      "propertyId": "referenz-wangen-grundstueck",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_0257.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-erdgeschoss-77.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1707007673",
+      "propertyId": "referenz-eislingen-erdgeschoss-77",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Grundriss+Bild.JPG",
+      "expose": null,
+      "role": "Grundriss aus dem zugehörigen Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-eislingen-erdgeschoss-garten.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1808654679",
+      "propertyId": "referenz-eislingen-erdgeschoss-garten",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/aussen.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-muellheim.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1664756962",
+      "propertyId": "referenz-muellheim",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_0042.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-ottenbach.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1695483978",
+      "propertyId": "referenz-ottenbach",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/IMG_0110-3c6cac57.JPG",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-murrhardt.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1774260965",
+      "propertyId": "referenz-murrhardt",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/7135cb35-9f91-48bb-9c48-3cd3e1bf5f5f.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "referenz-goeppingen-zweifamilienhaus.webp",
+      "source": "https://www.basalic.de/Immobilien",
+      "sourceRow": "1105700857",
+      "propertyId": "referenz-goeppingen-zweifamilienhaus",
+      "original": "https://cdn.website-editor.net/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/f841328f-4407-4076-9b60-65122c9f00a6.jpg",
+      "expose": null,
+      "role": "Abbildung aus dem zugehörigen Immobilien-Quelleneintrag",
+      "rights": "Betreiberfreigabe und Urhebernachweis ausstehend; ausschließlich interne Entwurfsvorschau."
+    },
+    {
+      "file": "senad-basalic.webp",
+      "source": "https://www.basalic.de/about",
+      "original": "https://cdn.website-editor.net/s/3d7cd83f138046e7ae10bad5403fc7ca/dms3rep/multi/Basalic+Senad+Bild+Business.jpg",
+      "rights": "Urheber-/Persönlichkeitsrechte vor Veröffentlichung bestätigen."
+    },
+    {
+      "file": "hero-original.webp",
+      "source": "https://www.basalic.de/",
+      "original": "https://cdn.website-editor.net/md/and1/dms3rep/multi/10562.jpeg",
+      "downloadUrl": "https://le-cdn.website-editor.net/md/and1/dms3rep/multi/opt/10562-1920w.jpeg",
+      "role": "Originales Startseitenmotiv: Person vor Sonnenaufgang, kein Immobilienobjekt",
+      "width": 1800,
+      "pixelWidth": 1701,
+      "pixelHeight": 1129,
+      "rights": "Aus der bisherigen Website übernommen; vorhandene Projekthinweise zu Bildfreigaben bleiben bestehen."
+    },
+    {
+      "file": "mietverwaltung.webp",
+      "source": "https://www.basalic.de/Mietverwaltung",
+      "original": "https://cdn.website-editor.net/md/and1/dms3rep/multi/116719.jpeg",
+      "role": "Originales Illustrationsmotiv zur Mietverwaltung",
+      "pixelWidth": 1279,
+      "pixelHeight": 1501,
+      "rights": "Aus der bisherigen Website übernommen; vorhandene Projekthinweise zu Bildfreigaben bleiben bestehen.",
+      "width": 1400
+    },
+    {
+      "file": "finanzierung.webp",
+      "source": "https://www.basalic.de/finanzierung",
+      "original": "https://cdn.website-editor.net/md/and1/dms3rep/multi/113667.jpeg",
+      "role": "Originales Illustrationsmotiv zur Baufinanzierung",
+      "pixelWidth": 1400,
+      "pixelHeight": 939,
+      "rights": "Aus der bisherigen Website übernommen; vorhandene Projekthinweise zu Bildfreigaben bleiben bestehen.",
+      "width": 1400
+    },
+    {
+      "file": "absicherung.webp",
+      "source": "https://www.basalic.de/Vorsorge",
+      "original": "https://cdn.website-editor.net/md/and1/dms3rep/multi/112107.jpeg",
+      "role": "Originales Illustrationsmotiv zur Absicherung",
+      "pixelWidth": 1400,
+      "pixelHeight": 933,
+      "rights": "Aus der bisherigen Website übernommen; vorhandene Projekthinweise zu Bildfreigaben bleiben bestehen.",
+      "width": 1400
+    },
+    {
+      "file": "altersvorsorge.webp",
+      "source": "https://www.basalic.de/Vorsorge",
+      "original": "https://cdn.website-editor.net/md/and1/dms3rep/multi/125224.jpeg",
+      "role": "Originales Illustrationsmotiv zur Altersvorsorge",
+      "pixelWidth": 1400,
+      "pixelHeight": 933,
+      "rights": "Aus der bisherigen Website übernommen; vorhandene Projekthinweise zu Bildfreigaben bleiben bestehen.",
+      "width": 1400
+    }
+  ]
+}
