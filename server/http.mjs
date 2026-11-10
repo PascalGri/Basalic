@@ -1,6 +1,8 @@
 import sharp from 'sharp';
 import { createAuth } from './auth.mjs';
+import { createContactMailer } from './contact.mjs';
 import { createPropertyStore, RequestError } from './properties.mjs';
+import { validateContact } from '../src/contact-fields.js';
 
 const maxUpload = 12 * 1024 * 1024;
 const imageTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
@@ -71,7 +73,33 @@ function wrongMethod(response, methods) {
 export function createSiteApi(config) {
   const auth = createAuth(config);
   const store = createPropertyStore(config.dataDir);
+  const contact = createContactMailer(config.contact);
   let uploadsInFlight = 0;
+
+  async function handleContact(request, response) {
+    const { method, headers } = request;
+    const allowedOrigin = config.contact?.allowedOrigin;
+    const fromPreview = Boolean(allowedOrigin && headers.origin === allowedOrigin);
+    if (fromPreview) {
+      response.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+      response.setHeader('Vary', 'Origin');
+    }
+    if (method === 'GET' && !headers.origin) return sendJson(response, 200, { configured: contact.configured });
+    if (!fromPreview && !auth.sameOrigin(request)) throw new RequestError(403, 'Bitte öffnen Sie das Formular direkt auf der Website.');
+    if (method === 'GET') return sendJson(response, 200, { configured: contact.configured });
+    if (method === 'OPTIONS') {
+      response.writeHead(204, { 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Allow-Headers': 'Content-Type', 'Cache-Control': 'no-store' });
+      return response.end();
+    }
+    if (method !== 'POST') return wrongMethod(response, ['GET', 'POST', 'OPTIONS']);
+
+    const { values, errors } = validateContact(await readJson(request, 24 * 1024));
+    if (Object.keys(errors).length) {
+      return sendJson(response, 400, { error: 'Bitte prüfen Sie die markierten Felder.', fields: errors });
+    }
+    await contact.send(values);
+    return sendJson(response, 200, { ok: true });
+  }
 
   async function upload(request) {
     const type = contentType(request);
@@ -97,6 +125,7 @@ export function createSiteApi(config) {
 
   async function handle(request, response, path) {
     const { method } = request;
+    if (path === '/api/contact') return handleContact(request, response);
     if (path === '/api/properties') {
       if (method !== 'GET') return wrongMethod(response, ['GET']);
       return sendJson(response, 200, { properties: await store.list() });

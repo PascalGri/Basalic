@@ -2,18 +2,32 @@
 
 **Stand: 03.11.2026.** Prüfung der beschriebenen Website-Funktionen und der verlinkten amtlichen Grundlagen. Die Website wird weiterhin lokal bereitgestellt. Es wurde keine allgemeine Rechtskonformität festgestellt und kein öffentlicher Betrieb eingerichtet.
 
-Der Nutzer hat ausdrücklich sichtbare Platzhalter für noch fehlende Pflichtangaben angeordnet. Diese Felder stehen in eckigen Klammern; sie sind **keine tatsächlich erteilten Angaben**. Rechtliche Informationen, Registerstatus und Bildfreigaben dürfen nicht durch Vermutungen ersetzt werden.
+Seit dem 10.11.2026 werden offene Angaben nur noch intern dokumentiert. Die Besuchertexte enthalten die vorliegenden Angaben. Die unten genannten Lücken sind vor der entsprechenden öffentlichen Nutzung zu klären.
 
 ## Umgesetzt
 
-- Impressum, Datenschutz und Erstinformationen nennen denselben bekannten Namen und dieselben Kontaktangaben. Für vollständige Firmierung/Rechtsform und Geschäftsanschrift werden identische, klar erkennbare Platzhalter verwendet. Die widersprüchlichen alten Adressen werden Besuchern nicht als wählbare aktuelle Anschriften präsentiert.
+- Impressum, Datenschutz und Erstinformationen nennen denselben bekannten Namen und dieselben Kontaktangaben. Die vollständige Firmierung/Rechtsform und die Geschäftsanschrift stehen noch aus.
 - Persönliche Steuernummer, veraltete TMG-Standardtexte und der nicht mehr aktuelle EU-OS-Link sind entfernt.
 - Erlaubnisbereiche für Immobilienvermittlung, Wohnimmobilienverwaltung, allgemeine Darlehensvermittlung, Versicherungsvermittlung und Immobiliardarlehensvermittlung werden getrennt behandelt. Es werden keine unbekannten Befugnisse oder Zuständigkeiten als bestätigt dargestellt.
 - Versicherungs-Erstinformation: der erforderliche Zeitpunkt wurde auf **ersten Geschäftskontakt** präzisiert. Ein Footerlink allein wird nicht als Ersatz für die vorgesehene Übermittlung bezeichnet.
 - Datenschutz beschreibt die vorhandene Technik: keine Cookies, kein Tracking, keine dauerhafte Speicherung von Formulareingaben durch die Website; Bilder/Schriften vom eigenen Webserver; Kontaktformular erzeugt einen Mailto-Entwurf und versendet nichts automatisch. Keine erfundene Cookie-Einwilligung oder Hosting-Konfiguration.
 - Alle vier neuen KI-Motive und ihre Wiederverwendung auf der Startseite tragen direkt am Bild die Kennzeichnung **„KI-generiertes Beispielbild“**. Die Bildnachweise erklären, dass keine realen Kunden-, Beratungs- oder Objektaufnahmen gezeigt werden.
-- Die Finanzierungsseite enthält beim Angebot den Platzhalter für Vermittlungsbefugnisse und Bindungen an Darlehensgeber.
-- Die sieben Verkaufsangebote enthalten unter „Preis & Energie“ Platzhalter für Kaufpreis, Käuferprovision und Energieausweisangaben. Es wurden keine Preise, Provisionen oder Energiewerte erfunden.
+- Für die Finanzierungsseite stehen Angaben zu Vermittlungsbefugnissen und Bindungen an Darlehensgeber aus.
+- Angebotsseiten zeigen nur die hinterlegten aktuellen Konditionen und belegten Objektdaten.
+
+### Abgleich der Verkaufsangebote am 10.11.2026
+
+| Objekt | Angaben aus der Recherche |
+| --- | --- |
+| Mühlhausen im Täle | 398.000 €, keine Käuferprovision im Privatangebot, Öl-Zentralheizung und Energieausweis zur Besichtigung. Dazu 4,5 Zimmer und Baujahr 1978. [ImmoScout24](https://www.immobilienscout24.de/expose/171799398) |
+| Neidlingen | 498.000 €, keine Käuferprovision im Privatangebot, Öl-Zentralheizung und Energieausweis zur Besichtigung. Dazu zehn Zimmer und ca. 190 m² Grundstück. [ImmoScout24](https://www.immobilienscout24.de/expose/172113062) |
+| Göppingen-Faurndau | Früheres Privatangebot über 318.000 € ohne Käuferprovision. Öl-Zentralheizung, Energieausweis zur Besichtigung, sieben Zimmer und zwei Gebäudeteile aus 1890 und 1960. [Deaktiviertes ImmoScout24-Exposé](https://www.immobilienscout24.de/en/expose/171049343) |
+| Göppingen-Bezgenriet | Früheres Privatangebot über 398.000 € ohne Käuferprovision. Öl-Zentralheizung, Energieausweis zur Besichtigung, sieben Zimmer und ca. 244 m² Grundstück. Das Fassadenfoto und die Eckdaten stimmen mit dem Basalic-Objekt überein. Die ca. 164 m² sind als Wohnfläche ausgewiesen (ca. 62 m² und ca. 102 m² je Wohneinheit). [Deaktiviertes ImmoScout24-Exposé](https://www.immobilienscout24.de/expose/172208938) |
+| Schwäbisch Hall | 198.000 €, optional 10.000 € für den Tiefgaragenstellplatz, 412 € Hausgeld, keine Käuferprovision im Privatangebot, Fernwärme und Energieausweis zur Besichtigung. Innenaufnahmen und Grundriss belegen die Zuordnung über ein früheres Mietinserat. [Aktuelles ImmoScout24-Exposé](https://www.immobilienscout24.de/expose/171640669), [bisheriges ImmoScout24-Exposé](https://www.immobilienscout24.de/expose/168406677), [Mietinserat](https://mapio.net/expose/MHaZPBeKC4k7eOTJiGAbvG/) |
+| Salach | Der Kaufpreis steht in der Basalic-Objektübersicht auf Anfrage. Der ähnliche ImmoScout24-Treffer weist abweichende Wohn- und Grundstücksflächen aus. [Basalic](https://www.basalic.de/Immobilien), [ImmoScout24](https://www.immobilienscout24.de/expose/171640628) |
+| Plochingen | Das verlinkte Inserat ist nicht mehr abrufbar. Für den Abgleich fehlt ein eindeutig zuordenbares Folgeinserat. [ImmoScout24](https://www.immobilienscout24.de/expose/166340253) |
+
+Bei den fünf zugeordneten Exposés fehlen Ausweisart, Energiekennwert, Effizienzklasse und das ausdrücklich dem Ausweis entnommene Baujahr. Frühere Preise und Ausweisstatus deaktivierter Angebote bleiben hier dokumentiert. Die Käuferprovision bei Vermittlung durch Basalic ist separat zu bestätigen.
 
 ## Noch benötigte Angaben und Nachweise
 
@@ -49,7 +63,7 @@ Die folgenden Seiten wurden am 03.11.2026 inhaltlich geprüft. Einzelne Abrufe �
 ### Erstinformationen und Darlehenswerbung
 
 - [§ 15 VersVermV](https://www.gesetze-im-internet.de/versvermv_2018/__15.html): Pflichtangaben bereits beim ersten Geschäftskontakt, einschließlich Status/Registerprüfung, Beratungsangebot, Vergütung, Beteiligungen und Schlichtungsanschrift. [§ 16 VersVermV](https://www.gesetze-im-internet.de/versvermv_2018/__16.html) regelt verständliche, unentgeltliche Übermittlung und die Voraussetzungen alternativer Datenträger/Webseiten. Ein allgemein zugänglicher Website-Link erfüllt diese Bedingungen nicht automatisch.
-- [Art. 247 § 13 EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13.html): Vergütung, Drittanreize, Befugnisumfang und gegebenenfalls Nebenentgelte rechtzeitig in der vorgesehenen Form. **Abs. 4 verlangt den Befugnisumfang schon bei Werbung für Verbraucherdarlehen**; der sichtbare Platzhalter auf der Finanzierungsseite muss daher vor einer entsprechenden öffentlichen Werbung mit bestätigten Angaben ersetzt werden.
+- [Art. 247 § 13 EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13.html): Vergütung, Drittanreize, Befugnisumfang und gegebenenfalls Nebenentgelte rechtzeitig in der vorgesehenen Form. **Abs. 4 verlangt den Befugnisumfang schon bei Werbung für Verbraucherdarlehen.** Für die Finanzierungsseite müssen die bestätigten Angaben vor einer entsprechenden öffentlichen Werbung vorliegen.
 - [Art. 247 § 13b EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13b.html): zusätzliche Angaben für Immobiliardarlehensvermittlung, unter anderem Bindungen, Beratung, Vergütungsberechnung, Beschwerden und Drittanreize. Bei früherem Tätigkeitsbeginn sind die vorgesehenen Informationen vorher zu erteilen.
 - [§ 655a BGB](https://www.gesetze-im-internet.de/bgb/__655a.html): Pflichten bei Darlehensvermittlung und Beratung. Kein durch die Texte erfundenes Honorar-, Unabhängigkeits- oder Marktbreitenversprechen.
 
@@ -76,7 +90,7 @@ Die folgenden Seiten wurden am 03.11.2026 inhaltlich geprüft. Einzelne Abrufe �
 
 ## Ergebnis
 
-Die technische Darstellung und die rechtlichen Informationsfelder sind soweit mit den vorhandenen Daten möglich vorbereitet. **Offene Pflichtangaben, persönliche Register-/Erlaubnisnachweise, Bildrechte, finales Hosting und objektspezifische Pflichtwerte bleiben tatsächlich offen.** Vor entsprechender öffentlicher Nutzung sind die Platzhalter durch bestätigte Angaben zu ersetzen und die Tätigkeit-/Vertragsprozesse passend einzurichten. Ein transparenter Platzhalter ist keine Rechtskonformitätsbestätigung.
+Vor der öffentlichen Nutzung sind die offenen Pflichtangaben, Register- und Erlaubnisnachweise, Hostingdetails und objektspezifischen Pflichtwerte zu ergänzen. Die Tätigkeits- und Vertragsprozesse sind auf das tatsächliche Angebot abzustimmen. Zu den Bildfreigaben siehe den Nachtrag unten.
 
 
 ## Kurze Kennzeichnung der KI-Beispielbilder

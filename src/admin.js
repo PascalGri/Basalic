@@ -32,7 +32,7 @@ const statusLabels = { offer: 'Im Angebot', sold: 'Verkauft', draft: 'Entwurf', 
 const filters = [['all', 'Alle Objekte'], ['offer', 'Angebote'], ['sold', 'Referenzen'], ['draft', 'Entwürfe'], ['information', 'Ausland']];
 const pageSize = 8;
 const requiredFields = ['title', 'city', 'kind', 'type'];
-const formFields = ['title', 'city', 'type', 'kind', 'note', 'area', 'areaLabel', 'land', 'rooms', 'year', 'listingUrl', 'price', 'commission', 'energyCertificate', 'energyYear'];
+const formFields = ['title', 'city', 'type', 'kind', 'note', 'area', 'areaLabel', 'land', 'rooms', 'year', 'listingUrl', 'price', 'commission', 'heating', 'energyCertificate', 'energyYear'];
 const propertyUrl = p => '/immobilien/' + encodeURIComponent(p.id);
 const propertyName = p => p.title || p.kind || 'Unbenanntes Objekt';
 const imageSrc = name => uploaded.test(name || '') ? name : getImageData(name)?.src || '';
@@ -228,7 +228,7 @@ export async function mountAdmin(root) {
     const isDraft = status === 'draft';
     const field = (key, label, options = {}) => {
       const { hint = '', multiline = false, placeholder = '', max = 160, inputType = 'text', mode = '', wide = false } = options;
-      const value = key === 'features' ? (p.features || []).join('\n') : key === 'listingUrl' ? p.listingUrl || (p.expose ? 'https://www.immobilienscout24.de/expose/' + p.expose : '') : p[key];
+      const value = key === 'features' ? (p.features || []).join('\n') : p[key];
       const attr = `id="a-field-${key}" name="${key}" maxlength="${max}"${requiredFields.includes(key) ? ' aria-required="true"' : ''}${placeholder ? ` placeholder="${esc(placeholder)}"` : ''}${hint ? ` aria-describedby="a-help-${key}"` : ''}`;
       return `<div class="a-field${wide ? ' a-wide' : ''}"><label for="a-field-${key}">${label}</label>${multiline ? `<textarea ${attr} rows="${key === 'features' ? 3 : 5}">${esc(value)}</textarea>` : `<input ${attr} type="${inputType}" ${mode ? `inputmode="${mode}"` : ''} value="${esc(value)}">`}${hint ? `<small id="a-help-${key}">${hint}</small>` : ''}</div>`;
     };
@@ -263,6 +263,7 @@ export async function mountAdmin(root) {
             ${section('04', 'Preis und Energie', 'Ergänzen Sie die Angaben, die zum Angebot gehören.', `<div class="a-fields">
               ${field('price', 'Kaufpreis', { placeholder: 'z. B. 349.000 €', max: 100 })}
               ${field('commission', 'Käuferprovision', { placeholder: 'z. B. provisionsfrei', max: 240 })}
+              ${field('heating', 'Heizung', { placeholder: 'z. B. Öl-Zentralheizung', max: 120 })}
               ${field('energyCertificate', 'Energieausweis', { multiline: true, max: 900, wide: true, hint: 'Übernehmen Sie, falls vorhanden, Ausweisart, Kennwert, Energieträger und Effizienzklasse aus dem Energieausweis.' })}
               ${field('energyYear', 'Baujahr laut Energieausweis', { max: 40 })}
             </div>`)}

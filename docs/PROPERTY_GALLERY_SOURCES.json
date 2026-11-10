@@ -169,17 +169,28 @@
       "sha256": "e579f71f5b4e28795e5079db467e2436922b64c4dfded2eaee0140d14dfa8623"
     }
   ],
+  "listingEvidence": [
+    {
+      "propertyId": "schwaebisch-hall",
+      "checked": "2026-11-10",
+      "originalExpose": "https://www.immobilienscout24.de/expose/168406677",
+      "source": "https://www.immobilienscout24.de/expose/171640669",
+      "identityEvidence": "Ein archiviertes Mietinserat derselben Wohnung zeigt das Basalic-Wohnzimmer aus der Gegenrichtung mit identischer Leuchte, Sofa, Glastisch und Vorhängen. Der Grundriss ist bis auf die Drehung identisch mit dem des Verkaufsangebots. Ort, Baujahr 1992, 76 m², drei Zimmer, zwei Terrassen und Tiefgaragenstellplatz stimmen überein.",
+      "identityArchive": "https://mapio.net/expose/MHaZPBeKC4k7eOTJiGAbvG/",
+      "identityPhoto": "https://cdn.mapio.net/expose/MHaZPBeKC4k7eOTJiGAbvG/img-3.webp"
+    }
+  ],
   "unavailable": {
     "bezgenriet": "Kein belegter Original-Exposé-Link; nicht Teil der Recherche zu den fünf verlinkten Angeboten.",
     "salach": "Quellseite zeigt ausdrücklich nur ein Beispielbild; kein vermeintliches Originalfoto übernommen.",
     "plochingen": "Original-Exposé 166340253 liefert 410 Gone. Kein sicher identifiziertes öffentliches Folgeinserat mit zusätzlichen Fotos gefunden.",
-    "schwaebisch-hall": "Original-Exposé 168406677 liefert 410 Gone. Ein Sparkassen-Inserat mit passenden Eckdaten und ähnlichem Innenraum wurde gefunden, aber die Identität zur Basalic-Aufnahme lässt sich nicht zweifelsfrei belegen. Die sechs Kandidatenfotos und ein Grundriss wurden deshalb verworfen; keine Übernahme."
+    "schwaebisch-hall": "Original-Exposé 168406677 liefert 410 Gone. Bei der ersten Galerierecherche blieb die Identität des Sparkassen-Inserats offen. Der spätere Abgleich mit einem archivierten Mietinserat belegt das Folgeinserat. Es wurden keine Zusatzfotos übernommen."
   },
   "rejectedSources": [
     {
       "propertyId": "schwaebisch-hall",
       "url": "https://immobilien.sparkasse.de/expose/FID-F13-963-035.html",
-      "reason": "Passende Eckdaten und ähnliche Bildmerkmale reichen ohne eindeutigen Objekt-/Bildabgleich nicht für die Übernahme."
+      "reason": "Zum Zeitpunkt der Galerierecherche fehlte der eindeutige Objektabgleich für die Bildübernahme."
     }
   ]
 }

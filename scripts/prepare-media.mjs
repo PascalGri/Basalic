@@ -1,5 +1,5 @@
 // Deterministic local derivatives only. Original assets are never overwritten.
-import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -8,12 +8,20 @@ import { loadEnv } from 'vite';
 import { load } from 'cheerio';
 import { properties } from '../src/data.js';
 import { propertyGalleries } from '../src/property-galleries.js';
+import { pagesOutput, readPagesConfig } from './pages-config.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const assets = join(root, 'public/assets');
+const pages = process.argv.includes('--pages') ? readPagesConfig() : null;
+const outputDir = join(root, pages ? pagesOutput : 'dist');
+if (pages) {
+  process.env.BASALIC_PAGES_BASE = pages.base;
+  process.env.BASALIC_PAGES_ORIGIN = pages.origin;
+}
 const manifestPath = join(root, 'src/media-manifest.js');
 const widths = [320, 640, 960, 1440];
 const variantSignature = 'webp-q82-effort5-widths320,640,960,1440-v1';
+const socialSignature = 'aurora-webp86-v2';
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 const escapeXml = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[char]));
 
@@ -93,36 +101,66 @@ async function prepareImages() {
   return { manifest, outputs };
 }
 
-function headlineLines(value, max = 24, count = 5) {
-  const words = String(value).replace(/\s*· Senad Basalic & Partner$/, '').split(/\s+/);
-  const lines = [];
-  let current = '';
-  for (const word of words) {
-    if (current && `${current} ${word}`.length > max) { lines.push(current); current = word; }
-    else current += `${current ? ' ' : ''}${word}`;
-  }
-  if (current) lines.push(current);
-  if (lines.length > count) { lines.length = count; lines[count - 1] = `${lines[count - 1].slice(0, max - 1)}…`; }
-  return lines;
-}
+// Use the warm paper, ink and four corner washes from the website's atmosphere.
+const socialBackdrop = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <radialGradient id="peach" cx="0%" cy="16%" r="62%"><stop stop-color="#f6be97" stop-opacity=".48"/><stop offset="1" stop-color="#f6be97" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rose" cx="7%" cy="100%" r="58%"><stop stop-color="#f1b1cb" stop-opacity=".37"/><stop offset="1" stop-color="#f1b1cb" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lavender" cx="100%" cy="12%" r="55%"><stop stop-color="#cab9f3" stop-opacity=".45"/><stop offset="1" stop-color="#cab9f3" stop-opacity="0"/></radialGradient>
+    <radialGradient id="sky" cx="100%" cy="98%" r="65%"><stop stop-color="#9dcaf0" stop-opacity=".46"/><stop offset="1" stop-color="#9dcaf0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#faf9f6"/>
+  <rect width="1200" height="630" fill="url(#peach)"/>
+  <rect width="1200" height="630" fill="url(#rose)"/>
+  <rect width="1200" height="630" fill="url(#lavender)"/>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+</svg>`);
+const photo = { left: 624, top: 42, width: 534, height: 546 };
+const photoMask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${photo.width}" height="${photo.height}"><rect width="100%" height="100%" rx="24" fill="white"/></svg>`);
 
 async function prepareSocial(routeMetadata, manifest) {
   let outputs = 0;
   const social = {};
   for (const [path, metadata] of Object.entries(routeMetadata)) {
     const image = manifest.images[metadata.imageName];
-    const fingerprint = sha256(JSON.stringify({ version: metadata.generatedImage ? 'social-webp86-v2-subtle-disclosure' : 'social-webp86-v1', path, title: metadata.title, generatedImage: metadata.generatedImage, image: image?.sourceSha256 || '' }));
+    const fingerprint = sha256(JSON.stringify({ version: socialSignature, path, title: metadata.previewTitle, generatedImage: metadata.generatedImage, image: image?.sourceSha256 || '' }));
     const outputPath = join(root, 'public', metadata.image);
     social[path] = { src: metadata.image, fingerprint, width: 1200, height: 630 };
     if (manifest.social?.[path]?.fingerprint === fingerprint && await exists(outputPath)) continue;
-    const headline = headlineLines(metadata.title);
-    const lines = headline.map((line, index) => `<text x="54" y="${210 + index * 52}" font-size="42" font-weight="600">${escapeXml(line)}</text>`).join('');
-    const disclosure = metadata.generatedImage ? '<text x="1138" y="595" text-anchor="end" font-size="13" fill="#ffffff" fill-opacity=".85" stroke="#000000" stroke-opacity=".55" stroke-width="1" stroke-linejoin="round" paint-order="stroke fill">KI-generiertes Beispielbild</text>' : '';
-    const overlay = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><g font-family="Arial, sans-serif" fill="#fafafa"><rect width="568" height="630" fill="#141414"/><rect x="54" y="77" width="74" height="5" rx="2" fill="#a8d946"/><text x="54" y="128" font-size="25" fill="#a8d946">GÖPPINGEN &amp; DIE REGION</text>${lines}<text x="54" y="555" font-size="29" font-weight="700">basalic &amp; partner</text><text x="54" y="588" font-size="19" fill="#c7c7c7">Immobilien. Finanzen. Zukunft.</text>${disclosure}</g></svg>`);
+    const textX = image ? 68 : 600;
+    const anchor = image ? 'start' : 'middle';
+    const headline = metadata.previewTitle.replaceAll('· ', '·\u00a0').replaceAll('ca. ', 'ca.\u00a0').replaceAll(' m²', '\u00a0m²');
+    const heading = await sharp({ text: {
+      text: `<span foreground="#20231f">${escapeXml(headline)}</span>`,
+      font: image ? 'Georgia 52' : 'Georgia 76',
+      width: image ? 510 : 980,
+      align: image ? 'left' : 'centre',
+      rgba: true,
+      wrap: 'word-char',
+    } }).png().toBuffer({ resolveWithObject: true });
+    const disclosure = metadata.generatedImage
+      ? '<text x="1136" y="564" text-anchor="end" font-size="18" fill="#ffffff" stroke="#20231f" stroke-opacity=".75" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke fill">KI-generiertes Beispielbild</text>'
+      : '';
+    const overlay = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+      <path d="M42 0v630${image ? '' : 'M1158 0v630'}" fill="none" stroke="#20231f" stroke-opacity=".12"/>
+      <g font-family="Arial, sans-serif" text-anchor="${anchor}">
+        <text x="${textX}" y="106" fill="#20231f" font-size="34" font-weight="700">basalic<tspan dx="6" font-size="23" font-weight="400" fill="#585b54">&amp; partner</tspan></text>
+        <text x="${textX}" y="543" fill="#585b54" font-size="25">Göppingen und die Region</text>
+        ${disclosure}
+      </g>
+    </svg>`);
     const layers = [];
-    if (image) layers.push({ input: await sharp(join(root, 'public', image.src)).resize(632, 630, { fit: 'cover', position: 'attention', withoutEnlargement: false }).toBuffer(), left: 568, top: 0 });
-    layers.push({ input: overlay, left: 0, top: 0 });
-    const output = await sharp({ create: { width: 1200, height: 630, channels: 3, background: image ? '#141414' : '#242424' } }).composite(layers).webp({ quality: 86, effort: 5 }).toBuffer();
+    if (image) {
+      const crop = await sharp(join(root, 'public', image.src))
+        .resize(photo.width, photo.height, { fit: 'cover', position: 'attention' }).ensureAlpha().png().toBuffer();
+      const rounded = await sharp(crop).composite([{ input: photoMask, blend: 'dest-in' }]).png().toBuffer();
+      layers.push({ input: rounded, left: photo.left, top: photo.top });
+    }
+    layers.push(
+      { input: overlay, left: 0, top: 0 },
+      { input: heading.data, left: image ? textX : Math.round(textX - heading.info.width / 2), top: Math.round((630 - heading.info.height) / 2) },
+    );
+    const output = await sharp(socialBackdrop).composite(layers).webp({ quality: 86, effort: 5 }).toBuffer();
     if (await writeIfChanged(outputPath, output)) outputs++;
   }
   manifest.social = social;
@@ -131,18 +169,20 @@ async function prepareSocial(routeMetadata, manifest) {
 }
 
 async function preparePageHeads() {
-  const { routeMetadata, seoConfig, seoTagsFor } = await import(pathToFileURL(join(root, 'src/seo.js')).href);
+  const { normalizeSeoPath, routeMetadata, seoConfig, seoTagsFor } = await import(pathToFileURL(join(root, 'src/seo.js')).href);
+  const { routeAliases } = await import('../src/site-paths.js');
   const { getImageData, getPrimaryImageOptions } = await import('../src/media.js');
-  const template = await readFile(join(root, 'dist/index.html'), 'utf8');
-  let outputs = 0;
-  for (const path of Object.keys(routeMetadata)) {
+  const template = await readFile(join(outputDir, 'index.html'), 'utf8');
+
+  function htmlFor(path) {
     const tags = seoTagsFor(path);
     const $ = load(template);
     $('title').text(tags.title);
     $('meta[name="description"],meta[name="robots"],meta[name^="twitter:"],meta[property^="og:"],link[rel="canonical"]').remove();
     $('link[data-primary-image-preload]').remove();
-    const imageOptions = getPrimaryImageOptions(path);
-    const primaryImage = imageOptions ? getImageData(routeMetadata[path].imageName) : null;
+    const normalized = normalizeSeoPath(path);
+    const imageOptions = getPrimaryImageOptions(normalized);
+    const primaryImage = imageOptions ? getImageData(routeMetadata[normalized]?.imageName) : null;
     if (primaryImage?.srcset) {
       // Leave href unset so browsers without responsive preload support do not
       // fetch a separate fallback candidate before the image renders.
@@ -156,20 +196,35 @@ async function preparePageHeads() {
     for (const [name, content] of Object.entries(tags.names)) if (content) $('head').append($('<meta>').attr({ name, content }));
     for (const [property, content] of Object.entries(tags.properties)) if (content) $('head').append($('<meta>').attr({ property, content }));
     if (tags.canonical) $('head').append($('<link>').attr({ rel: 'canonical', href: tags.canonical }));
-    const destination = path === '/' ? join(root, 'dist/index.html') : join(root, 'dist', path, 'index.html');
-    const html = $.html();
+    return $.html();
+  }
+
+  let outputs = 0;
+  for (const path of Object.keys(routeMetadata)) {
+    const destination = join(outputDir, path, 'index.html');
+    const html = htmlFor(path);
     if (await writeIfChanged(destination, html)) outputs++;
     // Vite's extensionless HTML fallback resolves /route to /route.html.
-    // Keep directory indexes as well for static hosts using /route/.
-    if (path !== '/' && await writeIfChanged(join(root, 'dist', `${path}.html`), html)) outputs++;
+    if (!pages && path !== '/' && await writeIfChanged(join(outputDir, `${path}.html`), html)) outputs++;
+  }
+  if (pages) {
+    for (const alias of Object.keys(routeAliases)) {
+      const html = htmlFor(alias);
+      if (await writeIfChanged(join(outputDir, alias, 'index.html'), html)) outputs++;
+      // This also preserves the case-sensitive alias on a case-insensitive build filesystem.
+      if (await writeIfChanged(join(outputDir, `${alias}.html`), html)) outputs++;
+    }
+    if (await writeIfChanged(join(outputDir, '404.html'), htmlFor('/404.html'))) outputs++;
+    await writeFile(join(outputDir, '.nojekyll'), '');
+    await rm(join(outputDir, 'assets/manifest.json'), { force: true });
   }
   const robots = seoConfig.allowIndexing
     ? `User-agent: *\nAllow: /\nSitemap: ${seoConfig.siteUrl}/sitemap.xml\n`
     : 'User-agent: *\nDisallow: /\n';
-  await writeIfChanged(join(root, 'dist/robots.txt'), robots);
+  await writeIfChanged(join(outputDir, 'robots.txt'), robots);
   if (seoConfig.allowIndexing) {
     const urls = Object.keys(routeMetadata).map(path => `<url><loc>${escapeXml(`${seoConfig.siteUrl}${path}`)}</loc></url>`).join('');
-    await writeIfChanged(join(root, 'dist/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>\n`);
+    await writeIfChanged(join(outputDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>\n`);
   }
   console.log(`SEO: ${Object.keys(routeMetadata).length} individuelle HTML-Heads (${outputs} geschrieben); Indexierung ${seoConfig.allowIndexing ? 'explizit freigegeben' : 'gesperrt'}.`);
 }

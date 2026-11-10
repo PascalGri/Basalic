@@ -3,8 +3,18 @@ import { defineConfig, loadEnv } from 'vite';
 import { projectRoot, readConfig } from './server/config.mjs';
 import { createSiteApi } from './server/http.mjs';
 import { runtimePages } from './server/pages.mjs';
+import { pagesOutput, readPagesConfig } from './scripts/pages-config.mjs';
 
 export default defineConfig(({ mode }) => {
+  if (mode === 'pages') {
+    const { base, origin } = readPagesConfig();
+    return {
+      base,
+      build: { outDir: pagesOutput },
+      define: { 'import.meta.env.VITE_BASALIC_PAGES_ORIGIN': JSON.stringify(origin) },
+    };
+  }
+
   const config = readConfig(loadEnv(mode, projectRoot, 'BASALIC_'));
   return {
     server: {

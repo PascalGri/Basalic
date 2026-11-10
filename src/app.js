@@ -13,12 +13,13 @@ import plus from '@phosphor-icons/core/assets/regular/plus.svg?raw';
 import pauseIcon from '@phosphor-icons/core/assets/regular/pause.svg?raw';
 import playIcon from '@phosphor-icons/core/assets/regular/play.svg?raw';
 import { services } from './data.js';
-import { loadPublicProperties, propertyForPath, publishedProperties as properties } from './public-properties.js';
+import { loadPublicProperties, propertyCity, propertyForPath, propertyLabel, publishedProperties as properties } from './public-properties.js';
 import { renderPage, setupPage } from './pages.js';
 import { initMotion, scrollToTarget, closeFaq } from './motion.js';
 import { initFinanceReferences } from './finance-carousel.js';
 import { imageMarkup } from './media.js';
 import { updateSeo } from './seo.js';
+import { routeAliases, routePath, setSiteLinks, sitePath } from './site-paths.js';
 import './finance.css';
 import './finance-pages.css';
 import './finance-motion.css';
@@ -58,24 +59,26 @@ function featuredReferences(sold) {
 }
 
 function propertyPhoto(property, sizes) {
- return img(property.image, `${property.kind} in ${property.city}`, '', false, sizes)
-  || `<span class="finance-property-no-photo">${icon(house)} Fotos auf Anfrage</span>`;
+ return img(property.image, propertyLabel(property), '', false, sizes)
+  || `<span class="finance-property-no-photo" aria-hidden="true">${icon(house)}</span>`;
 }
 
 function offerCard(property) {
  const area = property.area ? `${property.area} m² ${property.areaLabel || 'Wohnfläche'}` : property.kind;
+ const city = propertyCity(property);
  return `<a href="/immobilien/${esc(property.id)}" class="finance-property reveal">
   <div class="finance-property-photo">${propertyPhoto(property, '(max-width: 700px) 90vw, 380px')}</div>
-  <div class="finance-property-copy"><span>${esc(property.city)}</span><h3>${esc(property.title)}</h3>
+  <div class="finance-property-copy">${city ? `<span>${esc(city)}</span>` : ''}<h3>${esc(property.title)}</h3>
    <div><p>${esc(area)}</p>${icon(arrowRight)}</div>
   </div>
  </a>`;
 }
 
 function referenceCard(property) {
+ const city = propertyCity(property);
  return `<a class="finance-reference" href="/immobilien/${esc(property.id)}">
   ${propertyPhoto(property, '(max-width: 700px) 80vw, 370px')}
-  <div><span>Verkauft</span><h3>${esc(property.kind)}</h3><p>${esc(property.city)}</p>
+  <div><span>Verkauft</span><h3>${esc(property.kind)}</h3>${city ? `<p>${esc(city)}</p>` : ''}
    ${property.area ? `<small>${esc(property.area)} m² Fläche</small>` : ''}${icon(arrowRight)}
   </div>
  </a>`;
@@ -96,7 +99,6 @@ function home(){
  <section class="finance-hero">
   <div class="finance-glow" aria-hidden="true"></div>
   <div class="finance-hero-inner container">
-   <a href="/ueber-uns" class="finance-badge">Einfach individuell. Seit 2001. ${icon(arrowRight)}</a>
    <h1>Für Ihr Zuhause.<br> Und alles, was folgt.</h1>
    <p>Immobilien, Finanzierung, Mietverwaltung und Vorsorge.<br class="desktop-break"> Persönlich an Ihrer Seite. In Göppingen und der Region.</p>
    <div class="finance-hero-actions" role="group" aria-label="Ihr nächster Schritt">${button('/immobilien','Immobilie finden')}${button('/immobilie-verkaufen','Immobilie verkaufen','button-outline')}</div>
@@ -107,7 +109,7 @@ function home(){
  ${featured.length ? `<section class="finance-offers container finance-section">
   <div class="finance-heading reveal"><h2>Ein neuer Ort.<br> Für Ihre nächsten Kapitel.</h2><p>Entdecken Sie ausgewählte Immobilien in unserer Region.</p></div>
   <div class="finance-offer-grid">${featured.map(offerCard).join('')}</div>
-  <div class="finance-section-end"><p>Verfügbarkeit und Konditionen auf Anfrage.</p><a href="/immobilien" class="subtle-link">Alle Immobilien ansehen ${icon(arrowRight)}</a></div>
+  <div class="finance-section-end"><a href="/immobilien" class="subtle-link">Alle Immobilien ansehen ${icon(arrowRight)}</a></div>
  </section>` : ''}
  <section class="finance-services container finance-section" id="leistungen">
   <div class="finance-heading reveal"><h2>Immobilien. Finanzen.<br> Zusammen gedacht.</h2><p>Vier Fachgebiete. Ein persönlicher Ansprechpartner.</p></div>
@@ -124,7 +126,7 @@ function home(){
  </section>
  <div class="finance-facts container" aria-label="Basalic & Partner in Zahlen und Fakten"><div><strong>2001</strong><span>Seitdem für Sie da</span></div><div><strong>4</strong><span>Fachgebiete, die zusammenpassen</span></div><div><strong>${sold.length}</strong><span>Verkaufte Immobilienreferenzen</span></div><div><strong>Göppingen</strong><span>Hier sind wir zu Hause</span></div></div>
  ${references.length ? `<section id="referenzen" class="finance-references finance-section">
-  <div class="container"><div class="finance-heading reveal"><h2>Einblicke in<br> verkaufte Immobilien.</h2><p>Häuser und Wohnungen aus unserer bisherigen Vermittlung.</p></div><div class="finance-reference-controls"><a href="/immobilien?status=sold" class="subtle-link">Alle verkauften Referenzen ${icon(arrowRight)}</a><div class="finance-reference-buttons"><button type="button" class="finance-slide-prev" aria-label="Vorherige Referenzen">${icon(arrowRight)}</button><button type="button" class="finance-slide-next" aria-label="Weitere Referenzen">${icon(arrowRight)}</button></div></div>
+  <div class="container"><div class="finance-heading reveal"><h2>Einblicke in<br> verkaufte Immobilien.</h2><p>Häuser und Wohnungen, die wir vermittelt haben.</p></div><div class="finance-reference-controls"><a href="/immobilien?status=sold" class="subtle-link">Alle verkauften Referenzen ${icon(arrowRight)}</a><div class="finance-reference-buttons"><button type="button" class="finance-slide-prev" aria-label="Vorherige Referenzen">${icon(arrowRight)}</button><button type="button" class="finance-slide-next" aria-label="Weitere Referenzen">${icon(arrowRight)}</button></div></div>
   <div class="finance-reference-track" tabindex="0" aria-label="Verkaufte Immobilien, horizontal scrollbar">${references.map(referenceCard).join('')}</div></div>
  </section>` : ''}
  <section class="finance-contact-paths container finance-section" id="kontaktwege">
@@ -137,7 +139,7 @@ function home(){
  <section class="finance-faq container finance-section"><div class="finance-heading reveal"><h2>Ihre Fragen.<br> Unsere Antworten.</h2><p>Der erste Schritt ist oft eine gute Frage.</p></div><div class="faq-list">${faqItems.map(([q,a])=>`<details class="faq-item"><summary>${q}${icon(plus)}</summary><div><p>${a}</p></div></details>`).join('')}</div><p class="finance-faq-end">Noch etwas offen? <a href="/kontakt">Sprechen Sie uns an. ${icon(arrowRight)}</a></p></section>
  </main>`;
 }
-function footer(){return `<footer class="site-footer"><section class="footer-cta container"><div class="finance-glow" aria-hidden="true"></div><div class="footer-cta-copy"><h2>Ihre Zukunft beginnt<br> mit einem Gespräch.</h2><form id="quick-contact" class="quick-contact"><label class="sr-only" for="quick-email">Ihre E-Mail-Adresse (optional)</label><input id="quick-email" name="email" type="email" placeholder="Ihre E-Mail-Adresse (optional)" autocomplete="email" maxlength="200"><button class="button" type="submit"><span class="button-label">Kontakt aufnehmen</span><span class="button-icon" aria-hidden="true">${arrowRight}</span></button></form><p>Weiter zur Kontaktseite. Diese Eingabe versendet keine Nachricht.</p></div></section>
+function footer(path){return `<footer class="site-footer">${path === '/kontakt' ? '' : `<section class="footer-cta container"><div class="finance-glow" aria-hidden="true"></div><div class="footer-cta-copy"><h2>Ihre Zukunft beginnt<br> mit einem Gespräch.</h2>${button('/kontakt','Kontakt aufnehmen')}</div></section>`}
  <div class="footer-base"><div class="container footer-grid"><div><a class="brand" href="/" aria-label="Basalic & Partner - Startseite">${logo}</a><p>Senad Basalic &amp; Partner<br> Einfach individuell. Seit 2001.</p><a href="tel:+491786654819">+49 178 6654819</a><a href="mailto:info@basalic.de">info@basalic.de</a></div><nav aria-label="Leistungen"><h3>Leistungen</h3>${serviceNavigation.map(s=>`<a href="${s.path}">${s.title}</a>`).join('')}</nav><nav aria-label="Unternehmen"><h3>Unternehmen</h3><a href="/ueber-uns">Über uns</a><a href="/kontakt">Kontakt</a><a href="/immobilien?status=sold">Verkaufte Referenzen</a></nav><nav aria-label="Informationen"><h3>Informationen</h3><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/erstinformationen">Erstinformationen</a><a href="/barrierefreiheit">Barrierefreiheit</a><a href="/bildnachweise">Bildnachweise</a></nav></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Senad Basalic &amp; Partner</span><span>Immobilien. Finanzen. Zukunft.</span></div></div></footer>`;}
 
 function setupHeader(){
@@ -175,14 +177,6 @@ function setupHeader(){
  };
  mobile.addEventListener('click',()=>setMobile(mobile.getAttribute('aria-expanded')!=='true'));
  document.onkeydown=e=>{if(e.key==='Escape'){const open=toggles.find(t=>t.getAttribute('aria-expanded')==='true');closeMenus();if(open)open.focus();if(!mobileNav.hidden){setMobile(false);mobile.focus();}}};
- document.querySelector('#quick-contact').addEventListener('submit',e=>{
-  e.preventDefault();
-  if(!e.currentTarget.reportValidity())return;
-  const email=String(new FormData(e.currentTarget).get('email')||'').trim();
-  navigate('/kontakt');
-  const field=document.querySelector('#contact-email');
-  if(field)field.value=email;
- });
  return()=>{timers.forEach(clearTimeout);animations.forEach(animation=>animation.cancel());};
 }
 
@@ -192,14 +186,32 @@ function setupHome(){
  return stopReferences;
 }
 
-function normalizePath(){let path=decodeURI(location.pathname).replace(/\/$/,'')||'/';const aliases={'/Immobilien':'/immobilien','/Mietverwaltung':'/mietverwaltung','/Vorsorge':'/vorsorge','/about':'/ueber-uns'};if(aliases[path]){path=aliases[path];history.replaceState({},'',path+location.search+location.hash);}return path;}
-function navigate(url){cleanupMotion();window.scrollTo({top:0,left:0,behavior:'instant'});history.pushState({},'',url);render();if(location.hash){const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(target)scrollToTarget(target);}else window.scrollTo({top:0,behavior:'instant'});document.querySelector('#main')?.focus({preventScroll:true});}
+function normalizePath() {
+ const path = routePath(decodeURI(location.pathname)) || '/404';
+ const alias = routeAliases[path];
+ if (!alias) return path;
+ history.replaceState({}, '', sitePath(alias + location.search + location.hash));
+ return alias;
+}
+
+function navigate(route) {
+ cleanupMotion();
+ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+ history.pushState({}, '', sitePath(route));
+ render();
+ if (location.hash) {
+  const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (target) scrollToTarget(target);
+ } else window.scrollTo({ top: 0, behavior: 'instant' });
+ document.querySelector('#main')?.focus({ preventScroll: true });
+}
 function render(){
  cleanupMotion();cleanupPage();cleanupHome();cleanupHeader();
  const path=normalizePath();
  const page=path==='/'?{html:home(),title:'Einfach individuell'}:renderPage(path,location.search);
- const body=page||{html:`<main id="main" tabindex="-1" class="not-found container"><span class="section-kicker">Seite nicht gefunden</span><h1>Hier geht es<br> <em>weiter.</em></h1><p>Diese Seite ist nicht vorhanden. Finden Sie Ihren Weg zurück.</p>${button('/','Zur Startseite')}</main>`,title:'Seite nicht gefunden'};
- app.innerHTML=header(path)+body.html+footer();document.title=body.title+' · Senad Basalic & Partner';
+ const body=page||{html:`<main id="main" tabindex="-1" class="not-found container"><h1>Hier geht es<br> <em>weiter.</em></h1><p>Diese Seite ist nicht vorhanden. Finden Sie Ihren Weg zurück.</p>${button('/','Zur Startseite')}</main>`,title:'Seite nicht gefunden'};
+ app.innerHTML=header(path)+body.html+footer(path);document.title=body.title+' · Senad Basalic & Partner';
+ setSiteLinks(app);
  updateSeo(path, path.startsWith('/immobilien/') ? propertyForPath(path) : undefined);
  cleanupHeader=setupHeader();cleanupPage=setupPage(path)||(()=>{});cleanupHome=path==='/'?setupHome():(()=>{});
  cleanupMotion=initMotion({isHome:path==='/'});
@@ -212,12 +224,37 @@ const syncMotionButton=()=>{const paused=document.documentElement.dataset.motion
 motionButton.addEventListener('click',()=>{document.documentElement.dataset.motionUser=document.documentElement.dataset.motionUser==='paused'?'enabled':'paused';syncMotionButton();});
 motionPreference.addEventListener('change',syncMotionButton);syncMotionButton();document.body.appendChild(motionButton);
 
-document.addEventListener('click',e=>{if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-trigger[aria-expanded="true"]').forEach(t=>{t.setAttribute('aria-expanded','false');document.getElementById(t.getAttribute('aria-controls')).hidden=true;});const a=e.target.closest('a');if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target||a.hasAttribute('download'))return;const url=new URL(a.href);if(url.origin!==location.origin||!['http:','https:'].includes(url.protocol)||/^\/admin\/?$/.test(url.pathname))return;if(url.pathname===location.pathname&&url.search===location.search&&url.hash){const target=document.getElementById(decodeURIComponent(url.hash.slice(1)));if(target){e.preventDefault();history.pushState({},'',url.pathname+url.search+url.hash);scrollToTarget(target);if(target.id==='main')target.focus({preventScroll:true});}return;}e.preventDefault();navigate(url.pathname+url.search+url.hash);});
+ document.addEventListener('click', event => {
+  if (!event.target.closest('.nav-dropdown')) {
+   document.querySelectorAll('.nav-trigger[aria-expanded="true"]').forEach(trigger => {
+    trigger.setAttribute('aria-expanded', 'false');
+    document.getElementById(trigger.getAttribute('aria-controls')).hidden = true;
+   });
+  }
+  const link = event.target.closest('a');
+  if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
+  const url = new URL(link.href);
+  if (url.origin !== location.origin || !['http:', 'https:'].includes(url.protocol)) return;
+  const path = routePath(url.pathname);
+  if (!path || path === '/admin') return;
+  if (url.pathname === location.pathname && url.search === location.search && url.hash) {
+   const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+   if (target) {
+    event.preventDefault();
+    history.pushState({}, '', url.pathname + url.search + url.hash);
+    scrollToTarget(target);
+    if (target.id === 'main') target.focus({ preventScroll: true });
+   }
+   return;
+  }
+  event.preventDefault();
+  navigate(path + url.search + url.hash);
+ });
  window.addEventListener('popstate',()=>render());
  render();
 }
 
-if (/^\/admin\/?$/.test(location.pathname)) {
+if (import.meta.env.MODE !== 'pages' && /^\/admin\/?$/.test(location.pathname)) {
  document.querySelector('.site-atmosphere')?.remove();
  document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex,nofollow,noarchive');
  document.querySelector('link[rel="canonical"]')?.remove();

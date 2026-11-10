@@ -10,7 +10,8 @@ const fields = {
   title: ['Titel', 140], city: ['Ort', 100], type: ['Objektart', 40], kind: ['Bezeichnung', 120],
   note: ['Beschreibung', 6000], area: ['Fläche', 40], areaLabel: ['Flächenart', 50], land: ['Grundstücksfläche', 40],
   rooms: ['Zimmer', 40], year: ['Baujahr', 40], listingUrl: ['Exposé-Link', 2048], price: ['Kaufpreis', 100],
-  commission: ['Käuferprovision', 240], energyCertificate: ['Energieausweis', 900], energyYear: ['Baujahr laut Energieausweis', 40],
+  commission: ['Käuferprovision', 240], heating: ['Heizung', 120], energyCertificate: ['Energieausweis', 900],
+  energyYear: ['Baujahr laut Energieausweis', 40],
 };
 
 export const photoPathPattern = /^\/property-media\/([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}\.webp)$/;

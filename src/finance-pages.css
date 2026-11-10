@@ -10,7 +10,7 @@
   font-weight: 400;
   letter-spacing: -.055em;
   line-height: 1.06;
-  margin: 24px 0;
+  margin: 0 0 24px;
 }
 .subpage .page-head h1 em,
 .subpage h2 em {
@@ -24,7 +24,6 @@
   font-weight: 400;
   letter-spacing: -.04em;
 }
-.subpage .section-kicker { border-radius: 40px; font-size: 12px; }
 .subpage :is(a, button, summary, input, select, textarea):focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 5px;
@@ -77,8 +76,6 @@
 .subpage .object-card-bottom { padding-top: 18px; }
 .subpage .object-card-arrow { width: 36px; height: 36px; }
 .subpage .object-card:hover { border-color: color-mix(in srgb, var(--text) 35%, transparent); }
-.subpage .object-status { font-size: 11px; padding: 8px 11px; }
-.subpage .object-status.information { background: #dbe6ce; color: #283125; }
 .subpage .object-back { padding-top: 128px; }
 .subpage .object-back + .page-head { padding-top: 38px; padding-bottom: 52px; }
 .subpage .object-back .text-link { font-size: 13px; }

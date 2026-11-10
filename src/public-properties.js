@@ -3,7 +3,17 @@ import { properties as originalProperties } from './data.js';
 const publicStatuses = new Set(['offer', 'information', 'sold']);
 export let publishedProperties = originalProperties;
 
+export function propertyCity(property) {
+  return property.city === 'Ort nicht genannt' ? '' : property.city || '';
+}
+
+export function propertyLabel(property, kind = property.kind) {
+  const city = propertyCity(property);
+  return city ? `${kind} in ${city}` : kind;
+}
+
 export async function loadPublicProperties() {
+  if (import.meta.env.MODE === 'pages') return;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 2500);
   try {

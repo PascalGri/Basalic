@@ -1,1 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#141414"/><path d="M18 14h15c15 0 18 16 6 19 16 3 11 20-3 20H18zm8 6v11h7c9 0 9-11 0-11zm0 17v10h9c9 0 9-10 0-10z" fill="#a8d946"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="tile"><rect width="64" height="64" rx="13"/></clipPath>
+    <radialGradient id="peach" cx="0%" cy="12%" r="80%">
+      <stop stop-color="#f6be97" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#f6be97" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rose" cx="5%" cy="100%" r="73%">
+      <stop stop-color="#f1b1cb" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#f1b1cb" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lavender" cx="100%" cy="5%" r="76%">
+      <stop stop-color="#cab9f3" stop-opacity=".64"/>
+      <stop offset="1" stop-color="#cab9f3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sky" cx="100%" cy="100%" r="82%">
+      <stop stop-color="#9dcaf0" stop-opacity=".67"/>
+      <stop offset="1" stop-color="#9dcaf0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="64" height="64" fill="#faf9f6"/>
+    <rect width="64" height="64" fill="url(#peach)"/>
+    <rect width="64" height="64" fill="url(#rose)"/>
+    <rect width="64" height="64" fill="url(#lavender)"/>
+    <rect width="64" height="64" fill="url(#sky)"/>
+  </g>
+  <path fill="#20231f" d="M18 13h15c15 0 18 16 6 19 16 3 11 20-3 20H18zm8 6v11h7c9 0 9-11 0-11zm0 17v10h9c9 0 9-10 0-10z"/>
+</svg>

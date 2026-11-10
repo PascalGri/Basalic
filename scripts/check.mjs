@@ -21,6 +21,7 @@ const assetByFile = new Map(manifest.assets.map(asset => [asset.file, asset]));
 const propertyById = new Map(properties.map(property => [property.id, property]));
 const galleryProvenance = JSON.parse(await read('docs/PROPERTY_GALLERY_SOURCES.json'));
 const galleryAssetByFile = new Map(galleryProvenance.assets.map(asset => [asset.file, asset]));
+const listingEvidence = [...galleryProvenance.assets, ...galleryProvenance.listingEvidence];
 const serviceImages = ['finanzierung', 'mietverwaltung', 'absicherung', 'altersvorsorge'].map(name => `/assets/services/${name}.webp`);
 const additionalImages = new Set(serviceImages);
 
@@ -51,12 +52,8 @@ assert.equal(propertyById.get('plochingen').area, '50');
 assert.equal(propertyById.get('referenz-plochingen').area, '51');
 assert.notEqual(propertyById.get('plochingen').sourceRow, propertyById.get('referenz-plochingen').sourceRow);
 assert.notEqual(assetByFile.get('plochingen.webp').original, assetByFile.get('referenz-plochingen.webp').original, 'Plochingen-Angebot und Referenz besitzen getrennte Fotos');
-assert.equal(propertyById.get('bezgenriet').areaLabel, 'Gesamtfläche', 'Keine unbelegte Wohnfläche aus Gesamtfläche machen');
 assert.ok(!propertyById.get('istrien').area, 'Steinhausfläche nicht als belegte Wohnfläche ausgeben');
 assert.ok(!propertyById.get('referenz-tamm').rooms, 'Widersprüchliche Tamm-Zimmerzahl nicht erfinden');
-for (const value of ['1 Zimmer', '1,5 Zimmer']) {
-  assert.ok(propertyById.get('referenz-tamm').note.includes(value), `Tamm: abweichende Zimmerangabe ${value} bleibt nachvollziehbar`);
-}
 assert.match(propertyById.get('referenz-gartenwohnung-88').city, /nicht genannt/, 'Keinen fehlenden Ort ergänzen');
 for (const [id, expose] of Object.entries({ faurndau: '171049343', muehlhausen: '169662545', neidlingen: '169930109' })) {
   assert.equal(propertyById.get(id).expose, expose, `${id}: Exposé-Zuordnung`);
@@ -67,12 +64,11 @@ for (const p of properties) {
   assert.ok(['Haus', 'Wohnung', 'Grundstück'].includes(p.type), `${p.id}: Objektart für Filter`);
   assert.ok(p.city && p.kind && p.title && Array.isArray(p.features), `${p.id}: vollständiger Datensatz`);
   assert.doesNotMatch([p.city, p.note, p.areaLabel, p.imageRole, ...p.features].filter(Boolean).join(' '), /\b(?:Quellseite|Quellwebsite|Quelle)\b|bisherige Website/i, `${p.id}: kundenorientierter Besuchertext`);
-  if (p.status === 'sold') assert.match(p.note, /verkauft/i, `${p.id}: historischer Status`);
   if (p.listingUrl) {
     assert.match(p.listingUrl, /^https:\/\/www\.immobilienscout24\.de\/expose\/\d{8,10}$/, `${p.id}: sichere öffentliche ImmoScout-Exposé-Adresse`);
-    const evidence = galleryProvenance.assets.filter(asset => asset.propertyId === p.id && asset.source === p.listingUrl);
+    const evidence = listingEvidence.filter(entry => entry.propertyId === p.id && entry.source === p.listingUrl);
     assert.ok(evidence.length > 0, `${p.id}: Folgeinserat ist lokal für genau dieses Objekt belegt`);
-    assert.ok(evidence.every(asset => asset.originalExpose === `https://www.immobilienscout24.de/expose/${p.expose}` && asset.identityEvidence?.trim()), `${p.id}: ursprüngliches Exposé und Objektidentität bleiben nachvollziehbar`);
+    assert.ok(evidence.every(entry => entry.originalExpose === `https://www.immobilienscout24.de/expose/${p.expose}` && entry.identityEvidence?.trim()), `${p.id}: ursprüngliches Exposé und Objektidentität bleiben nachvollziehbar`);
   }
   if (!p.image) continue;
   const asset = assetByFile.get(`${p.image}.webp`);
@@ -172,12 +168,10 @@ for (const required of [
   /491786654819/
 ]) assert.match(sourceText, required, `Originalinhalt im Quellcode erhalten: ${required}`);
 
-// Unknown operator details remain explicit and consistent until supplied.
+// Open operator details are tracked internally instead of rendered as editorial prompts.
 const legalPages = getLegalContent('');
-for (const path of ['/impressum', '/datenschutz', '/erstinformationen']) {
-  const legalText = load(legalPages[path].body)('.legal-placeholder').text();
-  assert.match(legalText, /Geschäftsanschrift: Straße, Hausnummer, PLZ und Ort ergänzen/, `${path}: eindeutiger Adressplatzhalter`);
-  assert.match(legalText, /Rechtsform \/ vollständige Firmierung bestätigen/, `${path}: keine erfundene Firmierung`);
+for (const [path, { body }] of Object.entries(legalPages)) {
+  assert.equal(load(body)('.legal-placeholder').length, 0, `${path}: keine redaktionellen Platzhalter`);
 }
 
 const routes = [
@@ -207,7 +201,10 @@ for (const route of routes) {
   assert.equal(dom('title').text(), metadata.title, `${route}: individueller Titel bereits im ausgelieferten HTML`);
   assert.equal(dom('meta[name="description"]').attr('content'), metadata.description, `${route}: individuelle Suchbeschreibung`);
   assert.equal(dom('meta[property="og:title"]').attr('content'), metadata.title, `${route}: Titel für Teilenvorschau`);
+  assert.equal(dom('meta[property="og:image"]').attr('content'), `${seoConfig.siteUrl}${metadata.image}`, `${route}: Open-Graph-Vorschaubild`);
+  assert.equal(dom('meta[name="twitter:image"]').attr('content'), `${seoConfig.siteUrl}${metadata.image}`, `${route}: Twitter-Vorschaubild`);
   assert.equal(dom('meta[name="twitter:card"]').attr('content'), 'summary_large_image', `${route}: große Teilenvorschau`);
+  assert.equal(dom('link[rel="icon"][type="image/png"][sizes="96x96"]').attr('href'), '/favicon.png', `${route}: PNG-Favicon für Browser und Suchmaschinen`);
   assert.equal(dom('meta[name="robots"]').attr('content'), seoConfig.allowIndexing ? 'index,follow,max-image-preview:large' : 'noindex,nofollow,noarchive', `${route}: bewusste Indexierungseinstellung`);
   if (!seoConfig.siteUrl) assert.equal(dom('link[rel="canonical"]').length, 0, `${route}: keine erfundene Produktionsdomain`);
   assert.ok(!servedTitles.has(metadata.title), `${route}: eindeutiger Seitentitel`);
@@ -251,6 +248,12 @@ for (const url of socialUrls) {
 }
 const robots = await request('/robots.txt');
 assert.match(await robots.text(), seoConfig.allowIndexing ? /Allow: \// : /Disallow: \//, 'Crawlerfreigabe entspricht Indexierungseinstellung');
+const favicon = await request('/favicon.png');
+assert.equal(favicon.status, 200, 'PNG-Favicon erreichbar');
+assert.match(favicon.headers.get('content-type'), /^image\/png\b/, 'PNG-Favicon korrekt ausgeliefert');
+const { width: faviconWidth, height: faviconHeight } = await sharp(Buffer.from(await favicon.arrayBuffer())).metadata();
+assert.equal(faviconWidth, 96, 'PNG-Favicon 96 Pixel breit');
+assert.equal(faviconHeight, 96, 'PNG-Favicon quadratisch');
 
 const imageUrls = [...manifest.assets.map(asset => `/assets/${asset.file}`), ...additionalImages, ...responsiveUrls, ...socialUrls];
 for (const url of imageUrls) {

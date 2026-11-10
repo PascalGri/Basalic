@@ -1,6 +1,8 @@
 import { properties } from './data.js';
 import { mediaManifest } from './media-manifest.js';
 import { isPropertyMediaPath, mediaFor } from './media.js';
+import { propertyLabel } from './public-properties.js';
+import { assetPath, isPagesPreview, routeAliases, sitePath } from './site-paths.js';
 
 const brand = 'Senad Basalic & Partner';
 const browserEnv = import.meta.env || {};
@@ -15,16 +17,22 @@ export function normalizeSiteUrl(value) {
   } catch { return ''; }
 }
 
-const configuredUrl = browserEnv.VITE_SITE_URL || generatedConfig.siteUrl || '';
+const configuredUrl = isPagesPreview
+  ? browserEnv.VITE_BASALIC_PAGES_ORIGIN || globalThis.process?.env.BASALIC_PAGES_ORIGIN
+  : browserEnv.VITE_SITE_URL || generatedConfig.siteUrl || '';
 const configuredIndexing = browserEnv.VITE_ALLOW_INDEXING ?? generatedConfig.allowIndexing ?? false;
 export const seoConfig = {
   siteUrl: normalizeSiteUrl(configuredUrl),
-  allowIndexing: Boolean(normalizeSiteUrl(configuredUrl)) && [true, 'true', '1', 1].includes(configuredIndexing),
+  allowIndexing: !isPagesPreview && Boolean(normalizeSiteUrl(configuredUrl)) && [true, 'true', '1', 1].includes(configuredIndexing),
 };
 
-const page = (title, description, imageName = 'hero-original', imageAlt = 'Senad Basalic & Partner – Immobilien und Finanzen') => ({ title, description, imageName, imageAlt });
+const page = (title, description, imageName = '', imageAlt = title) => ({ title, description, imageName, imageAlt });
+const homePreviewTitle = 'Für Ihr Zuhause.\nUnd alles, was folgt.';
 const baseRoutes = {
-  '/': page('Immobilien & Finanzen in Göppingen', 'Immobilien finden, Eigentum verkaufen, Finanzierung und Vorsorge planen: Senad Basalic & Partner begleitet Sie persönlich in Göppingen und der Region.'),
+  '/': {
+    ...page('Immobilien & Finanzen in Göppingen', 'Immobilien finden, Eigentum verkaufen, Finanzierung und Vorsorge planen: Senad Basalic & Partner begleitet Sie persönlich in Göppingen und der Region.', '', homePreviewTitle.replace('\n', ' ')),
+    previewTitle: homePreviewTitle,
+  },
   '/immobilien': page('Immobilien in Göppingen und der Region', 'Entdecken Sie Häuser, Wohnungen und Grundstücke sowie bereits verkaufte Referenzen. Fragen Sie Senad Basalic & Partner nach Verfügbarkeit und Besichtigung.', 'faurndau', 'Zweifamilienhaus in Göppingen-Faurndau'),
   '/immobilie-verkaufen': page('Ihre Immobilie verkaufen', 'Sie möchten Ihr Haus oder Ihre Wohnung verkaufen? Besprechen Sie mit Senad Basalic & Partner Ihr Objekt und die nächsten Schritte für den Verkauf.'),
   '/mietverwaltung': page('Mietverwaltung für Eigentümer', 'Unterstützung für Kapitalanleger und Vermieter: Besprechen Sie mit Senad Basalic & Partner, welche Aufgaben Sie bei Ihrer vermieteten Immobilie abgeben möchten.', 'services/mietverwaltung', 'KI-generiertes Beispielbild: Helles Mehrfamilienhaus mit grauen Balkonen'),
@@ -32,7 +40,7 @@ const baseRoutes = {
   '/vorsorge': page('Absicherung und Altersvorsorge', 'Versorgungslücken erkennen und für den Ruhestand planen: Persönliche Beratung zu Absicherung und Altersvorsorge bei Senad Basalic & Partner.', 'services/absicherung', 'KI-generiertes Beispielbild: Elternteil hilft einem Kind in die Jacke'),
   '/ueber-uns': page('Senad Basalic – Ihr Ansprechpartner', 'In Göppingen verwurzelt und seit 2001 am Markt: Lernen Sie Senad Basalic und seine persönliche Begleitung bei Immobilien-, Finanzierungs- und Vorsorgefragen kennen.', 'senad-basalic', 'Senad Basalic, persönlicher Ansprechpartner'),
   '/kontakt': page('Kontakt zu Senad Basalic & Partner', 'Besprechen wir Ihr Vorhaben. Hier finden Sie Telefonnummer und E-Mail-Adressen für Immobilien, Finanzierung, Mietverwaltung und Vorsorge.', 'senad-basalic', 'Senad Basalic, persönlicher Ansprechpartner'),
-  '/impressum': page('Impressum', 'Betreiber-, Kontakt- und Vermittlerangaben zu Senad Basalic & Partner sowie Hinweise zum Stand der noch zu bestätigenden Pflichtangaben.', 'senad-basalic', 'Senad Basalic'),
+  '/impressum': page('Impressum', 'Betreiber-, Kontakt- und Vermittlerangaben zu Senad Basalic & Partner.', 'senad-basalic', 'Senad Basalic'),
   '/datenschutz': page('Datenschutzhinweise', 'Informationen zur technischen Bereitstellung, zu Ihren Kontaktangaben, externen Links und Ihren Datenschutzrechten auf dieser Website.'),
   '/erstinformationen': page('Vermittler- und Verbraucherinformationen', 'Informationen zu Vermittlerstatus, Versicherungs- und Darlehensvermittlung sowie weiteren Verbraucherinformationen von Senad Basalic & Partner.'),
   '/barrierefreiheit': page('Informationen zur Barrierefreiheit', 'Informationen zur Bedienbarkeit dieser Website und Möglichkeiten, Barrieren bei Senad Basalic & Partner zu melden.'),
@@ -44,14 +52,15 @@ function socialPath(path) {
 }
 
 function metadataForProperty(property) {
-  const heading = `${property.status === 'sold' ? 'Verkauft: ' : ''}${property.kind} in ${property.city}${property.area ? ` · ${property.area} m²` : ''}`;
+  const label = propertyLabel(property);
+  const heading = `${property.status === 'sold' ? 'Verkauft: ' : ''}${label}${property.area ? ` · ${property.area} m²` : ''}`;
   const details = [property.area ? `${property.area} m² ${property.areaLabel || 'Wohnfläche'}` : '', property.rooms ? `${property.rooms} Zimmer` : '', property.land ? `${property.land} m² Grundstück` : ''].filter(Boolean).join(' · ');
   const ending = property.status === 'sold'
     ? 'Bereits verkauft. Entdecken Sie diese Referenz und sprechen Sie uns auf ein ähnliches Objekt an.'
     : property.status === 'information'
       ? 'Informationen zu dieser Auslandsimmobilie erhalten Sie im persönlichen Gespräch.'
       : 'Fragen zu Verfügbarkeit, Preis und Besichtigung? Wir freuen uns auf Ihre Anfrage.';
-  return page(heading, `${property.kind} in ${property.city}.${details ? ` ${details}.` : ''} ${ending}`, property.image || '', property.image ? `${property.imageRole || property.kind} in ${property.city}` : 'Basalic & Partner – Objektinformationen');
+  return page(heading, `${label}.${details ? ` ${details}.` : ''} ${ending}`, property.image || '', property.image ? propertyLabel(property, property.imageRole || property.kind) : heading);
 }
 
 const objectRoutes = Object.fromEntries(properties.map(property => [`/immobilien/${property.id}`, metadataForProperty(property)]));
@@ -60,6 +69,7 @@ const objectRoutes = Object.fromEntries(properties.map(property => [`/immobilien
 export const routeMetadata = Object.fromEntries(Object.entries({ ...baseRoutes, ...objectRoutes }).map(([path, metadata]) => [path, {
   ...metadata,
   title: `${metadata.title} · ${brand}`,
+  previewTitle: metadata.previewTitle || metadata.title,
   image: socialPath(path),
   imageWidth: 1200,
   imageHeight: 630,
@@ -68,7 +78,7 @@ export const routeMetadata = Object.fromEntries(Object.entries({ ...baseRoutes, 
 
 export function normalizeSeoPath(path) {
   const clean = String(path || '/').split(/[?#]/)[0].replace(/\/+$/, '') || '/';
-  return ({ '/Immobilien': '/immobilien', '/Mietverwaltung': '/mietverwaltung', '/Vorsorge': '/vorsorge', '/about': '/ueber-uns' })[clean] || clean;
+  return routeAliases[clean] || clean;
 }
 
 export function metadataFor(path, property) {
@@ -102,8 +112,8 @@ export function metadataFor(path, property) {
 export function seoTagsFor(path, property) {
   const normalized = normalizeSeoPath(path);
   const metadata = metadataFor(normalized, property);
-  const canonical = seoConfig.siteUrl && !metadata.missing ? `${seoConfig.siteUrl}${normalized}` : '';
-  const image = seoConfig.siteUrl ? `${seoConfig.siteUrl}${metadata.image}` : metadata.image;
+  const canonical = seoConfig.siteUrl && !metadata.missing ? `${seoConfig.siteUrl}${sitePath(normalized)}` : '';
+  const image = `${seoConfig.siteUrl}${assetPath(metadata.image)}`;
   const index = seoConfig.allowIndexing && !metadata.missing;
   return {
     title: metadata.title,

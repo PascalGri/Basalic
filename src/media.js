@@ -1,4 +1,5 @@
 import { mediaManifest } from './media-manifest.js';
+import { assetPath } from './site-paths.js';
 
 const escapeAttribute = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
@@ -33,14 +34,14 @@ export function isPropertyMediaPath(value) {
 }
 
 export function getImageData(name) {
-  if (isPropertyMediaPath(name)) return { src: name };
+  if (isPropertyMediaPath(name)) return { src: assetPath(name) };
   const image = mediaFor(name);
   if (!image) return null;
   const variants = image.variants;
   const preferred = [...variants].reverse().find(variant => variant.width <= 960) || variants[0];
   return {
-    src: preferred?.src || image.src,
-    srcset: variants.map(variant => `${variant.src} ${variant.width}w`).join(', '),
+    src: assetPath(preferred?.src || image.src),
+    srcset: variants.map(variant => `${assetPath(variant.src)} ${variant.width}w`).join(', '),
     width: image.width,
     height: image.height,
   };
