@@ -183,8 +183,7 @@ async function preparePageHeads() {
   const { getImageData, getPrimaryImageOptions } = await import('../src/media.js');
   const template = await readFile(join(outputDir, 'index.html'), 'utf8');
 
-  function htmlFor(path) {
-    const tags = seoTagsFor(path);
+  function htmlFor(path, tags = seoTagsFor(path)) {
     const $ = load(template);
     $('title').text(tags.title);
     $('meta[name="description"],meta[name="robots"],meta[name^="twitter:"],meta[property^="og:"],link[rel="canonical"]').remove();
@@ -217,6 +216,15 @@ async function preparePageHeads() {
     if (!pages && path !== '/' && await writeIfChanged(join(outputDir, `${path}.html`), html)) outputs++;
   }
   if (pages) {
+    const adminDemo = htmlFor('/admin', {
+      title: 'Admin-Testportal · Basalic & Partner',
+      names: {
+        description: 'Die Immobilienverwaltung mit einem Testbestand ausprobieren.',
+        robots: 'noindex,nofollow,noarchive',
+      },
+      properties: {},
+    });
+    if (await writeIfChanged(join(outputDir, 'admin/index.html'), adminDemo)) outputs++;
     for (const alias of Object.keys(routeAliases)) {
       const html = htmlFor(alias);
       if (await writeIfChanged(join(outputDir, alias, 'index.html'), html)) outputs++;

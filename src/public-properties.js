@@ -12,8 +12,14 @@ export function propertyLabel(property, kind = property.kind) {
   return city ? `${kind} in ${city}` : kind;
 }
 
-export async function loadPublicProperties() {
-  if (import.meta.env.MODE === 'pages') return;
+export async function loadPublicProperties({ demo = false } = {}) {
+  if (import.meta.env.MODE === 'pages') {
+    if (demo) {
+      const { loadDemoProperties } = await import('./admin-demo.js');
+      publishedProperties = await loadDemoProperties();
+    }
+    return;
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 2500);
   try {

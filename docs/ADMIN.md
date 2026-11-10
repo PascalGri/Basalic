@@ -1,5 +1,9 @@
 # Immobilien auf der Website verwalten
 
+Im [Testportal auf GitHub Pages](https://pascalgri.github.io/Basalic/admin/) können Sie die folgenden Schritte ohne Anmeldung ausprobieren. Testobjekte und Fotos bleiben im verwendeten Browser. In der Testvorschau sehen Sie, wie sich die Änderungen auf der Website auswirken. Über **Demo zurücksetzen** stellen Sie den Ausgangsbestand wieder her.
+
+Für die gemeinsame Immobilienverwaltung auf dem Server gelten diese Schritte:
+
 1. Öffnen Sie `/admin` auf Ihrer Website und melden Sie sich mit Ihrem Passwort an.
 2. Wählen Sie **Neues Angebot**. Ergänzen Sie Titel, Ort und Objektart. Sie können Beschreibung, Ausstattung, Preis, Energieangaben, einen Exposé-Link und bis zu acht Fotos hinzufügen. Das erste Foto ist das Titelbild. Bei Bedarf können Sie ein anderes Foto als Titelbild wählen.
 3. Mit **Als Entwurf speichern** bleibt der Eintrag nur für Sie sichtbar. Mit **Angebot veröffentlichen** erscheint die Immobilie auf der Website unter **Immobilien**. Für Änderungen öffnen Sie das Objekt im Bestand und speichern erneut.

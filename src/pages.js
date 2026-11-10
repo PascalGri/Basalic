@@ -7,7 +7,7 @@ import { closeFaq } from './motion.js';
 import { contactFormMarkup, setupContactForm } from './contact-form.js';
 import { properties as originalProperties, services } from './data.js';
 import { propertyCity, propertyForPath, propertyLabel, publishedProperties as properties } from './public-properties.js';
-import { setSiteLinks, sitePath } from './site-paths.js';
+import { demoWebsitePath, isDemoWebsite, setSiteLinks, sitePath } from './site-paths.js';
 import arrowUpRightSvg from '@phosphor-icons/core/assets/regular/arrow-up-right.svg?raw';
 import arrowLeftSvg from '@phosphor-icons/core/assets/regular/arrow-left.svg?raw';
 import houseSvg from '@phosphor-icons/core/assets/regular/house.svg?raw';
@@ -131,7 +131,7 @@ function propertyTerms(p) {
   </section>`;
 }
 
-function propertyDetail(p) {
+function propertyDetail(p, demo) {
   const sold = p.status === 'sold';
   const offer = p.status === 'offer';
   const original = originalProperties.find(item => item.id === p.id);
@@ -141,7 +141,7 @@ function propertyDetail(p) {
   const contactUrl = contactHref('Immobilien', sold ? 'suche' : offer ? 'besichtigung' : 'information') + '&' + (sold ? 'referenz=' : 'objekt=') + encodeURIComponent(topic);
   const status = sold ? 'Verkauft · Referenz' : offer ? 'Zum Verkauf' : 'Auslandsimmobilie · Informationen';
   const moreUrl = '/immobilien' + (sold ? '?status=sold' : '');
-  const exposeUrl = listingAddress(p);
+  const exposeUrl = demo ? null : listingAddress(p);
   const exposeIsScout = exposeUrl && (exposeUrl.hostname === 'immobilienscout24.de' || exposeUrl.hostname.endsWith('.immobilienscout24.de'));
   const exposeLink = exposeUrl ? splitButton(exposeUrl.href, exposeIsScout ? 'Auf ImmoScout24 ansehen' : 'Externes Exposé ansehen', 'object-expose-button', 'target="_blank" rel="noopener noreferrer"') : '';
   const features = p.features;
@@ -159,17 +159,19 @@ function propertyDetail(p) {
         ${features.length ? `<ul class="object-features">${features.map(feature => `<li>${check}<span>${esc(feature)}</span></li>`).join('')}</ul>` : ''}
         ${note ? `<p class="object-note">${esc(note).replace(/\r?\n/g, '<br>')}</p>` : ''}
         ${offer ? propertyTerms(p) : ''}
-        <aside class="source-callout">
+        ${demo ? '' : `<aside class="source-callout">
           <strong>${sold ? 'Erfolgreich vermittelt' : 'Interesse an dieser Immobilie?'}</strong>
           <p>${sold ? 'Wir begleiten Sie gern bei der Suche nach einer ähnlichen Immobilie oder beim Verkauf Ihres Eigentums.' : 'Sprechen Sie uns an, wenn Sie Fragen zum Objekt haben oder eine Besichtigung vereinbaren möchten.'}</p>
-        </aside>
+        </aside>`}
       </div>
-      <aside class="object-contact">
+      <aside class="object-contact">${demo ? `<h2>Objektvorschau</h2>
+        <p>In der Testvorschau sind Anfragen und externe Exposés deaktiviert.</p>
+        ${splitButton('/admin', 'Zurück zum Testportal')}` : `
         <h2>${sold ? 'Ähnliche<br> <em>Vorstellungen?</em>' : 'Das könnte<br> <em>passen?</em>'}</h2>
         <p>${sold ? 'Die Referenz ist verkauft. Sprechen wir über eine ähnliche Immobilie oder den Verkauf Ihres Eigentums.' : 'Wir klären Ihre Fragen zur Immobilie und besprechen Ihren nächsten Schritt.'}</p>
         ${splitButton(contactUrl, sold ? 'Ähnliche Immobilie finden' : offer ? 'Besichtigung anfragen' : 'Objektinformationen anfragen')}
         <div class="object-contact-links"><a href="${mailto('immobilien@basalic.de', (sold ? 'Anfrage zu ähnlichen Immobilien: ' : 'Objektanfrage: ') + topic)}">${icon(envelopeSvg)}immobilien@basalic.de</a><a href="tel:+491786654819">${icon(phoneSvg)}+49 178 6654819</a></div>
-        ${exposeLink ? `<div class="object-expose">${exposeLink}<small>Öffnet einen neuen Tab.</small></div>` : ''}
+        ${exposeLink ? `<div class="object-expose">${exposeLink}<small>Öffnet einen neuen Tab.</small></div>` : ''}`}
       </aside>
     </section>
     ${related.length ? `<section class="related-objects container reveal">
@@ -258,13 +260,13 @@ function legalPage(path) {
   return wrapPage(`${head(page.title, page.intro)}<section class="legal-layout container"><nav class="legal-page-nav" aria-label="Rechtliche Informationen">${Object.entries(legalLabels).map(([url, label]) => `<a href="${url}" ${path === url ? 'aria-current="page"' : ''}>${label}${arrow}</a>`).join('')}</nav><article class="legal-copy">${page.body}</article></section>`);
 }
 
-export function renderPage(path, search = '') {
+export function renderPage(path, search = '', { demo = false } = {}) {
   const params = paramsFor(search);
   if (path === '/immobilien') return { html: listing(params), title: 'Immobilien' };
   if (path === '/immobilie-verkaufen') return { html: sellerPage(), title: 'Immobilie verkaufen' };
   if (path.startsWith('/immobilien/')) {
     const property = propertyForPath(path);
-    return property ? { html: propertyDetail(property), title: propertyLabel(property) } : null;
+    return property ? { html: propertyDetail(property, demo), title: propertyLabel(property) } : null;
   }
   if (servicePages[path]) return { html: servicePage(path), title: servicePages[path].title };
   if (path === '/ueber-uns') return { html: aboutPage(), title: 'Über uns' };
@@ -303,7 +305,8 @@ export function setupPage(path) {
       results.innerHTML = resultMarkup(list);
       setSiteLinks(results);
       document.querySelector('#property-count').textContent = `${list.length} ${list.length === 1 ? 'Objekt' : 'Objekte'}${status === 'sold' ? ' · Verkauft' : ''}`;
-      history.replaceState({}, '', sitePath('/immobilien' + (nextParams.size ? '?' + nextParams.toString() : '')));
+      const linkPath = isDemoWebsite() ? demoWebsitePath : sitePath;
+      history.replaceState({}, '', linkPath('/immobilien' + (nextParams.size ? '?' + nextParams.toString() : '')));
     };
     document.querySelectorAll('[data-property-status]').forEach(button => button.addEventListener('click', () => { status = button.dataset.propertyStatus; update(); }));
     search.addEventListener('input', update);

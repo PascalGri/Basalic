@@ -1,5 +1,5 @@
 import { mediaManifest } from './media-manifest.js';
-import { assetPath } from './site-paths.js';
+import { assetPath, isPagesPreview } from './site-paths.js';
 
 const escapeAttribute = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
@@ -33,8 +33,21 @@ export function isPropertyMediaPath(value) {
   return /^\/property-media\/[a-f0-9-]{36}\.webp$/.test(value || '');
 }
 
+const demoPhotos = new Map();
+
+export function registerDemoPhoto({ path, blob, width, height }) {
+  if (isPropertyMediaPath(path) && blob instanceof Blob && !demoPhotos.has(path)) {
+    demoPhotos.set(path, { src: URL.createObjectURL(blob), width, height });
+  }
+}
+
+export function clearDemoPhotos() {
+  demoPhotos.forEach(photo => URL.revokeObjectURL(photo.src));
+  demoPhotos.clear();
+}
+
 export function getImageData(name) {
-  if (isPropertyMediaPath(name)) return { src: assetPath(name) };
+  if (isPropertyMediaPath(name)) return isPagesPreview ? demoPhotos.get(name) || null : { src: assetPath(name) };
   const image = mediaFor(name);
   if (!image) return null;
   const variants = image.variants;

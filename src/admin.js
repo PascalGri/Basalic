@@ -18,6 +18,7 @@ import close from '@phosphor-icons/core/assets/regular/x.svg?raw';
 import restore from '@phosphor-icons/core/assets/regular/arrow-counter-clockwise.svg?raw';
 import globe from '@phosphor-icons/core/assets/regular/globe.svg?raw';
 import { getImageData } from './media.js';
+import { demoWebsitePath, sitePath } from './site-paths.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const icon = svg => `<span class="a-icon" aria-hidden="true">${svg}</span>`;
@@ -35,12 +36,12 @@ const requiredFields = ['title', 'city', 'kind', 'type'];
 const formFields = ['title', 'city', 'type', 'kind', 'note', 'area', 'areaLabel', 'land', 'rooms', 'year', 'listingUrl', 'price', 'commission', 'heating', 'energyCertificate', 'energyYear'];
 const propertyUrl = p => '/immobilien/' + encodeURIComponent(p.id);
 const propertyName = p => p.title || p.kind || 'Unbenanntes Objekt';
-const imageSrc = name => uploaded.test(name || '') ? name : getImageData(name)?.src || '';
+const imageSrc = name => getImageData(name)?.src || '';
 const badge = status => `<span class="a-badge a-badge-${esc(status)}"><i aria-hidden="true"></i>${esc(statusLabels[status] || 'Unbekannt')}</span>`;
 const action = (name, label, svg, cls = 'a-secondary', extra = '') => `<button type="button" class="a-button ${cls}" data-action="${name}" ${extra}>${svg ? icon(svg) : ''}${label}</button>`;
 const externalLink = (href, label, cls = 'a-secondary') => `<a class="a-button ${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${label}${icon(external)}</a>`;
 
-async function request(path, { method = 'GET', data, file: body } = {}) {
+async function serverRequest(path, { method = 'GET', data, file: body } = {}) {
   let response;
   try {
     response = await fetch(api + path, {
@@ -61,9 +62,13 @@ async function request(path, { method = 'GET', data, file: body } = {}) {
   return result;
 }
 
-export async function mountAdmin(root) {
+export async function mountAdmin(root, { demo = false } = {}) {
   document.body.classList.add('admin-mode');
-  document.title = 'Immobilienverwaltung · Basalic & Partner';
+  document.title = `${demo ? 'Testportal' : 'Immobilienverwaltung'} · Basalic & Partner`;
+  const websitePath = demo ? demoWebsitePath : sitePath;
+  const publicationTarget = demo ? 'in der Testvorschau' : 'auf Ihrer Website';
+  let demoStore;
+  const request = (path, options) => demo ? demoStore.demoRequest(path, options) : serverRequest(path, options);
   let inventory = [], filter = 'all', query = '', page = 0;
   let editing = null, baseline = '', uploading = false, saving = false, notice = '';
   let pendingTransition = null, transitionTrigger = null;
@@ -87,33 +92,38 @@ export async function mountAdmin(root) {
     editing = null;
     inventory = [];
     root.innerHTML = `<main id="main" tabindex="-1" class="a-login">
-      <header class="a-login-header"><a class="a-brand" href="/" aria-label="Basalic und Partner – Startseite">${brand}</a><a class="a-login-back" href="/">${icon(arrowLeft)} Zur Website</a></header>
+      <header class="a-login-header"><a class="a-brand" href="${sitePath('/')}" aria-label="Basalic und Partner – Startseite">${brand}</a><a class="a-login-back" href="${sitePath('/')}">${icon(arrowLeft)} Zur Website</a></header>
       <div class="a-login-side">
         <div class="a-login-story"><span class="a-kicker"><i></i> Immobilienverwaltung</span><p>Ihre Immobilien.<br>An einem Ort.</p></div>
         <span class="a-login-caption">Immobilien · Göppingen und die Region</span>
       </div>
       <div class="a-login-content">
-        <div class="a-login-panel"><span class="a-login-icon">${icon(lock)}</span><p class="a-kicker">Verwaltung</p><h1>Willkommen zurück.</h1>
-        <p class="a-login-lede">Melden Sie sich an, um Angebote und verkaufte Referenzen zu verwalten.</p>
-        ${unavailable ? `<p class="a-feedback a-error" role="alert">${esc(error)}</p>${action('retry', 'Erneut versuchen', restore, 'a-primary')}` : configured
+        <div class="a-login-panel"><span class="a-login-icon">${icon(demo ? buildings : lock)}</span><p class="a-kicker">${demo ? 'Testportal' : 'Verwaltung'}</p><h1>${demo ? 'Testportal nicht verfügbar' : 'Willkommen zurück.'}</h1>
+        <p class="a-login-lede">${demo ? 'Die Demo benötigt Zugriff auf den Browserspeicher.' : 'Melden Sie sich an, um Angebote und verkaufte Referenzen zu verwalten.'}</p>
+        ${unavailable || demo ? `<p class="a-feedback a-error" role="alert">${esc(error)}</p>${action('retry', 'Erneut versuchen', restore, 'a-primary')}` : configured
           ? `<form id="a-login-form"><div class="a-field"><label for="a-password">Passwort</label><input id="a-password" name="password" type="password" autocomplete="current-password" required maxlength="1024"></div>
           <p class="a-feedback a-error" role="alert"${error ? '' : ' hidden'}>${esc(error)}</p><button class="a-button a-primary" type="submit">Anmelden ${icon(caretRight)}</button></form>`
           : '<p class="a-feedback">Der Zugang ist noch nicht eingerichtet.</p>'}
         ${supportContact}
-        </div><p class="a-login-foot">Geschützter Bereich · Basalic &amp; Partner</p>
+        </div><p class="a-login-foot">${demo ? 'Testportal' : 'Geschützter Bereich'} · Basalic &amp; Partner</p>
       </div></main>`;
   }
 
   async function initialize() {
     root.innerHTML = `<main id="main" class="a-loading" tabindex="-1"><span class="a-login-icon">${icon(buildings)}</span><p role="status">Portal wird geladen …</p></main>`;
     try {
-      const session = await request('/session');
-      if (session.authenticated) {
+      if (demo) {
+        demoStore ??= await import('./admin-demo.js');
         await loadInventory();
         dashboard();
-      } else login({ configured: session.configured });
+        return;
+      }
+      const session = await request('/session');
+      if (!session.authenticated) return login({ configured: session.configured });
+      await loadInventory();
+      dashboard();
     } catch (error) {
-      if (error.status === 401) login();
+      if (!demo && error.status === 401) login();
       else login({ unavailable: true, error: error.message });
     }
   }
@@ -126,15 +136,16 @@ export async function mountAdmin(root) {
   function shell(content, locationLabel) {
     root.innerHTML = `<div class="a-shell">
       <aside class="a-sidebar">
-        <a class="a-brand" href="/admin" aria-label="Basalic und Partner – Verwaltung">${brand}</a>
+        <a class="a-brand" href="${sitePath('/admin')}" aria-label="Basalic und Partner – Verwaltung">${brand}</a>
         <div class="a-sidebar-nav"><p class="a-sidebar-label">Verwaltung</p>${action('list', 'Immobilien', buildings, 'a-nav-active')}</div>
-        <div class="a-sidebar-foot">
+        ${demo ? '' : `<div class="a-sidebar-foot">
           <div class="a-person"><span class="a-avatar" aria-hidden="true">SB</span><span><strong>Senad Basalic</strong><small>Verwaltung</small></span></div>
           ${action('logout', '<span>Abmelden</span>', signOut, 'a-sign-out', 'aria-label="Abmelden"')}
-        </div>
+        </div>`}
       </aside>
       <div class="a-body">
-        <header class="a-top"><div class="a-crumb"><span>Verwaltung</span><i aria-hidden="true">/</i><strong>${locationLabel}</strong></div>${externalLink('/', 'Website öffnen', 'a-top-link')}</header>
+        <header class="a-top"><div class="a-crumb"><span>${demo ? 'Testportal' : 'Verwaltung'}</span><i aria-hidden="true">/</i><strong>${locationLabel}</strong></div>${externalLink(websitePath(demo ? '/immobilien' : '/'), demo ? 'Vorschau öffnen' : 'Website öffnen', 'a-top-link')}</header>
+        ${demo ? `<aside class="a-demo-bar" aria-label="Hinweis zum Testportal"><p><strong>Testportal.</strong> Änderungen und Fotos bleiben in diesem Browser. Die Vorschau zeigt Ihren Testbestand.</p>${action('reset-demo', 'Demo zurücksetzen', restore)}</aside>` : ''}
         <aside class="a-support-bar" aria-label="Hilfe und Kontakt">${supportContact}</aside>
         <main id="main" tabindex="-1" class="a-main">
           <div id="a-notice" role="status" aria-atomic="true" class="a-notice"${notice ? '' : ' hidden'}>${notice ? icon(check) + esc(notice) : ''}</div>
@@ -153,7 +164,7 @@ export async function mountAdmin(root) {
     editing = null;
     const total = counts();
     const metrics = [
-      ['offer', 'Aktive Angebote', 'Auf der Website gelistet', house],
+      ['offer', 'Aktive Angebote', demo ? 'In der Testvorschau gelistet' : 'Auf der Website gelistet', house],
       ['sold', 'Verkaufte Referenzen', 'Erfolgreich vermittelt', check],
       ['draft', 'Entwürfe', 'Nur hier sichtbar', draft],
     ];
@@ -165,7 +176,7 @@ export async function mountAdmin(root) {
         ${metrics.map(([key, label, note, svg]) => `<button type="button" class="a-metric a-metric-${key}" data-filter="${key}" aria-pressed="${filter === key}"><span class="a-metric-top"><span class="a-metric-icon">${icon(svg)}</span><span>${label}</span></span><span class="a-metric-value">${total[key] || 0}</span><span class="a-metric-note">${note}</span></button>`).join('')}
       </div>
       <section class="a-register" aria-labelledby="a-register-title">
-        <div class="a-register-top"><div><h2 id="a-register-title">Objektbestand</h2><p>Alle Immobilien Ihrer Website im Überblick.</p></div>
+        <div class="a-register-top"><div><h2 id="a-register-title">Objektbestand</h2><p>${demo ? 'Alle Immobilien Ihres Testbestands im Überblick.' : 'Alle Immobilien Ihrer Website im Überblick.'}</p></div>
         <label class="a-search">${icon(searchIcon)}<span class="sr-only">Objekte suchen</span><input id="a-search" type="search" placeholder="Objekt suchen …" value="${esc(query)}"></label></div>
         <div class="a-filters" role="group" aria-label="Nach Status filtern">
           ${filters.map(([key, label]) => `<button type="button" class="a-filter" data-filter="${key}" aria-pressed="${filter === key}">${label}<span>${key === 'all' ? inventory.length : total[key] || 0}</span></button>`).join('')}
@@ -240,7 +251,7 @@ export async function mountAdmin(root) {
       <form id="a-editor" novalidate>
         <div class="a-editor-grid">
           <div class="a-form-stack">
-            ${section('01', 'Stammdaten', 'Diese Angaben stehen auf der Website beim Objekt.', `<div class="a-fields">
+            ${section('01', 'Stammdaten', `Diese Angaben stehen ${publicationTarget} beim Objekt.`, `<div class="a-fields">
               ${field('title', 'Titel *', { placeholder: 'z. B. Helle Wohnung mit Balkon', wide: true, max: 140 })}
               ${field('city', 'Ort *', { placeholder: 'z. B. Göppingen', max: 100 })}
               <div class="a-field"><label for="a-field-type">Objektart *</label><select name="type" id="a-field-type" aria-required="true"><option value="">Bitte auswählen</option>${types.map(type => `<option${p.type === type ? ' selected' : ''}>${type}</option>`).join('')}</select></div>
@@ -269,13 +280,13 @@ export async function mountAdmin(root) {
             </div>`)}
           </div>
           <aside class="a-publish" id="a-publish" tabindex="-1"><section class="a-form-section">
-            <div class="a-section-heading"><span>${icon(globe)}</span><div><h2>Sichtbarkeit</h2><p>Stand auf Ihrer Website</p></div></div>
+            <div class="a-section-heading"><span>${icon(globe)}</span><div><h2>Sichtbarkeit</h2><p>Stand ${publicationTarget}</p></div></div>
             ${badge(status)}
-            <p class="a-publish-copy">${isDraft ? 'Entwürfe sind nur im Portal sichtbar. Sobald Sie das Angebot veröffentlichen, erscheint es auf Ihrer Website.' : status === 'sold' ? 'Diese Immobilie ist auf Ihrer Website bei den verkauften Referenzen sichtbar.' : 'Diese Immobilie ist auf Ihrer Website sichtbar.'}</p>
+            <p class="a-publish-copy">${isDraft ? `Entwürfe sind nur im Portal sichtbar. Sobald Sie das Angebot veröffentlichen, erscheint es ${publicationTarget}.` : `Diese Immobilie ist ${publicationTarget}${status === 'sold' ? ' bei den verkauften Referenzen' : ''} sichtbar.`}</p>
             <p id="a-save-error" class="a-feedback a-error" role="alert" tabindex="-1" hidden></p>
             <div class="a-publish-actions">
               <button class="a-button a-primary" type="submit" data-save="${isDraft ? 'offer' : status}">${isDraft ? 'Angebot veröffentlichen' : status === 'sold' ? 'Referenz speichern' : 'Änderungen speichern'}${icon(isDraft ? external : check)}</button>
-              ${isDraft ? '<button class="a-button a-secondary" type="submit" data-save="draft">Als Entwurf speichern</button>' : externalLink(propertyUrl(p), 'Auf Website ansehen')}
+              ${isDraft ? '<button class="a-button a-secondary" type="submit" data-save="draft">Als Entwurf speichern</button>' : externalLink(websitePath(propertyUrl(p)), demo ? 'In Vorschau ansehen' : 'Auf Website ansehen')}
               ${status === 'offer' ? action('transition', 'Als verkauft markieren', check, 'a-secondary', `data-id="${esc(p.id)}" data-status="sold"`) : ''}
             </div>
             <p class="a-required-note">* Pflichtfelder für die Veröffentlichung</p>
@@ -381,12 +392,12 @@ export async function mountAdmin(root) {
       filter = property.status;
       query = '';
       page = 0;
-      notice = status === 'draft' ? 'Der Entwurf wurde gespeichert.' : status === 'offer' && wasDraft ? 'Das Angebot ist jetzt auf Ihrer Website sichtbar.' : 'Die Änderungen wurden gespeichert.';
+      notice = status === 'draft' ? 'Der Entwurf wurde gespeichert.' : status === 'offer' && wasDraft ? `Das Angebot ist jetzt ${publicationTarget} sichtbar.` : 'Die Änderungen wurden gespeichert.';
       dashboard();
       top();
       focusMain();
     } catch (error) {
-      if (error.status === 401) return login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
+      if (!demo && error.status === 401) return login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
       feedback(errorBox, error.message);
       errorBox.focus();
     } finally {
@@ -409,7 +420,7 @@ export async function mountAdmin(root) {
     let completed = 0;
     try {
       for (const file of files) {
-        feedback(message, `Foto ${completed + 1} von ${files.length} wird hochgeladen …`, false);
+        feedback(message, `Foto ${completed + 1} von ${files.length} wird ${demo ? 'gespeichert' : 'hochgeladen'} …`, false);
         const { url } = await request('/uploads', { method: 'POST', file });
         editing.photos.push(url);
         completed++;
@@ -417,7 +428,7 @@ export async function mountAdmin(root) {
       }
       feedback(message, completed === 1 ? 'Ein Foto wurde hinzugefügt.' : `${completed} Fotos wurden hinzugefügt.`, false);
     } catch (error) {
-      if (error.status === 401) return login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
+      if (!demo && error.status === 401) return login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
       feedback(message, error.message);
     } finally {
       uploading = false;
@@ -463,10 +474,31 @@ export async function mountAdmin(root) {
     }
   }
 
+  function confirmDemoReset() {
+    if (saving || uploading) return;
+    openDialog({
+      title: 'Demo zurücksetzen?',
+      copy: 'Dadurch werden alle Teständerungen und hinzugefügten Fotos in diesem Browser gelöscht. Der ursprüngliche Testbestand wird wiederhergestellt.',
+      label: 'Demo zurücksetzen',
+      run: async () => {
+        await demoStore.resetDemo();
+        await loadInventory();
+        filter = 'all';
+        query = '';
+        page = 0;
+        notice = 'Der Testbestand wurde zurückgesetzt.';
+        root.querySelector('#a-dialog').close();
+        dashboard();
+        top();
+        focusMain();
+      },
+    });
+  }
+
   root.addEventListener('submit', async event => {
     event.preventDefault();
     if (event.target.id === 'a-editor') return save(event.submitter?.dataset.save || (editing?.status === 'draft' || !editing?.id ? 'offer' : editing.status));
-    if (event.target.id !== 'a-login-form') return;
+    if (demo || event.target.id !== 'a-login-form') return;
     const form = event.target;
     const button = form.querySelector('button');
     if (button.disabled) return;
@@ -517,6 +549,7 @@ export async function mountAdmin(root) {
     if (name === 'list') return editing ? leaveEditor(showList) : showList();
     if (name === 'edit') return openEditor(inventory.find(item => item.id === id));
     if (name === 'logout') return editing ? leaveEditor(logout, 'Verwerfen und abmelden') : logout();
+    if (name === 'reset-demo' && demo) return confirmDemoReset();
     if (name === 'retry') return initialize();
     if (name === 'transition') {
       if (editing && hasEdits()) {
@@ -550,7 +583,7 @@ export async function mountAdmin(root) {
       button.textContent = 'Wird ausgeführt …';
       try { await pendingTransition(); }
       catch (error) {
-        if (error.status === 401) login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
+        if (!demo && error.status === 401) login({ error: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.' });
         else feedback(dialog.querySelector('#a-dialog-error'), error.message);
       } finally {
         button.disabled = cancel.disabled = false;

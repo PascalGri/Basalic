@@ -24,6 +24,8 @@ Die Vorschau ist von der Indexierung ausgeschlossen. [SEO und Medien](docs/SEO_M
 
 ## GitHub Pages und Kontaktversand
 
-`npm run build:pages` erzeugt eine statische Vorschau in `dist-pages/`. `BASALIC_PAGES_BASE` bestimmt den Repository-Pfad (z. B. `/Basalic/`), `BASALIC_PAGES_ORIGIN` die öffentliche Origin. Der Pages-Branch enthält den Inhalt dieses Verzeichnisses. Die Immobilienverwaltung läuft über den Node-Server.
+`npm run build:pages` erzeugt eine statische Vorschau in `dist-pages/`. `BASALIC_PAGES_BASE` bestimmt den Repository-Pfad (z. B. `/Basalic/`), `BASALIC_PAGES_ORIGIN` die öffentliche Origin. Der Pages-Branch enthält den Inhalt dieses Verzeichnisses.
+
+Das [Admin-Testportal](https://pascalgri.github.io/Basalic/admin/) auf GitHub Pages speichert Testobjekte und Fotos im jeweiligen Browser. Die Testvorschau zeigt die eigenen Änderungen. Die gemeinsame Immobilienverwaltung mit Passwort läuft über den Node-Server.
 
 Für den Direktversand in der Serverumgebung `BASALIC_CONTACT_RESEND_API_KEY` und `BASALIC_CONTACT_FROM` mit einem in Resend verifizierten Absender setzen. `BASALIC_CONTACT_TO` kann die Empfänger überschreiben. Für einen separaten öffentlichen Formulardienst die Pages-Origin in `BASALIC_CONTACT_ALLOWED_ORIGIN` am Server eintragen und beim Pages-Build die öffentliche HTTPS-Adresse des Endpunkts `/api/contact` als `VITE_BASALIC_CONTACT_ENDPOINT` setzen. Der API-Schlüssel bleibt in der Serverumgebung.

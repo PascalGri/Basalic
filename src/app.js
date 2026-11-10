@@ -19,13 +19,14 @@ import { initMotion, scrollToTarget, closeFaq } from './motion.js';
 import { initFinanceReferences } from './finance-carousel.js';
 import { imageMarkup } from './media.js';
 import { updateSeo } from './seo.js';
-import { routeAliases, routePath, setSiteLinks, sitePath } from './site-paths.js';
+import { isDemoWebsite, isPagesPreview, routeAliases, routePath, setSiteLinks, sitePath } from './site-paths.js';
 import './finance.css';
 import './finance-pages.css';
 import './finance-motion.css';
 import './finance-atmosphere.css';
 
 const app = document.querySelector('#app');
+const demoPreview = isDemoWebsite();
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const icon = svg => `<span class="icon" aria-hidden="true">${svg}</span>`;
 const img = (name,alt,cls='',eager=false,sizes='(max-width: 850px) 100vw, 50vw') => imageMarkup(name,alt,{className:cls,eager,sizes});
@@ -189,9 +190,25 @@ function setupHome(){
 function normalizePath() {
  const path = routePath(decodeURI(location.pathname)) || '/404';
  const alias = routeAliases[path];
- if (!alias) return path;
- history.replaceState({}, '', sitePath(alias + location.search + location.hash));
- return alias;
+ if (alias) history.replaceState({}, '', sitePath(alias + location.search + location.hash));
+ const route = alias || path;
+ if (demoPreview && route === '/immobilien') {
+  const id = new URLSearchParams(location.search).get('objekt');
+  if (id && /^[a-z0-9-]+$/.test(id)) return `/immobilien/${id}`;
+ }
+ return route;
+}
+
+function markPrivatePreview() {
+ document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex,nofollow,noarchive');
+ document.querySelector('link[rel="canonical"]')?.remove();
+}
+
+function demoBanner() {
+ return `<aside class="demo-site-banner" aria-label="Testvorschau"><div class="container">
+  <p><strong>Testvorschau</strong> · Änderungen sind nur in diesem Browser sichtbar.</p>
+  <a href="${sitePath('/admin')}">Zurück zum Testportal</a>
+ </div></aside>`;
 }
 
 function navigate(route) {
@@ -208,16 +225,27 @@ function navigate(route) {
 function render(){
  cleanupMotion();cleanupPage();cleanupHome();cleanupHeader();
  const path=normalizePath();
- const page=path==='/'?{html:home(),title:'Einfach individuell'}:renderPage(path,location.search);
+ const page=path==='/'?{html:home(),title:'Einfach individuell'}:renderPage(path,location.search,{demo:demoPreview});
  const body=page||{html:`<main id="main" tabindex="-1" class="not-found container"><h1>Hier geht es<br> <em>weiter.</em></h1><p>Diese Seite ist nicht vorhanden. Finden Sie Ihren Weg zurück.</p>${button('/','Zur Startseite')}</main>`,title:'Seite nicht gefunden'};
- app.innerHTML=header(path)+body.html+footer(path);document.title=body.title+' · Senad Basalic & Partner';
+ app.innerHTML=header(path)+(demoPreview?demoBanner():'')+body.html+footer(path);
+ document.title=body.title+(demoPreview?' · Testvorschau':'')+' · Senad Basalic & Partner';
  setSiteLinks(app);
- updateSeo(path, path.startsWith('/immobilien/') ? propertyForPath(path) : undefined);
+ if (!demoPreview) updateSeo(path, path.startsWith('/immobilien/') ? propertyForPath(path) : undefined);
  cleanupHeader=setupHeader();cleanupPage=setupPage(path)||(()=>{});cleanupHome=path==='/'?setupHome():(()=>{});
  cleanupMotion=initMotion({isHome:path==='/'});
 }
 async function startPublicSite() {
- await loadPublicProperties();
+ if (demoPreview) markPrivatePreview();
+ try {
+  await loadPublicProperties({ demo: demoPreview });
+ } catch (error) {
+  if (!demoPreview) throw error;
+  document.title='Testvorschau · Senad Basalic & Partner';
+  app.innerHTML=header('')+demoBanner()+`<main id="main" tabindex="-1" class="not-found container"><h1>Testvorschau</h1><p>Die Testdaten konnten nicht geladen werden. Öffnen Sie das Testportal und versuchen Sie es erneut.</p>${button(sitePath('/admin'),'Zum Testportal')}</main>`;
+  setupHeader();
+  setSiteLinks(app);
+  return;
+ }
  const motionButton=document.createElement('button');motionButton.id='motion-toggle';motionButton.className='motion-toggle';motionButton.type='button';
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
 const syncMotionButton=()=>{const paused=document.documentElement.dataset.motionUser==='paused';motionButton.disabled=motionPreference.matches;motionButton.setAttribute('aria-pressed',String(paused));const label=motionPreference.matches?'Animationen durch Systemeinstellung reduziert':paused?'Animationen fortsetzen':'Animationen pausieren';motionButton.setAttribute('aria-label',label);motionButton.title=label;motionButton.innerHTML=icon(paused?playIcon:pauseIcon);};
@@ -236,7 +264,7 @@ motionPreference.addEventListener('change',syncMotionButton);syncMotionButton();
   const url = new URL(link.href);
   if (url.origin !== location.origin || !['http:', 'https:'].includes(url.protocol)) return;
   const path = routePath(url.pathname);
-  if (!path || path === '/admin') return;
+  if (!path || path === '/admin' || isDemoWebsite(url.search) !== demoPreview) return;
   if (url.pathname === location.pathname && url.search === location.search && url.hash) {
    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
    if (target) {
@@ -254,11 +282,10 @@ motionPreference.addEventListener('change',syncMotionButton);syncMotionButton();
  render();
 }
 
-if (import.meta.env.MODE !== 'pages' && /^\/admin\/?$/.test(location.pathname)) {
+if (routePath(location.pathname) === '/admin') {
  document.querySelector('.site-atmosphere')?.remove();
- document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex,nofollow,noarchive');
- document.querySelector('link[rel="canonical"]')?.remove();
- import('./admin.js').then(({ mountAdmin }) => mountAdmin(app));
+ markPrivatePreview();
+ import('./admin.js').then(({ mountAdmin }) => mountAdmin(app, { demo: isPagesPreview }));
 } else {
  startPublicSite();
 }
