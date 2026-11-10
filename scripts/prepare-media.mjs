@@ -123,7 +123,9 @@ async function prepareSocial(routeMetadata, manifest) {
   const social = {};
   for (const [path, metadata] of Object.entries(routeMetadata)) {
     const image = manifest.images[metadata.imageName];
-    const fingerprint = sha256(JSON.stringify({ version: socialSignature, path, title: metadata.previewTitle, generatedImage: metadata.generatedImage, image: image?.sourceSha256 || '' }));
+    // Keep both people and the floor plan in the financing preview.
+    const cropPosition = path === '/finanzierung' ? 'centre' : undefined;
+    const fingerprint = sha256(JSON.stringify({ version: socialSignature, path, title: metadata.previewTitle, generatedImage: metadata.generatedImage, image: image?.sourceSha256 || '', cropPosition }));
     const outputPath = join(root, 'public', metadata.image);
     social[path] = { src: metadata.image, fingerprint, width: 1200, height: 630 };
     if (manifest.social?.[path]?.fingerprint === fingerprint && await exists(outputPath)) continue;
@@ -152,7 +154,7 @@ async function prepareSocial(routeMetadata, manifest) {
     const layers = [];
     if (image) {
       const crop = await sharp(join(root, 'public', image.src))
-        .resize(photo.width, photo.height, { fit: 'cover', position: 'attention' }).ensureAlpha().png().toBuffer();
+        .resize(photo.width, photo.height, { fit: 'cover', position: cropPosition ?? 'attention' }).ensureAlpha().png().toBuffer();
       const rounded = await sharp(crop).composite([{ input: photoMask, blend: 'dest-in' }]).png().toBuffer();
       layers.push({ input: rounded, left: photo.left, top: photo.top });
     }

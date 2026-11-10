@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-04",
-  "version": "editorial-v3",
+  "date": "2026-11-10",
+  "version": "editorial-v3-with-financing-refresh",
   "encoding": {
     "format": "webp",
     "quality": 85,
@@ -11,14 +11,14 @@
   "images": [
     {
       "asset": "finanzierung",
-      "source": "finanzierung-editorial-v3.png",
-      "sourceSha256": "b5965ac5199d0b26933bb2ff0c7985baa55bad95a2574532a4588405e9649f32",
+      "source": "exec-7a71273b-0865-4c38-b0c6-36544d0b766d.png",
+      "sourceSha256": "6db8b09262fb857cd6418f772165be94910dcbc9892e21fdc0f87f6cec93f251",
       "current": "public/assets/services/finanzierung.webp",
-      "currentSha256": "58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9",
-      "beforeSha256": "31b27c73237bf66d2280702fd7c4e579aa8b6004735d902716005c8d2eed2021",
-      "width": 1536,
-      "height": 1024,
-      "bytes": 134846
+      "currentSha256": "d07d8d1c934994ae32bec319f9e047ba1871d1c057109d19cd315450c4dd8e31",
+      "beforeSha256": "58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 206578
     },
     {
       "asset": "mietverwaltung",

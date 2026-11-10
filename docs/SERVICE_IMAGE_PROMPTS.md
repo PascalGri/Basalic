@@ -1,10 +1,10 @@
 # Leistungsbilder: Herkunft und Produktionsprompts
 
-Stand: 04.11.2026. Aktuelle Auswahl: Editorial V3.
+Stand: 10.11.2026. Die Auswahl Editorial V3 vom 04.11.2026 wurde beim Finanzierungsmotiv aktualisiert.
 
 Die vier Motive wurden vollständig neu mit dem eingebauten `image_gen.imagegen`-Tool erzeugt. Es handelt sich um KI-generierte, fiktive Szenen mit natürlicher dokumentarischer Bildsprache. Sie zeigen keine tatsächlichen Kunden, Mitarbeiter oder angebotenen Immobilien. Echte Objektfotos und das Porträt von Senad Basalic bleiben erhalten. Alle Verwendungen tragen weiterhin den Text „KI-generiertes Beispielbild“ direkt am Bild.
 
-Die ausgewählten Tool-Ausgaben wurden visuell geprüft und im lokalen Bildarchiv unverändert als PNG gesichert. Für die Website wurden die PNGs mit Sharp nach WebP konvertiert: Qualität 85, Effort 5, höchstens 1600 × 1600 px ohne Vergrößerung. Alle vier finalen Bilder haben 1536 × 1024 px im Seitenverhältnis 3:2. Es wurden keine weiteren inhaltlichen Bildbearbeitungen vorgenommen.
+Die ausgewählten Tool-Ausgaben wurden visuell geprüft und unverändert als PNG gesichert. Für die Website wurden die PNGs mit Sharp nach WebP konvertiert: Qualität 85, Effort 5, höchstens 1600 × 1600 px ohne Vergrößerung. Das Finanzierungsmotiv hat ein Seitenverhältnis von 4:3, die anderen drei Motive haben 3:2. Es wurden keine weiteren inhaltlichen Bildbearbeitungen vorgenommen.
 
 Die ersetzten WebP-Dateien, PNG-Ausgaben und Produktionsmanifeste der früheren Bildauswahlen bleiben im lokalen Bildarchiv außerhalb des Repositorys erhalten.
 
@@ -15,24 +15,23 @@ Produktions- und Integrationsnachweise:
 
 ## finanzierung
 
-Fiktiver Mann denkt am eigenen Küchentresen über Unterlagen nach; Laptop, Mappe und Kaffeebecher begleiten die Szene. Blick über die Schulter, keine Beratungssituation.
+Eine Frau und ein Mann besprechen bei Tageslicht einen Wohnungsgrundriss. Die fiktive Szene veranschaulicht ein erstes Gespräch zur Baufinanzierung.
 
 Finaler Dateipfad: `public/assets/services/finanzierung.webp`
 
-Finale Datei: 1536 × 1024 px, 134846 Bytes. SHA-256: `58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9`.
+Finale Datei: 1448 × 1086 px, 206578 Bytes. SHA-256: `d07d8d1c934994ae32bec319f9e047ba1871d1c057109d19cd315450c4dd8e31`.
 
-PNG SHA-256: `b5965ac5199d0b26933bb2ff0c7985baa55bad95a2574532a4588405e9649f32`. Vorheriges WebP SHA-256: `31b27c73237bf66d2280702fd7c4e579aa8b6004735d902716005c8d2eed2021`.
+PNG SHA-256: `6db8b09262fb857cd6418f772165be94910dcbc9892e21fdc0f87f6cec93f251`. Vorheriges WebP SHA-256: `58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9`.
 
 Exakter Prompt:
 
 ```text
-Use case: photorealistic-natural.
-Asset type: refined documentary editorial photograph for a regional German finance website, landscape 3:2.
-Primary request: an unposed over-the-shoulder moment of ONE fictional adult considering home financing at the small kitchen counter of an attractive but ordinary apartment in southern Germany. The adult is in their early forties, mostly seen from behind and the side, a hand resting naturally on a closed anonymous folder beside an open laptop. A few plain unmarked sheets are partly tucked under the folder. The screen is angled away and no contents are readable. Their attention is on the work, not the photographer.
-Scene: bright maintained apartment with practical pale kitchen cabinetry, a wood counter, a plain mug and modest lived-in details. Through a nearby open doorway a comfortable dining corner and daylight window are visible. Keep the setting clean and quietly appealing without luxury staging.
-Style: photorealistic editorial photography captured in the moment, 35mm environmental lens at normal eye level, soft natural morning window light, true-to-life exposure and colours, real cotton texture, believable skin and hands, subtle unobtrusive grain. Ordinary natural imperfections, no exaggerated wear.
-Composition: shoulder and upper back in the near foreground, hands and counter in the middle, bright apartment depth beyond; generous landscape crop, no face front-on, no central symmetrical pose.
-Constraints: entirely fictional person, no company staff identity or actual client. No readable text, numbers, logos, watermark, charts or money symbols. Avoid couples arranged at a table, staged consultation, handshake, camera gaze, stock advertising smile, luxurious showroom, poverty, damage, CGI, HDR, glossy skin or heavy cinematic grading.
+Use case: photorealistic-natural
+Asset type: website service photograph for the Baufinanzierung (home financing) page of an independent German real estate and finance practice.
+Primary request: An unstaged, personal first consultation about buying a home. A woman in her thirties and a male adviser in his forties in a dark navy overshirt sit at neighboring sides of a light oak table, looking down together at a simple residential floor plan next to a few understated, softly out-of-focus financing papers. The woman is engaged and thoughtful, holding a plain pencil loosely; the adviser listens attentively, one relaxed hand resting naturally near the papers. Nobody looks into the camera. The floor plan reads as a real floor plan with fine architectural lines, without legible labels. No signing, handshake, or posed smiles.
+Scene and style: a modest, bright consultation room in southern Germany, soft off-white plaster, an out-of-focus window and a touch of foliage. Natural editorial lifestyle photography with believable candid expressions and accurate anatomy, visible skin and wood texture, soft side daylight, warm cream and oak neutrals balanced with muted slate blue and sage. Calm, contemporary, approachable, and grounded.
+Composition: landscape 4:3, eye-level to slightly elevated medium shot. The two faces and the floor plan form one compact visual triangle in the central 65% of the frame, with margins above the heads and on both sides to survive a centered near-square crop. Keep the bottom-left corner quiet for a small disclosure added by the website. Moderately deep focus so the consultation reads instantly at thumbnail size.
+Avoid logos, text overlays, watermarks, legible words or numbers, miniature houses, coins, calculators, laptops, keys, ties, luxury office decor, exaggerated bokeh, and the polished look of staged stock photography.
 ```
 
 ## mietverwaltung

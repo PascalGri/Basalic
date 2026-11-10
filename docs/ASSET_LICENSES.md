@@ -1,6 +1,6 @@
 # Bildherkunft und lokale Schriften
 
-Dokumentationsstand **04.11.2026**. Alle eingesetzten Bilddateien und Schriften werden lokal ausgeliefert. Der Bildbestand umfasst die 54 ursprünglichen Quelldateien aus **www.basalic.de**, vier neue KI-Servicebilder und zwölf zusätzliche echte Objektfotos aus belegten ImmoScout-Inseraten. Die vier alten Leistungsmotive bleiben als historische Quelldateien erhalten, werden jedoch nicht mehr in der Oberfläche verwendet. Es gibt beim Öffnen der Website keine externen Bild- oder Fontabrufe.
+Dokumentationsstand **10.11.2026**. Alle eingesetzten Bilddateien und Schriften werden lokal ausgeliefert. Der Bildbestand umfasst die 54 ursprünglichen Quelldateien aus **www.basalic.de**, vier neue KI-Servicebilder und zwölf zusätzliche echte Objektfotos aus belegten ImmoScout-Inseraten. Die vier alten Leistungsmotive bleiben als historische Quelldateien erhalten, werden jedoch nicht mehr in der Oberfläche verwendet. Es gibt beim Öffnen der Website keine externen Bild- oder Fontabrufe.
 
 Die ursprünglichen 54 Einträge stehen unverändert als Herkunftsnachweis in `public/assets/manifest.json`. Die neuen Motive sind getrennt in `docs/SERVICE_IMAGE_PROMPTS.md` und `docs/PROPERTY_GALLERY_SOURCES.json` dokumentiert.
 
@@ -20,20 +20,20 @@ Das frühere Startmotiv bleibt im historischen Bestand und in bestehenden Teilen
 
 | Datei | Motiv |
 | --- | --- |
-| `public/assets/services/finanzierung.webp` | Mann am eigenen Küchentresen mit Laptop, Mappe und Kaffeebecher |
+| `public/assets/services/finanzierung.webp` | Eine Frau und ein Mann besprechen einen Wohnungsgrundriss am Tisch |
 | `public/assets/services/mietverwaltung.webp` | Gepflegtes helles Mehrfamilienhaus mit grauen Balkonen und Pflanzen |
 | `public/assets/services/absicherung.webp` | Elternteil hilft einem Kind beim Anziehen einer Jacke |
 | `public/assets/services/altersvorsorge.webp` | Ältere Frau beim Umtopfen in einer Gartenwerkstatt, zweite Person mit Tee im Hintergrund |
 
-Diese vier fiktiven Illustrationsszenen wurden mit dem eingebauten `image_gen.imagegen`-Tool erzeugt. Sie zeigen keine tatsächlichen Kunden, Mitarbeiter oder angebotenen Immobilien. Die am 04.11.2026 vollständig neu erzeugten Bilder der dritten Auswahl zeigen vier andere Szenen in einer natürlichen dokumentarischen Bildsprache und ersetzen die bisherigen KI-Servicebilder der Website. Die ersetzten WebP-Dateien und ihre Prompts sind im lokalen Bildarchiv gesichert. Themenkarten sind durchgehend textbasiert gestaltet; die Bilder werden davon getrennt als Serviceillustrationen eingesetzt.
+Diese vier fiktiven Illustrationsszenen wurden mit dem eingebauten `image_gen.imagegen`-Tool erzeugt. Sie zeigen keine tatsächlichen Kunden, Mitarbeiter oder angebotenen Immobilien. Die Bilder der dritten Auswahl entstanden am 04.11.2026; das Finanzierungsmotiv wurde am 10.11.2026 ersetzt. Die früheren Bilder und ihre Prompts sind im lokalen Bildarchiv dokumentiert.
 
-Alle vier Dateien sind WebP-Bilder mit 1536 × 1024 px, Qualität 85 und Effort 5. Die unveränderten generierten PNGs und ihr Manifest liegen im lokalen Bildarchiv. [SERVICE_IMAGE_SOURCES.json](SERVICE_IMAGE_SOURCES.json) dokumentiert Maße, Dateigrößen und SHA-256-Prüfsummen. Exakte Prompts, Methode und finale Pfade stehen in `docs/SERVICE_IMAGE_PROMPTS.md`. Die visuellen Ausgaben wurden bei ihrer Erstellung geprüft. Für die KI-Motive wird keine externe Stockfotolizenz behauptet.
+Alle vier Dateien sind WebP-Bilder mit Qualität 85 und Effort 5. [SERVICE_IMAGE_SOURCES.json](SERVICE_IMAGE_SOURCES.json) dokumentiert Maße, Dateigrößen und SHA-256-Prüfsummen. Exakte Prompts, Methode und finale Pfade stehen in `docs/SERVICE_IMAGE_PROMPTS.md`. Die visuellen Ausgaben wurden bei ihrer Erstellung geprüft. Für die KI-Motive wird keine externe Stockfotolizenz behauptet.
 
-### Aktuelle WebP-Dateien der dritten Auswahl
+### Aktuelle WebP-Dateien
 
 | Motiv | Maße | Bytes | SHA-256 |
 | --- | --- | ---: | --- |
-| finanzierung | 1536 × 1024 | 134846 | `58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9` |
+| finanzierung | 1448 × 1086 | 206578 | `d07d8d1c934994ae32bec319f9e047ba1871d1c057109d19cd315450c4dd8e31` |
 | mietverwaltung | 1536 × 1024 | 245956 | `85d62271f3d9a5356d6d511c482cf19244d90ee728dc8643adaa2b4cae436e47` |
 | absicherung | 1536 × 1024 | 212314 | `2629e55ffd596c8c3f083706fb0f67a7944988d75873d8fc5db9e5130b2ba50f` |
 | altersvorsorge | 1536 × 1024 | 236990 | `eae427c0f84a64ff93874a54f96ae2d33201692361cf4c7c3e5d1d1591a2c927` |

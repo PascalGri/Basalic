@@ -193,7 +193,7 @@ const servicePages = {
   '/finanzierung': {
     title: 'Finanzierung', headline: 'Große Pläne.<br> <em>Ein guter Anfang.</em>',
     lead: 'Die eigenen vier Wände oder ein bestehender Privatkredit. Wir unterstützen Sie bei Ihren Finanzierungsfragen.',
-    image: 'services/finanzierung', imageAlt: 'Blick über die Schulter eines Mannes am Küchentresen mit Laptop und Mappe',
+    image: 'services/finanzierung', imageAlt: 'Eine Frau und ein Mann besprechen einen Wohnungsgrundriss am Tisch',
     intro: 'Für Ihr Zuhause.<br> <em>Und Ihre Möglichkeiten.</em>',
     text: 'Durch Kooperationen mit Banken, darunter auch regionale Institute, begleiten wir Sie auf dem Weg in die eigenen vier Wände. Ausgangspunkt ist Ihr persönliches Vorhaben.',
     topics: [{ title: 'Baufinanzierung', text: 'Sie planen den Kauf Ihrer eigenen vier Wände? Gemeinsam sprechen wir über Ihre Finanzierung und die Möglichkeiten unserer Bankkooperationen.' }, { title: 'Privatkredite und Umschuldung', text: 'Durch eine Umschuldung Ihres Privatkredits können unter Umständen Zinskosten sinken. Ob sich das für Sie lohnt, hängt von Ihrer persönlichen Situation und den Konditionen ab. Lassen Sie uns darüber sprechen.' }],

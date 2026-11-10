@@ -1726,29 +1726,29 @@ export const mediaManifest = {
     },
     "services/finanzierung": {
       "src": "/assets/services/finanzierung.webp",
-      "width": 1536,
-      "height": 1024,
-      "sourceSha256": "58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9",
+      "width": 1448,
+      "height": 1086,
+      "sourceSha256": "d07d8d1c934994ae32bec319f9e047ba1871d1c057109d19cd315450c4dd8e31",
       "variants": [
         {
           "src": "/assets/responsive/services/finanzierung-320.webp",
           "width": 320,
-          "height": 213
+          "height": 240
         },
         {
           "src": "/assets/responsive/services/finanzierung-640.webp",
           "width": 640,
-          "height": 427
+          "height": 480
         },
         {
           "src": "/assets/responsive/services/finanzierung-960.webp",
           "width": 960,
-          "height": 640
+          "height": 720
         },
         {
           "src": "/assets/responsive/services/finanzierung-1440.webp",
           "width": 1440,
-          "height": 960
+          "height": 1080
         }
       ]
     },
@@ -1808,7 +1808,7 @@ export const mediaManifest = {
     },
     "/finanzierung": {
       "src": "/assets/social/finanzierung.webp",
-      "fingerprint": "b34c578e096e841dacbd1f77b68dc173ac23f0e1b7f566518154eeaadafbdf1a",
+      "fingerprint": "703a647fa1e543a1b0ddba3fbe3ca7c5c67ce6e588b3be2b936fbb519dd16ed5",
       "width": 1200,
       "height": 630
     },
