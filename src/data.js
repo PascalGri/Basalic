@@ -11,12 +11,12 @@ export const properties = [
     "kind": "Freistehendes Zweifamilienhaus",
     "area": "ca. 155",
     "land": "ca. 244",
-    "note": "Auf der Quellseite zu verkaufen und als bezugsfrei beschrieben. Den aktuellen Stand bitte direkt erfragen.",
+    "note": "Ein freistehendes Zweifamilienhaus mit Garten, Garage und Stellplatz. Zuletzt als bezugsfrei angeboten; Verfügbarkeit, Preis und Übergabetermin erfahren Sie auf Anfrage.",
     "status": "offer",
     "features": [
       "Großer Garten",
       "Einzelgarage und Stellplatz",
-      "Laut Quelle bezugsfrei"
+      "Zuletzt als bezugsfrei angeboten"
     ],
     "sourceRow": "1766087092",
     "image": "faurndau",
@@ -30,16 +30,17 @@ export const properties = [
     "kind": "Freistehendes Einfamilienhaus",
     "area": "101",
     "land": "814",
-    "note": "Auf der Quellseite zu verkaufen und als bezugsfrei beschrieben. Eine aktuelle Verfügbarkeit wurde nicht bestätigt.",
+    "note": "Ein eigenes Haus mit großem Garten, Garage und Stellplätzen. Zuletzt als bezugsfrei angeboten; sprechen Sie uns auf Verfügbarkeit, Preis und eine Besichtigung an.",
     "status": "offer",
     "features": [
       "Großer Garten",
       "Einzelgarage und Stellplätze",
-      "Laut Quelle bezugsfrei"
+      "Zuletzt als bezugsfrei angeboten"
     ],
     "sourceRow": "1514467580",
     "image": "muehlhausen",
-    "expose": "169662545"
+    "expose": "169662545",
+    "listingUrl": "https://www.immobilienscout24.de/expose/171799398"
   },
   {
     "id": "neidlingen",
@@ -49,16 +50,17 @@ export const properties = [
     "kind": "Zweifamilienhaus mit Einliegerwohnung",
     "area": "201",
     "year": "1994",
-    "note": "Nutzung, Eignung als Kapitalanlage und aktuellen Stand bitte direkt bestätigen lassen.",
+    "note": "Zwei Wohnungen und eine Einliegerwohnung eröffnen unterschiedliche Nutzungsmöglichkeiten. Ob Eigennutzung oder Kapitalanlage: Wir besprechen mit Ihnen die Details und die aktuelle Verfügbarkeit.",
     "status": "offer",
     "features": [
       "2 Wohnungen und Einliegerwohnung",
-      "Laut Quelle bezugsfrei",
-      "In der Quelle als Kapitalanlage beschrieben"
+      "Zuletzt als bezugsfrei angeboten",
+      "Als Kapitalanlage angeboten"
     ],
     "sourceRow": "1432507334",
     "image": "neidlingen",
-    "expose": "169930109"
+    "expose": "169930109",
+    "listingUrl": "https://www.immobilienscout24.de/expose/172113062"
   },
   {
     "id": "bezgenriet",
@@ -69,10 +71,10 @@ export const properties = [
     "area": "164",
     "areaLabel": "Gesamtfläche",
     "year": "1997",
-    "note": "Die Quelle nennt „164 qm Gesamt“, ohne die Flächenart ausdrücklich zu bestimmen. Beide Wohnungen werden als vermietet beschrieben. Mietverhältnisse und aktuellen Stand bitte bestätigen lassen.",
+    "note": "Zwei vermietete Wohnungen, Balkon, Terrasse und zwei Stellplätze. Die angegebene Gesamtfläche beträgt 164 m²; die Flächenaufteilung, Mietverhältnisse und aktuelle Verfügbarkeit erläutern wir Ihnen persönlich.",
     "status": "offer",
     "features": [
-      "Zwei vermietete Wohnungen laut Quelle",
+      "Zwei vermietete Wohnungen",
       "Balkon und Terrasse",
       "Zwei Stellplätze"
     ],
@@ -88,13 +90,13 @@ export const properties = [
     "area": "76",
     "year": "1992",
     "rooms": "3",
-    "note": "Auf der Quellseite zu verkaufen, renoviert und bezugsfrei beschrieben. Aktuellen Stand bitte erfragen.",
+    "note": "Eine renovierte Erdgeschosswohnung mit zwei Terrassen und Tiefgaragenstellplatz. Zuletzt als bezugsfrei angeboten; Verfügbarkeit und Besichtigungstermine erhalten Sie auf Anfrage.",
     "status": "offer",
     "features": [
       "Zwei Terrassen",
       "Tiefgaragenstellplatz",
-      "Renoviert laut Quelle",
-      "Laut Quelle bezugsfrei"
+      "Renoviert",
+      "Zuletzt als bezugsfrei angeboten"
     ],
     "sourceRow": "1172901170",
     "image": "schwaebisch-hall",
@@ -110,13 +112,13 @@ export const properties = [
     "land": "700",
     "year": "2017",
     "rooms": "6",
-    "note": "Die Quelle zeigt ausdrücklich nur ein Beispielbild. Hier wird es nicht als Objektfoto verwendet. Barrierefreiheit, Ausstattung und aktuellen Stand bitte vor Ort bestätigen lassen.",
+    "note": "Großzügiges Wohnen auf einer Ebene mit Swimmingpool. Objektfotos sowie nähere Informationen zu Barrierefreiheit, Ausstattung, enthaltenem Interieur und Verfügbarkeit erhalten Sie auf Anfrage.",
     "status": "offer",
     "features": [
       "Wohnfläche auf einer Ebene",
-      "Laut Quelle barrierefrei",
+      "Als barrierefrei angeboten",
       "Swimmingpool",
-      "Hochwertiges Interieur laut Quelle inklusive",
+      "Angebot inklusive hochwertigem Interieur",
       "Preis auf Anfrage"
     ],
     "sourceRow": "1519572075"
@@ -130,13 +132,13 @@ export const properties = [
     "area": "50",
     "year": "1991",
     "rooms": "2",
-    "note": "Auf der Quellseite zu verkaufen und als vermietet beschrieben. Nicht mit der verkauften 51-m²-Referenz in Plochingen verwechseln.",
+    "note": "Eine vermietete 2-Zimmer-Wohnung mit Terrasse und Tiefgaragenstellplatz. Wir informieren Sie über Mietverhältnis, Kaufpreis und aktuelle Verfügbarkeit.",
     "status": "offer",
     "features": [
       "Terrasse",
       "Tiefgaragenstellplatz",
-      "Laut Quelle vermietet",
-      "In der Quelle als Kapitalanlage beschrieben"
+      "Vermietet angeboten",
+      "Als Kapitalanlage angeboten"
     ],
     "sourceRow": "1236925600",
     "image": "plochingen",
@@ -158,7 +160,7 @@ export const properties = [
     ],
     "sourceRow": "1107683856",
     "image": "referenz-plochingen",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "istrien",
@@ -167,13 +169,13 @@ export const properties = [
     "type": "Grundstück",
     "kind": "Grundstück mit Steinhaus",
     "land": "ca. 18.000",
-    "note": "Informationsangebot ohne eindeutigen Verkaufsstatus. Bebaubarkeit, Entfernungen und Baumalter sind Originalangaben der Quellseite, keine unabhängig bestätigten Zusagen. Lage, Eigentums-, Nutzungs- und Baurecht sowie aktuellen Stand vor Ort prüfen.",
+    "note": "Ein Grundstück mit Olivenbäumen und Steinhaus in Istrien. Informationen zur aktuellen Verfügbarkeit, zur genauen Lage und zu den Nutzungs- und Baumöglichkeiten erhalten Sie im persönlichen Gespräch. Entfernungen und Baumalter beziehen sich auf die ursprüngliche Objektbeschreibung.",
     "status": "information",
     "features": [
-      "120 Olivenbäume, laut Quelle 5–10 Jahre alt",
+      "120 Olivenbäume, bei Objektaufnahme 5–10 Jahre alt",
       "Steinhaus mit ca. 80 m² Fläche",
-      "Quellangabe zum Steinhaus: bebaubar",
-      "Laut Quelle 3,5 km zum Meer und 3 km zur Stadt"
+      "Steinhaus: Baumöglichkeiten auf Anfrage",
+      "Entfernungsangaben: 3,5 km zum Meer und 3 km zur Stadt"
     ],
     "sourceRow": "1963576162",
     "image": "istrien"
@@ -186,13 +188,13 @@ export const properties = [
     "kind": "Haus auf zwei Ebenen",
     "area": "110",
     "land": "ca. 10.000",
-    "note": "Informationsangebot ohne eindeutigen Verkaufsstatus. Baumalter und Fahrzeiten sind Originalangaben der Quellseite, keine unabhängig bestätigten Angaben. Genaue Lage, Rechtslage und aktuellen Stand bitte bestätigen lassen.",
+    "note": "Ein Haus auf zwei Ebenen mit weitem Grundstück und Walnussbäumen im Raum Sarajevo. Fragen Sie uns nach der genauen Lage, den rechtlichen Rahmenbedingungen und der aktuellen Verfügbarkeit. Baumalter und Fahrzeiten beziehen sich auf die ursprüngliche Objektbeschreibung.",
     "status": "information",
     "features": [
       "Zweistöckig",
-      "Über 50 Walnussbäume, laut Quelle 8 Jahre alt",
-      "Laut Quelle 1,5 Stunden zur Küste",
-      "Laut Quelle 30 Minuten zum Skigebiet und 20 Minuten nach Sarajevo"
+      "Über 50 Walnussbäume, bei Objektaufnahme 8 Jahre alt",
+      "Angegebene Fahrzeit zur Küste: 1,5 Stunden",
+      "Angegebene Fahrzeiten: 30 Minuten zum Skigebiet, 20 Minuten nach Sarajevo"
     ],
     "sourceRow": "1488694642",
     "image": "sarajevo"
@@ -209,12 +211,12 @@ export const properties = [
     "features": [
       "Doppelgarage",
       "Sauna",
-      "Solar laut historischem Inserat"
+      "Solar"
     ],
     "sourceRow": "1652934967",
     "image": "referenz-eislingen",
     "expose": "158137015",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-uhingen",
@@ -223,12 +225,12 @@ export const properties = [
     "type": "Wohnung",
     "kind": "2-Zimmer-Erdgeschosswohnung",
     "area": "50",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "2",
-    "note": "Verkauft laut Quelle. Die Flächenangabe steht dort als „50 qm €“ ohne nähere Einordnung. Barrierefreiheit und Ausstattung sind Angaben des historischen Inserats.",
+    "note": "Bereits verkauft. Diese Erdgeschosswohnung zeigen wir als Referenz. Für die angegebene Fläche von 50 m² liegt keine nähere Flächenaufteilung vor. Ausstattung und Barrierefreiheit beziehen sich auf den Vermarktungszeitpunkt.",
     "status": "sold",
     "features": [
-      "Barrierefrei laut historischem Inserat",
+      "Barrierefrei",
       "Tiefgaragenstellplatz",
       "Terrasse",
       "Einbauküche"
@@ -253,7 +255,7 @@ export const properties = [
     "sourceRow": "1821346797",
     "image": "referenz-eislingen-garten",
     "expose": "158165783",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-waldenbuch-wohnung",
@@ -270,7 +272,7 @@ export const properties = [
     ],
     "sourceRow": "1600318677",
     "image": "referenz-waldenbuch-wohnung",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-74",
@@ -279,7 +281,7 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3-Zimmer-Wohnung",
     "area": "ca. 74",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "3",
     "status": "sold",
     "features": [
@@ -287,7 +289,7 @@ export const properties = [
     ],
     "sourceRow": "1041976400",
     "image": "referenz-eislingen-74",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-ditzingen",
@@ -304,7 +306,7 @@ export const properties = [
     ],
     "sourceRow": "1073398324",
     "image": "referenz-ditzingen",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-waldenbuch-haus",
@@ -314,12 +316,12 @@ export const properties = [
     "kind": "Ein- / Zweifamilienhaus",
     "status": "sold",
     "features": [
-      "Laut historischem Inserat renovierungsbedürftig oder Abriss"
+      "Zum Vermarktungszeitpunkt renovierungsbedürftig oder zum Abriss vorgesehen"
     ],
     "sourceRow": "1047145304",
     "image": "referenz-waldenbuch-haus",
     "expose": "144454899",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-goeppingen-nordstadt-74",
@@ -328,18 +330,18 @@ export const properties = [
     "type": "Wohnung",
     "kind": "4-Zimmer-Wohnung",
     "area": "ca. 74",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "4",
     "status": "sold",
     "features": [
       "Zwei Balkone",
-      "Renoviert laut historischem Inserat",
+      "Renoviert",
       "Einbauküche",
-      "Bei Inserierung bezugsfrei"
+      "Bei Vermarktung bezugsfrei"
     ],
     "sourceRow": "1330675682",
     "image": "referenz-goeppingen-nordstadt-74",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-ebersbach",
@@ -348,16 +350,16 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3,5-Zimmer-Wohnung",
     "area": "ca. 87",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "3,5",
     "status": "sold",
     "features": [
       "Einzelgarage",
-      "Bei Inserierung bezugsfrei"
+      "Bei Vermarktung bezugsfrei"
     ],
     "sourceRow": "1893814691",
     "image": "referenz-ebersbach",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-leinfelden-echterdingen",
@@ -366,7 +368,7 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3-Zimmer-Wohnung",
     "area": "ca. 68",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "3",
     "status": "sold",
     "features": [
@@ -376,7 +378,7 @@ export const properties = [
     ],
     "sourceRow": "1843971558",
     "image": "referenz-leinfelden-echterdingen",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-wangen-oberwaelden",
@@ -385,13 +387,13 @@ export const properties = [
     "type": "Haus",
     "kind": "Bungalow",
     "area": "ca. 100",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "land": "589",
     "rooms": "3,5",
-    "note": "Verkauft laut Quelle. Die Erweiterbarkeit ist eine unbestätigte Angabe des historischen Inserats. Separater Quelleneintrag gegenüber dem 95-m²-Bungalow in Wangen; nicht zusammengeführt.",
+    "note": "Bereits verkauft. Dieser Bungalow in Wangen-Oberwälden wird als eigenständige Referenz gezeigt. Eine mögliche Erweiterung war Teil der Objektbeschreibung und bedarf einer baurechtlichen Prüfung.",
     "status": "sold",
     "features": [
-      "Im historischen Inserat als erweiterbar beschrieben"
+      "Mögliche Erweiterung baurechtlich zu prüfen"
     ],
     "sourceRow": "1924244566",
     "image": "referenz-wangen-oberwaelden"
@@ -403,7 +405,7 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3,5-Zimmer-Wohnung",
     "area": "77",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "3,5",
     "status": "sold",
     "features": [
@@ -411,7 +413,7 @@ export const properties = [
     ],
     "sourceRow": "1326889703",
     "image": "referenz-gingen",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-ludwigsburg",
@@ -420,13 +422,13 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3,5-Zimmer-Wohnung",
     "area": "85",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1992",
     "rooms": "3,5",
-    "note": "Verkauft laut Quelle. Das Inserat nennt zunächst einen TG-Stellplatz und bei den Eckdaten zwei TG-Stellplätze; die Abweichung ist nicht geklärt.",
+    "note": "Bereits verkauft. Die Wohnung mit Loftambiente zeigen wir als Referenz. Zur Zahl der Tiefgaragenstellplätze liegen unterschiedliche Angaben vor: ein beziehungsweise zwei Stellplätze.",
     "status": "sold",
     "features": [
-      "Loftambiente laut historischem Inserat",
+      "Loftambiente",
       "Aufzug",
       "Zwei Tiefgaragenstellplätze"
     ],
@@ -452,7 +454,7 @@ export const properties = [
     ],
     "sourceRow": "1141031938",
     "image": "referenz-goeppingen-nordstadt-garten",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-penthouse-123",
@@ -466,11 +468,11 @@ export const properties = [
     "status": "sold",
     "features": [
       "Balkon",
-      "Bei Inserierung bezugsfrei"
+      "Bei Vermarktung bezugsfrei"
     ],
     "sourceRow": "1053840471",
     "image": "referenz-eislingen-penthouse-123",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-faurndau-wohnung",
@@ -479,19 +481,19 @@ export const properties = [
     "type": "Wohnung",
     "kind": "2-Zimmer-Wohnung",
     "area": "55",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1967",
     "rooms": "2",
     "status": "sold",
     "features": [
       "Einbauküche",
       "Stellplatz",
-      "Renoviert laut historischem Inserat",
-      "Historische Bezugsangabe: ab 01.06.2021 bezugsfrei"
+      "Renoviert",
+      "Bezugsangabe bei Vermarktung: ab 01.06.2021"
     ],
     "sourceRow": "1477060526",
     "image": "referenz-faurndau-wohnung",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-plattenhardt-penthouse",
@@ -502,13 +504,13 @@ export const properties = [
     "area": "140",
     "year": "1991",
     "rooms": "3,5",
-    "note": "Verkauft laut Quelle. Kaltmiete und Mietstatus stammen aus dem historischen Inserat. Das gleiche Quellbild wird dort auch der 79-m²-Wohnung in Plattenhardt zugeordnet.",
+    "note": "Bereits verkauft. Mietstatus und Kaltmiete beziehen sich auf den Vermarktungszeitpunkt. Die Abbildung wurde auch für eine weitere Referenz in Plattenhardt verwendet.",
     "status": "sold",
     "features": [
       "Balkon",
       "Stellplatz",
       "Gartennutzung",
-      "Historische Mietangabe: vermietet für 950 € Kaltmiete"
+      "Kaltmiete zum Vermarktungszeitpunkt: 950 €"
     ],
     "sourceRow": "1498127006",
     "image": "referenz-plattenhardt-penthouse"
@@ -524,28 +526,28 @@ export const properties = [
     "year": "1936",
     "status": "sold",
     "features": [
-      "Renoviert laut historischem Inserat",
-      "Bei Inserierung bezugsfrei"
+      "Renoviert",
+      "Bei Vermarktung bezugsfrei"
     ],
     "sourceRow": "1674750184",
     "image": "referenz-wangen-zweifamilienhaus",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-gartenwohnung-88",
-    "city": "Ort in der Quelle nicht genannt",
+    "city": "Ort nicht genannt",
     "title": "Wohnung mit eigenem Garten.",
     "type": "Wohnung",
     "kind": "3,5-Zimmer-Wohnung",
     "area": "88",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1992",
     "rooms": "3,5",
-    "note": "Verkauft laut Quelle. Der Quelleneintrag nennt keinen Ort; eine Ortszuordnung wurde nicht ergänzt.",
+    "note": "Bereits verkauft. Diese Gartenwohnung zeigen wir als Referenz. Der Ort ist in den vorliegenden Objektunterlagen nicht genannt.",
     "status": "sold",
     "features": [
       "Ca. 40 m² Garten",
-      "Tiefgaragenstellplatz laut historischem Inserat inklusive"
+      "Tiefgaragenstellplatz enthalten"
     ],
     "sourceRow": "1953026017",
     "image": "referenz-gartenwohnung-88"
@@ -557,7 +559,7 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3,5-Zimmer-Wohnung",
     "area": "75",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1995",
     "rooms": "3,5",
     "status": "sold",
@@ -567,7 +569,7 @@ export const properties = [
     ],
     "sourceRow": "1323306606",
     "image": "referenz-goeppingen-75",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-goeppingen-103",
@@ -576,7 +578,7 @@ export const properties = [
     "type": "Wohnung",
     "kind": "4,5-Zimmer-Wohnung",
     "area": "103",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1998",
     "rooms": "4,5",
     "status": "sold",
@@ -586,7 +588,7 @@ export const properties = [
     ],
     "sourceRow": "1971343620",
     "image": "referenz-goeppingen-103",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-101",
@@ -604,7 +606,7 @@ export const properties = [
     ],
     "sourceRow": "1682627020",
     "image": "referenz-eislingen-101",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-plattenhardt-erdgeschoss",
@@ -620,11 +622,11 @@ export const properties = [
       "Balkon",
       "Garage",
       "Gartennutzung",
-      "Bei Inserierung zeitnah bezugsfrei"
+      "Bei Vermarktung zeitnah bezugsfrei"
     ],
     "sourceRow": "1591988186",
     "image": "referenz-plattenhardt-erdgeschoss",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-penthouse-44",
@@ -637,13 +639,13 @@ export const properties = [
     "rooms": "1,5",
     "status": "sold",
     "features": [
-      "Renoviert und gepflegt laut historischem Inserat",
-      "Aussicht laut historischem Inserat",
+      "Renoviert und gepflegt",
+      "Aussicht",
       "Tiefgaragenstellplatz"
     ],
     "sourceRow": "1770445873",
     "image": "referenz-eislingen-penthouse-44",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-plattenhardt-appartement",
@@ -658,11 +660,11 @@ export const properties = [
     "features": [
       "Stellplatz",
       "Gartennutzung",
-      "Bei Inserierung vermietet"
+      "Bei Vermarktung vermietet"
     ],
     "sourceRow": "1481795156",
     "image": "referenz-plattenhardt-appartement",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-tamm",
@@ -671,14 +673,14 @@ export const properties = [
     "type": "Wohnung",
     "kind": "Appartement",
     "area": "28",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1992",
-    "note": "Verkauft laut Quelle. Widersprüchliche Zimmerzahl: Im Titel steht „1 Zimmer App.“, bei den Eckdaten „1,5 Zimmer“. Daher wird keine eindeutige Zimmerzahl gesetzt.",
+    "note": "Bereits verkauft. Für dieses Appartement liegen abweichende Angaben von 1 Zimmer und 1,5 Zimmer vor. Eine eindeutige Zimmerzahl ist deshalb nicht ausgewiesen.",
     "status": "sold",
     "features": [
       "Aufzug",
       "Balkon",
-      "Zimmerzahl in der Quelle: Titel 1 Zimmer, Eckdaten 1,5 Zimmer"
+      "Abweichende Zimmerangaben: 1 Zimmer beziehungsweise 1,5 Zimmer"
     ],
     "sourceRow": "1842596248",
     "image": "referenz-tamm"
@@ -692,7 +694,7 @@ export const properties = [
     "area": "79",
     "year": "1991",
     "rooms": "3",
-    "note": "Verkauft laut Quelle. Das gleiche Quellbild wird dort auch der 140-m²-Penthousewohnung in Plattenhardt zugeordnet; beide Quelleneinträge bleiben getrennt.",
+    "note": "Bereits verkauft. Diese Wohnung zeigen wir als eigenständige Referenz. Die Abbildung wurde auch für eine weitere Referenz in Plattenhardt verwendet.",
     "status": "sold",
     "features": [
       "Stellplatz",
@@ -708,18 +710,18 @@ export const properties = [
     "type": "Wohnung",
     "kind": "2-Zimmer-Wohnung · betreutes Wohnen",
     "area": "52",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1996",
     "rooms": "2",
     "status": "sold",
     "features": [
-      "In der Quelle als seniorengerecht beschrieben",
-      "Betreutes Wohnen laut historischem Inserat",
-      "Historische Mietangabe: 440 € Kaltmiete"
+      "Seniorengerecht angeboten",
+      "Betreutes Wohnen",
+      "Kaltmiete zum Vermarktungszeitpunkt: 440 €"
     ],
     "sourceRow": "1712897407",
     "image": "referenz-metzingen",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-duernau",
@@ -733,7 +735,7 @@ export const properties = [
     "features": [],
     "sourceRow": "1086425521",
     "image": "referenz-duernau",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-goeppingen-appartement",
@@ -742,20 +744,20 @@ export const properties = [
     "type": "Wohnung",
     "kind": "1,5-Zimmer-Wohnung",
     "area": "33",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "year": "1972",
     "rooms": "1,5",
     "status": "sold",
     "features": [
-      "Küche laut historischem Inserat inklusive",
-      "Tiefgarage laut historischem Inserat inklusive",
+      "Küche enthalten",
+      "Tiefgarage enthalten",
       "Balkon",
       "Aufzug",
-      "Bei Inserierung sofort bezugsfrei"
+      "Bei Vermarktung sofort bezugsfrei"
     ],
     "sourceRow": "1205736916",
     "image": "referenz-goeppingen-appartement",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-wangen-bungalow-95",
@@ -765,29 +767,29 @@ export const properties = [
     "kind": "Einfamilienhaus · Bungalow",
     "area": "ca. 95",
     "land": "589",
-    "note": "Verkauft laut Quelle. Separater Quelleneintrag gegenüber dem 100-m²-Bungalow in Wangen-Oberwälden; nicht zusammengeführt.",
+    "note": "Bereits verkauft. Diesen Bungalow mit großem Garten in Wangen bei Göppingen zeigen wir als eigenständige Referenz.",
     "status": "sold",
     "features": [
-      "Großes Gartengrundstück laut historischem Inserat"
+      "Großes Gartengrundstück"
     ],
     "sourceRow": "1386546194",
     "image": "referenz-wangen-bungalow-95"
   },
   {
     "id": "referenz-zell",
-    "city": "Zell u. A. (laut Quelle)",
+    "city": "Zell u. A.",
     "title": "Wohnen auf zwei Ebenen.",
     "type": "Wohnung",
     "kind": "Maisonettewohnung",
     "area": "56",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "status": "sold",
     "features": [
-      "In der Quelle für Kapitalanlage oder Eigennutzung beschrieben"
+      "Für Kapitalanlage oder Eigennutzung angeboten"
     ],
     "sourceRow": "1332314411",
     "image": "referenz-zell",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-wangen-grundstueck",
@@ -800,7 +802,7 @@ export const properties = [
     "features": [],
     "sourceRow": "1850588193",
     "image": "referenz-wangen-grundstueck",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-erdgeschoss-77",
@@ -809,18 +811,18 @@ export const properties = [
     "type": "Wohnung",
     "kind": "3-Zimmer-Erdgeschosswohnung",
     "area": "77",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "3",
-    "imageRole": "Grundriss aus dem zugehörigen Quelleneintrag",
+    "imageRole": "Grundriss",
     "status": "sold",
     "features": [
       "Balkon",
       "Tiefgaragenstellplatz",
-      "Quellabbildung ist ein Grundriss"
+      "Grundriss vorhanden"
     ],
     "sourceRow": "1707007673",
     "image": "referenz-eislingen-erdgeschoss-77",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-eislingen-erdgeschoss-garten",
@@ -834,13 +836,13 @@ export const properties = [
     "status": "sold",
     "features": [
       "60 m² Garten",
-      "Tiefgaragenstellplatz laut historischem Inserat inklusive",
-      "Küche laut historischem Inserat inklusive",
-      "In der Quelle als hochwertig beschrieben"
+      "Tiefgaragenstellplatz enthalten",
+      "Küche enthalten",
+      "Hochwertige Ausstattung"
     ],
     "sourceRow": "1808654679",
     "image": "referenz-eislingen-erdgeschoss-garten",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-muellheim",
@@ -850,10 +852,10 @@ export const properties = [
     "kind": "Mehrfamilienhaus",
     "area": "180",
     "land": "1.275",
-    "note": "Verkauft laut Quelle. Die Bebaubarkeit ist eine Angabe des historischen Inserats und wurde nicht unabhängig bestätigt. Ortsname laut Quelle: Müllheim.",
+    "note": "Bereits verkauft. Dieses Mehrfamilienhaus in Müllheim zeigen wir als Referenz. Eine mögliche zusätzliche Bebauung des Grundstücks war Teil der Objektbeschreibung und bedarf einer baurechtlichen Prüfung.",
     "status": "sold",
     "features": [
-      "Grundstück im historischen Inserat als bebaubar bezeichnet"
+      "Mögliche Bebauung baurechtlich zu prüfen"
     ],
     "sourceRow": "1664756962",
     "image": "referenz-muellheim"
@@ -872,7 +874,7 @@ export const properties = [
     ],
     "sourceRow": "1695483978",
     "image": "referenz-ottenbach",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-murrhardt",
@@ -881,18 +883,18 @@ export const properties = [
     "type": "Wohnung",
     "kind": "2-Zimmer-Wohnung",
     "area": "ca. 49",
-    "areaLabel": "Fläche laut Quelle",
+    "areaLabel": "Fläche",
     "rooms": "2",
     "status": "sold",
     "features": [
       "Balkon",
       "Stellplatz",
-      "Historische Quellangabe: Oktober 2017",
-      "In der Quelle als Kapitalanlage beschrieben"
+      "Vermarktungsangabe: Oktober 2017",
+      "Als Kapitalanlage angeboten"
     ],
     "sourceRow": "1774260965",
     "image": "referenz-murrhardt",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   },
   {
     "id": "referenz-goeppingen-zweifamilienhaus",
@@ -906,7 +908,7 @@ export const properties = [
     "features": [],
     "sourceRow": "1105700857",
     "image": "referenz-goeppingen-zweifamilienhaus",
-    "note": "Auf der Quellseite ausdrücklich als verkauft gekennzeichnet. Referenz, kein verfügbares Angebot. Ausstattung, Zustand und Mietangaben stammen aus dem historischen Inserat."
+    "note": "Bereits verkauft. Diese Immobilie zeigen wir als Referenz. Die Eckdaten und Ausstattungsmerkmale beziehen sich auf den Zeitpunkt der Vermarktung."
   }
 ];
 export const services = [

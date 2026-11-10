@@ -1,0 +1,98 @@
+/* The pastel wash stays behind the content across routes and scroll positions. */
+body {
+  min-height: 100dvh;
+  isolation: isolate;
+}
+#app {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+.site-atmosphere.finance-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 1;
+  background:
+    radial-gradient(ellipse 62% 68% at -3% 16%, rgb(246 190 151 / .48), transparent 88%),
+    radial-gradient(ellipse 58% 73% at 7% 100%, rgb(241 177 203 / .37), transparent 88%),
+    radial-gradient(ellipse 55% 68% at 103% 12%, rgb(202 185 243 / .45), transparent 88%),
+    radial-gradient(ellipse 65% 82% at 103% 98%, rgb(157 202 240 / .46), transparent 90%);
+}
+/* Only transform and opacity change on the drifting layer. */
+.site-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 3%;
+  background:
+    radial-gradient(ellipse 48% 52% at 12% 30%, rgb(255 207 177 / .45), transparent 85%),
+    radial-gradient(ellipse 52% 58% at 89% 67%, rgb(177 198 241 / .48), transparent 87%);
+  opacity: .5;
+}
+@keyframes aurora-drift {
+  from { transform: translate3d(-3%, 1%, 0); opacity: .44; }
+  to { transform: translate3d(3%, -3%, 0); opacity: .78; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-motion=active] .site-atmosphere::after {
+    animation: aurora-drift 16s ease-in-out infinite alternate;
+  }
+}
+.subpage,
+.subpage .page-head,
+.footer-base { background-color: transparent; }
+
+/* The disclosure sits directly on the photograph without a filled label. */
+.finance-service-image .image-disclosure,
+.subpage .service-illustration .image-disclosure,
+.subpage .service-outlook-media .image-disclosure {
+  position: absolute;
+  z-index: 2;
+  top: auto;
+  right: 10px;
+  bottom: 10px;
+  left: auto;
+  display: block;
+  max-width: calc(100% - 20px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: rgb(255 255 255 / .85);
+  font-family: Geist, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-align: right;
+  text-shadow: 0 1px 1px rgb(0 0 0 / .75);
+  pointer-events: none;
+}
+.subpage .service-outlook-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+.subpage .service-outlook-media > img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+@media (max-width: 700px) {
+  .site-atmosphere.finance-glow { opacity: .86; }
+  .finance-service-image .image-disclosure,
+  .subpage .service-illustration .image-disclosure,
+  .subpage .service-outlook-media .image-disclosure { font-size: 10px; }
+  .subpage .service-outlook-media { border-radius: 17px; }
+}

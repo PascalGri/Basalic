@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-04",
+  "version": "editorial-v3",
+  "encoding": {
+    "format": "webp",
+    "quality": 85,
+    "effort": 5,
+    "maxDimension": 1600,
+    "upscale": false
+  },
+  "images": [
+    {
+      "asset": "finanzierung",
+      "source": "finanzierung-editorial-v3.png",
+      "sourceSha256": "b5965ac5199d0b26933bb2ff0c7985baa55bad95a2574532a4588405e9649f32",
+      "current": "public/assets/services/finanzierung.webp",
+      "currentSha256": "58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9",
+      "beforeSha256": "31b27c73237bf66d2280702fd7c4e579aa8b6004735d902716005c8d2eed2021",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 134846
+    },
+    {
+      "asset": "mietverwaltung",
+      "source": "mietverwaltung-editorial-v3.png",
+      "sourceSha256": "e64e65896f88e631e7b93f5d1fc9f262cf7fe1119f00d68785aa04db374688a9",
+      "current": "public/assets/services/mietverwaltung.webp",
+      "currentSha256": "85d62271f3d9a5356d6d511c482cf19244d90ee728dc8643adaa2b4cae436e47",
+      "beforeSha256": "984cedfede698ca5c41656a49e50cc79f51d28998b5ca26025eb94a3da03a022",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 245956
+    },
+    {
+      "asset": "absicherung",
+      "source": "absicherung-editorial-v3.png",
+      "sourceSha256": "0ac7236cc2bcf8076207ac259a79d9930223d5c6493341145eb68769afd7cf3e",
+      "current": "public/assets/services/absicherung.webp",
+      "currentSha256": "2629e55ffd596c8c3f083706fb0f67a7944988d75873d8fc5db9e5130b2ba50f",
+      "beforeSha256": "b9d287c1415e9ba85a2042e0cb22978de41355f06e0281338c3b027fb83389d6",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 212314
+    },
+    {
+      "asset": "altersvorsorge",
+      "source": "altersvorsorge-editorial-v3.png",
+      "sourceSha256": "61eaefcc84ff81acda88b56c08df4682c7f78f2ca3b962f4f49ab00089cb3d72",
+      "current": "public/assets/services/altersvorsorge.webp",
+      "currentSha256": "eae427c0f84a64ff93874a54f96ae2d33201692361cf4c7c3e5d1d1591a2c927",
+      "beforeSha256": "76afc2cd4a64ab0739589101f48f64906e7d2c84469ac787dec0c6f754773bfb",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 236990
+    }
+  ]
+}

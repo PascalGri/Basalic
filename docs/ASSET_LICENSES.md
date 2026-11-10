@@ -1,8 +1,10 @@
 # Bildherkunft und lokale Schriften
 
-Geprüft am **03.11.2026**. Alle 54 verwendeten Bilddateien sind lokal gespeichert und stammen aus der bestehenden Website **www.basalic.de**. Es gibt keine externen Bild- oder Fontabrufe beim Öffnen der Vorschau. Die präzisen URLs und Objektzuordnungen stehen in `public/assets/manifest.json`.
+Dokumentationsstand **04.11.2026**. Alle eingesetzten Bilddateien und Schriften werden lokal ausgeliefert. Der Bildbestand umfasst die 54 ursprünglichen Quelldateien aus **www.basalic.de**, vier neue KI-Servicebilder und zwölf zusätzliche echte Objektfotos aus belegten ImmoScout-Inseraten. Die vier alten Leistungsmotive bleiben als historische Quelldateien erhalten, werden jedoch nicht mehr in der Oberfläche verwendet. Es gibt beim Öffnen der Website keine externen Bild- oder Fontabrufe.
 
-## Startseite und Leistungsmotive
+Die ursprünglichen 54 Einträge stehen unverändert als Herkunftsnachweis in `public/assets/manifest.json`. Die neuen Motive sind getrennt in `docs/SERVICE_IMAGE_PROMPTS.md` und `docs/PROPERTY_GALLERY_SOURCES.json` dokumentiert.
+
+## Ursprüngliches Startmotiv und frühere Leistungsmotive
 
 | Datei | Originalseite | Originaldatei / Motiv |
 | --- | --- | --- |
@@ -12,7 +14,29 @@ Geprüft am **03.11.2026**. Alle 54 verwendeten Bilddateien sind lokal gespeiche
 | `absicherung.webp` | https://www.basalic.de/Vorsorge | `112107.jpeg`: Ärztin und ältere Frau |
 | `altersvorsorge.webp` | https://www.basalic.de/Vorsorge | `125224.jpeg`: Paar im Golfcart |
 
-Das zuvor verwendete Villenbild von Unsplash (`architektur.webp`) wurde entfernt. Es war ein zusätzliches Inspirationsmotiv und kein Bild der Originalwebsite. Die neue Vorschau verwendet ausschließlich Bildmotive der alten Website. Motive werden in Größe und Ausschnitt an die Premium-Gestaltung angepasst, ohne ihren Inhalt zu verändern.
+Das frühere Startmotiv bleibt im historischen Bestand und in bestehenden Teilenvorschauen erhalten. Der Hero und die Kontaktfläche der aktuellen Website verwenden grafische Farbverläufe. Die vier übrigen Motive in dieser Tabelle sind ausschließlich der historische Quellenbestand; die Website nutzt stattdessen die unten dokumentierten neuen Servicebilder. Das zuvor verwendete Villenbild von Unsplash (`architektur.webp`) wurde entfernt. Es war ein zusätzliches Inspirationsmotiv und kein Bild der Originalwebsite.
+
+## Neue KI-Servicebilder
+
+| Datei | Motiv |
+| --- | --- |
+| `public/assets/services/finanzierung.webp` | Mann am eigenen Küchentresen mit Laptop, Mappe und Kaffeebecher |
+| `public/assets/services/mietverwaltung.webp` | Gepflegtes helles Mehrfamilienhaus mit grauen Balkonen und Pflanzen |
+| `public/assets/services/absicherung.webp` | Elternteil hilft einem Kind beim Anziehen einer Jacke |
+| `public/assets/services/altersvorsorge.webp` | Ältere Frau beim Umtopfen in einer Gartenwerkstatt, zweite Person mit Tee im Hintergrund |
+
+Diese vier fiktiven Illustrationsszenen wurden mit dem eingebauten `image_gen.imagegen`-Tool erzeugt. Sie zeigen keine tatsächlichen Kunden, Mitarbeiter oder angebotenen Immobilien. Die am 04.11.2026 vollständig neu erzeugten Bilder der dritten Auswahl zeigen vier andere Szenen in einer natürlichen dokumentarischen Bildsprache und ersetzen die bisherigen KI-Servicebilder der Website. Die ersetzten WebP-Dateien und ihre Prompts sind im lokalen Bildarchiv gesichert. Themenkarten sind durchgehend textbasiert gestaltet; die Bilder werden davon getrennt als Serviceillustrationen eingesetzt.
+
+Alle vier Dateien sind WebP-Bilder mit 1536 × 1024 px, Qualität 85 und Effort 5. Die unveränderten generierten PNGs und ihr Manifest liegen im lokalen Bildarchiv. [SERVICE_IMAGE_SOURCES.json](SERVICE_IMAGE_SOURCES.json) dokumentiert Maße, Dateigrößen und SHA-256-Prüfsummen. Exakte Prompts, Methode und finale Pfade stehen in `docs/SERVICE_IMAGE_PROMPTS.md`. Die visuellen Ausgaben wurden bei ihrer Erstellung geprüft. Für die KI-Motive wird keine externe Stockfotolizenz behauptet.
+
+### Aktuelle WebP-Dateien der dritten Auswahl
+
+| Motiv | Maße | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| finanzierung | 1536 × 1024 | 134846 | `58c2b5d1e483f1e236c2076c4db898bf94454bf9ebd9960944f882b8fa43bdb9` |
+| mietverwaltung | 1536 × 1024 | 245956 | `85d62271f3d9a5356d6d511c482cf19244d90ee728dc8643adaa2b4cae436e47` |
+| absicherung | 1536 × 1024 | 212314 | `2629e55ffd596c8c3f083706fb0f67a7944988d75873d8fc5db9e5130b2ba50f` |
+| altersvorsorge | 1536 × 1024 | 236990 | `eae427c0f84a64ff93874a54f96ae2d33201692361cf4c7c3e5d1d1591a2c927` |
 
 ## Immobilienabbildungen und Porträt
 
@@ -25,16 +49,28 @@ Das zuvor verwendete Villenbild von Unsplash (`architektur.webp`) wurde entfernt
 
 Die bestehende Dokumentation zu Betreiber-, Urheber- und Porträtfreigaben für einen späteren öffentlichen Betrieb bleibt bestehen. Der Herkunftsabgleich ist kein zusätzlicher Lizenznachweis; es wird keine freie Bildlizenz behauptet. Diese Änderung ist eine lokale Weiterentwicklung der Vorschau.
 
+## Zusätzliche echte Objektfotos
+
+Für Faurndau, Mühlhausen im Täle und Neidlingen wurden jeweils vier weitere, eindeutig zugeordnete Fotos übernommen. Zusammen mit dem bestehenden Hauptfoto bietet jedes dieser drei Angebote fünf Bilder in einer Galerie mit Tastaturbedienung und vergrößerter Ansicht im nativen Dialog. Die zwölf Zusatzdateien liegen unter `public/assets/property-gallery/`.
+
+`docs/PROPERTY_GALLERY_SOURCES.json` enthält die genauen Bild-URLs, Inserate, Identitätsbelege, Maße, Dateigrößen und SHA-256-Prüfsummen. Faurndaus Fotos stammen unmittelbar aus dem ursprünglich verlinkten Inserat. Mühlhausen und Neidlingen stammen aus Folgeinseraten desselben Anbieters; Objektangaben und das jeweils identische Hauptfoto sichern die Zuordnung. Die vorhandenen ImmoScout-Links wurden durch die Bildrecherche nicht verändert.
+
+Die Zusatzfotos wurden ausschließlich anhand öffentlich abrufbarer Fotoverlinkungen übernommen, ohne geratenen Bildpfad oder Umgehung eines Zugangsschutzes. Sie sind als WebP mit Qualität 85 und höchstens 1600 × 1600 px ohne Vergrößerung gespeichert. Es gibt keine inhaltliche Bildbearbeitung und keine KI-erzeugten Objektfotos. Die öffentliche Abrufbarkeit ersetzt keine Nutzungsfreigabe; die Betreiberfreigabe einschließlich der Rechte an diesen Inseratsfotos bleibt intern zu bestätigen.
+
+Für Bezgenriet und Salach liegt kein belegter Original-Exposé-Link vor. Für Plochingen und Schwäbisch Hall wurden keine sicher zugeordneten weiteren Fotos gefunden. Grenzen und verworfene Kandidaten stehen im Galerienachweis. Der Objektbestand bleibt unverändert bei 49 Einträgen: sieben Angebote, zwei Auslandsinformationen und 40 verkaufte Referenzen.
+
 ## Schriften und Wortmarke
 
 Geist wird lokal über `@fontsource/geist` geladen (SIL Open Font License 1.1, vollständig in `licenses/Geist-OFL.txt`). Kursive Akzente verwenden die auf dem Gerät installierten Systemschriften Georgia beziehungsweise Times New Roman. Phosphor-Icons werden lokal gebündelt (MIT-Lizenz, `licenses/Phosphor-MIT.txt`).
 
 Die Wortmarke ist eine neue typografische Darstellung des bestehenden Namens. Die Angabe IHK-Ausbildungsbetrieb bleibt eine Textinformation; kein neues Gütesiegel wird behauptet.
 
-Der Hero und die Fußbereichs-CTA verwenden ausschließlich das ursprüngliche Basalic-Startseitenmotiv. Grün-/Cyanfärbung, Rasterung und Aufhellung werden per CSS darübergelegt. Vom Referenztemplate wurden keine Landschaftsbilder, Dashboard-Abbildungen, Kundenporträts oder Fremdlogos kopiert. Die Umsetzung ist eigener Code; die Referenz wurde visuell und anhand ihrer öffentlichen Darstellung analysiert.
+Der Hero und die Kontaktfläche im Fußbereich verwenden grafische Farbverläufe. Diese Flächen zeigen keine Immobilienaufnahme. Vom Referenztemplate wurden keine Landschaftsbilder, Dashboard-Abbildungen, Kundenporträts oder Fremdlogos kopiert. Die Umsetzung ist eigener Code; die Referenz wurde visuell und anhand ihrer öffentlichen Darstellung analysiert.
 
 ## Reproduktion
 
-`node scripts/assets.mjs` lädt Bilder erneut anhand der verifizierten Quellzeilen und des Manifests. `--references-only` aktualisiert ausschließlich die Referenzabbildungen. Anschließend mit `npm run build` neu bauen. Die Quellenprüfung ist ein eigener bewusster Recherchevorgang; im Frontend erfolgt keine automatische Bestandssynchronisierung.
+`node scripts/assets.mjs` lädt den ursprünglichen Bildbestand erneut anhand der verifizierten Quellzeilen und des historischen Manifests. `--references-only` aktualisiert ausschließlich die Referenzabbildungen. Die neuen KI-Motive werden damit nicht erzeugt; ihre Produktionsprompts stehen in `docs/SERVICE_IMAGE_PROMPTS.md`. Die Zusatzfotos sind über die konkreten Quellen und Prüfsummen in `docs/PROPERTY_GALLERY_SOURCES.json` nachvollziehbar. Nach Assetänderungen mit `npm run build` neu bauen. Die Quellenprüfung ist ein eigener bewusster Recherchevorgang; im Frontend erfolgt keine automatische Bestandssynchronisierung.
+
+Die Website wird weiterhin nur lokal unter `http://127.0.0.1:5104/` weiterentwickelt. Diese Änderungen enthalten kein Deployment. Offene Betreiberanschrift, erforderliche Rechtstexte und Bildfreigaben bleiben in den internen Prüfunterlagen dokumentiert.
 
 Pfeil-Icons: `@phosphor-icons/core`, MIT-Lizenz, vollständig in `licenses/Phosphor-MIT.txt`. Originale SVG-Pfade aus dem offiziellen Paket, lokal gebündelt.

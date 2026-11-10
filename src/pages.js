@@ -1,6 +1,11 @@
 import './pages.css';
+import './journey-pages.css';
+import { imageMarkup, primaryImageMarkup } from './media.js';
+import { getLegalContent } from './legal-content.js';
+import { renderPropertyGallery, setupPropertyGallery } from './property-gallery.js';
 import { closeFaq } from './motion.js';
-import { properties, services, sourceDate } from './data.js';
+import { properties as originalProperties, services } from './data.js';
+import { propertyForPath, publishedProperties as properties } from './public-properties.js';
 import arrowUpRightSvg from '@phosphor-icons/core/assets/regular/arrow-up-right.svg?raw';
 import arrowLeftSvg from '@phosphor-icons/core/assets/regular/arrow-left.svg?raw';
 import houseSvg from '@phosphor-icons/core/assets/regular/house.svg?raw';
@@ -19,7 +24,7 @@ const homeIcon = icon(houseSvg);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
 const mailto = (address, subject = '') => `mailto:${address}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
 const splitButton = (href, label, className = '', extra = '') => `<a class="button ${className}" href="${esc(href)}" ${extra}><span class="button-label">${label}</span><span class="button-icon">${arrow}</span></a>`;
-const img = (name, alt, eager = false) => `<img src="/assets/${esc(name)}.webp" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+const img = (name, alt, eager = false, sizes = '(max-width: 600px) calc(100vw - 48px), 50vw') => imageMarkup(name, alt, { eager, sizes });
 const paramsFor = search => search instanceof URLSearchParams ? search : new URLSearchParams(search || '');
 const wrapPage = html => `<main id="main" class="subpage" tabindex="-1">${html}</main>`;
 const accentLast = text => { const words = text.trim().split(/\s+/); const last = words.pop(); return `${esc(words.join(' '))} <em>${esc(last)}</em>`; };
@@ -27,11 +32,18 @@ const accentLast = text => { const words = text.trim().split(/\s+/); const last 
 function head(kicker, title, description = '', extra = '') {
   return `<section class="page-head container reveal"><span class="section-kicker">${kicker}</span><h1>${title}</h1>${description ? `<p>${description}</p>` : ''}${extra}</section>`;
 }
-function contactCta(topic = '', title = 'Lassen Sie uns<br><em>darüber sprechen.</em>') {
-  return `<section class="page-cta container reveal"><div><span class="section-kicker">Einfach individuell.</span><h2>${title}</h2><p>Eine Immobilie, ein Vorhaben oder eine Frage. Wir nehmen uns Zeit für Ihr Anliegen.</p></div>${splitButton('/kontakt' + (topic ? '?thema=' + encodeURIComponent(topic) : ''), 'Kontakt aufnehmen')}</section>`;
+const contextActions = { Immobilien: 'Immobilienwunsch besprechen', Mietverwaltung: 'Verwaltung anfragen', Finanzierung: 'Finanzierung besprechen', Vorsorge: 'Vorsorge besprechen' };
+const contactHref = (topic, intent = '') => '/kontakt?' + new URLSearchParams({ thema: topic, ...(intent ? { anliegen: intent } : {}) }).toString();
+function contactCta(topic = '', title = 'Lassen Sie uns<br> <em>darüber sprechen.</em>', options = {}) {
+  return `<section class="page-cta container reveal"><div><span class="section-kicker">Einfach individuell.</span><h2>${title}</h2><p>${options.description || 'Eine Immobilie, ein Vorhaben oder eine Frage. Wir nehmen uns Zeit für Ihr Anliegen.'}</p></div>${splitButton(options.href || contactHref(topic), options.label || contextActions[topic] || 'Gespräch anfragen')}</section>`;
 }
 function facts(p, small = false) {
-  const items = [
+  const items = small && p.type !== 'Grundstück' ? [
+    [p.areaLabel || 'Wohnfläche', p.area ? `${p.area} m²` : 'Nicht angegeben'],
+    ['Zimmer', p.rooms || 'Nicht angegeben'],
+    ['Baujahr', p.year || 'Nicht angegeben'],
+    ...(p.land ? [['Grundstück', `${p.land} m²`]] : [])
+  ] : [
     ...(p.area ? [[p.areaLabel || 'Wohnfläche', `${p.area} m²`]] : []),
     ...(p.land ? [['Grundstück', `${p.land} m²`]] : []),
     ...(p.rooms ? [['Zimmer', p.rooms]] : []),
@@ -39,110 +51,225 @@ function facts(p, small = false) {
   ];
   return items.length ? `<dl class="${small ? 'card-facts' : 'object-facts'}">${items.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>` : '<p class="object-facts-missing">Weitere Eckdaten auf Anfrage.</p>';
 }
-function propertyImage(p, eager = false) {
-  if (!p.image) return `<div class="object-no-photo">${homeIcon}<strong>Raum für Ihre Vorstellungen.</strong><span>Die bisherige Website zeigt ein Beispielbild.<br>Ein echtes Objektfoto liegt hier nicht vor.</span></div>`;
-  return img(p.image, `${p.imageRole || 'Objektabbildung'}: ${p.kind} in ${p.city}, von basalic.de`, eager);
+function propertyImage(p, primary = false) {
+  const alt = `${p.imageRole || 'Objektabbildung'}: ${p.kind} in ${p.city}`;
+  const image = primary
+    ? primaryImageMarkup(`/immobilien/${p.id}`, p.image, alt)
+    : img(p.image, alt, false, '(max-width: 600px) calc(100vw - 48px), (max-width: 960px) 50vw, 33vw');
+  return image || `<div class="object-no-photo">${homeIcon}<strong>Fotos auf Anfrage.</strong><span>Gern stellen wir Ihnen weitere<br> Informationen zum Objekt zur Verfügung.</span></div>`;
 }
 function propertyCard(p) {
   const status = p.status === 'sold' ? 'Verkauft' : p.status === 'information' ? 'Auslandsimmobilie' : 'Zum Verkauf';
-  return `<article class="object-card"><a href="/immobilien/${esc(p.id)}" aria-label="${esc(p.title + ' ' + p.kind + ' in ' + p.city + (p.status === 'sold' ? ' · verkaufte Referenz' : ''))}"><div class="object-card-media">${propertyImage(p)}<span class="object-status ${p.status}">${status}</span></div><div class="object-card-body"><p class="object-city">${esc(p.city)}</p><h2>${esc(p.title)}</h2>${facts(p, true)}<div class="object-card-bottom"><span>${esc(p.kind)}</span><span class="object-card-arrow">${arrow}</span></div></div></a></article>`;
+  const factualTitle = p.city === 'Ort nicht genannt' ? `${p.kind} · Ort nicht genannt` : `${p.kind} in ${p.city}`;
+  const mediaClass = p.status === 'sold' ? 'object-card-media' : 'object-card-media object-card-media-full';
+  return `<article class="object-card"><a href="/immobilien/${esc(p.id)}" aria-label="${esc(factualTitle + (p.status === 'sold' ? ' · verkaufte Referenz' : ''))}"><div class="${mediaClass}">${propertyImage(p)}<span class="object-status ${p.status}">${status}</span></div><div class="object-card-body"><h2 class="object-card-title">${esc(factualTitle)}</h2><p class="object-card-story">${esc(p.title)}</p>${facts(p, true)}<div class="object-card-bottom"><span>${p.status === 'sold' ? 'Referenz ansehen' : 'Immobilie ansehen'}</span><span class="object-card-arrow">${arrow}</span></div></div></a></article>`;
+}
+function positiveNumber(value) {
+  if (value === null || String(value).trim() === '') return null;
+  const number = Number(String(value).replace(',', '.'));
+  return Number.isFinite(number) && number >= 0 && number <= 100000 ? number : null;
+}
+function propertyNumber(value) {
+  const match = String(value || '').match(/\d[\d.,]*/);
+  if (!match) return null;
+  const number = match[0].includes(',') ? match[0].replaceAll('.', '').replace(',', '.') : match[0];
+  return positiveNumber(number);
 }
 function filteredProperties(params) {
   const sold = params.get('status') === 'sold';
   const type = params.get('art') || '';
   const term = (params.get('suche') || '').trim().toLocaleLowerCase('de');
-  return properties.filter(p => (sold ? p.status === 'sold' : p.status !== 'sold') && (!type || p.type === type) && (!term || [p.city, p.kind, p.title, ...p.features].join(' ').toLocaleLowerCase('de').includes(term)));
+  const rooms = positiveNumber(params.get('zimmer'));
+  const minArea = positiveNumber(params.get('flaeche_von'));
+  const maxArea = positiveNumber(params.get('flaeche_bis'));
+  if (minArea !== null && maxArea !== null && minArea > maxArea) return [];
+  return properties.filter(p => {
+    const area = propertyNumber(p.area);
+    const roomCount = propertyNumber(p.rooms);
+    return (sold ? p.status === 'sold' : p.status === 'offer' || p.status === 'information')
+      && (!type || p.type === type)
+      && (!term || [p.city, p.kind, p.title, ...p.features].join(' ').toLocaleLowerCase('de').includes(term))
+      && (rooms === null || (roomCount !== null && roomCount >= rooms))
+      && (minArea === null || (area !== null && area >= minArea))
+      && (maxArea === null || (area !== null && area <= maxArea));
+  });
 }
 function resultMarkup(list) {
-  return list.length ? list.map(propertyCard).join('') : `<div class="property-empty"><span class="empty-icon">${icon(magnifySvg)}</span><h2>Hier ist noch Raum<br>für einen neuen Versuch.</h2><p>Ändern Sie den Ort oder die Objektart. Mit „Zurücksetzen“ sehen Sie wieder alle Objekte.</p><a class="text-link" href="/kontakt?thema=Immobilien">Suchwunsch besprechen ${arrow}</a></div>`;
+  return list.length ? list.map(propertyCard).join('') : `<div class="property-empty"><span class="empty-icon">${icon(magnifySvg)}</span><h2>Hier ist noch Raum<br> für einen neuen Versuch.</h2><p>Ändern Sie Ort, Objektart oder Eckdaten. Mit „Zurücksetzen“ sehen Sie wieder alle Objekte.</p><a class="text-link" href="${contactHref('Immobilien', 'suche')}">Suchwunsch besprechen ${arrow}</a></div>`;
 }
 function listing(params) {
   const sold = params.get('status') === 'sold';
   const list = filteredProperties(params);
-  return wrapPage(`${head('Immobilien', 'Ein Ort, der<br><em>zu Ihnen passt.</em>', 'Ein neues Zuhause. Eine Kapitalanlage. Ein nächstes Kapitel. Entdecken Sie unsere Immobilien und die bereits verkauften Referenzen.')}<section class="property-browser container reveal" aria-label="Immobilien finden"><div class="property-toolbar"><div class="status-tabs" role="group" aria-label="Immobilienstatus"><button type="button" data-property-status="offers" aria-pressed="${!sold}">Immobilien <span>9</span></button><button type="button" data-property-status="sold" aria-pressed="${sold}">Verkaufte Referenzen <span>40</span></button></div><span class="source-date">Stand ${sourceDate}</span></div><form class="property-filter" id="property-filter" role="search"><label class="property-search"><span class="sr-only">Ort oder Stichwort</span>${icon(magnifySvg)}<input id="property-search" type="search" placeholder="Ort oder Stichwort suchen" value="${esc(params.get('suche') || '')}" autocomplete="off"></label><label class="property-type"><span class="sr-only">Objektart</span><select id="property-type"><option value="">Alle Objektarten</option>${['Haus', 'Wohnung', 'Grundstück'].map(type => `<option ${params.get('art') === type ? 'selected' : ''}>${type}</option>`).join('')}</select></label><button class="filter-reset" id="property-reset" type="button">Zurücksetzen</button></form><p class="property-result-count" id="property-count" role="status" aria-live="polite">${list.length} ${list.length === 1 ? 'Objekt' : 'Objekte'} · ${sold ? 'Verkauft laut bisheriger Website' : '7 Verkaufsangebote und 2 Auslandsimmobilien im Gesamtbestand'}</p><div class="property-grid" id="property-results">${resultMarkup(list)}</div><aside class="property-source-note"><span class="source-dot"></span><p>Sämtliche 49 Einträge der bisherigen Website, Stand ${sourceDate}. Angebote und verkaufte Referenzen sind getrennt. Bitte erfragen Sie den aktuellen Stand, Preise und weiterführende Unterlagen direkt bei uns. Historische Angaben bleiben als solche bezeichnet.</p></aside></section>${contactCta('Immobilien', 'Sie möchten<br><em>Ihre Immobilie verkaufen?</em>')}`);
+  const roomMinimum = positiveNumber(params.get('zimmer'));
+  const roomOptions = [...new Set([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, ...(roomMinimum !== null ? [roomMinimum] : [])])].sort((a, b) => a - b);
+  const minArea = positiveNumber(params.get('flaeche_von'));
+  const maxArea = positiveNumber(params.get('flaeche_bis'));
+  const soldCount = properties.filter(p => p.status === 'sold').length;
+  return wrapPage(`${head('Immobilien', 'Ein Ort, der<br> <em>zu Ihnen passt.</em>', 'Ein neues Zuhause. Eine Kapitalanlage. Ein nächstes Kapitel. Entdecken Sie unsere Immobilien und die bereits verkauften Referenzen.')}<section class="property-browser container reveal" aria-label="Immobilien finden"><div class="property-toolbar"><div class="status-tabs" role="group" aria-label="Immobilienstatus"><button type="button" data-property-status="offers" aria-pressed="${!sold}">Immobilien <span>${properties.length - soldCount}</span></button><button type="button" data-property-status="sold" aria-pressed="${sold}">Verkaufte Referenzen <span>${soldCount}</span></button></div><span class="source-date">Persönlich für Sie da</span></div><form class="property-filter property-filter-expanded" id="property-filter" role="search"><div class="property-filter-primary"><label class="property-search"><span class="sr-only">Ort oder Stichwort</span>${icon(magnifySvg)}<input id="property-search" type="search" placeholder="Ort oder Stichwort suchen" value="${esc(params.get('suche') || '')}" autocomplete="off"></label><label class="property-type"><span class="sr-only">Objektart</span><select id="property-type"><option value="">Alle Objektarten</option>${['Haus', 'Wohnung', 'Grundstück'].map(type => `<option ${params.get('art') === type ? 'selected' : ''}>${type}</option>`).join('')}</select></label></div><fieldset class="property-refinements"><legend>Zimmer und Wohn-/Gesamtfläche</legend><div class="property-refinement-fields"><label for="property-rooms"><span>Zimmer mindestens</span><select id="property-rooms"><option value="">Alle Zimmerzahlen</option>${roomOptions.map(value => `<option value="${value}" ${roomMinimum === value ? 'selected' : ''}>ab ${String(value).replace('.', ',')}</option>`).join('')}</select></label><label for="property-area-min"><span>Fläche ab (m²)</span><input id="property-area-min" type="number" min="0" max="100000" step="any" inputmode="decimal" placeholder="Minimum" value="${minArea === null ? '' : minArea}" aria-describedby="property-area-help property-filter-feedback"></label><label for="property-area-max"><span>Fläche bis (m²)</span><input id="property-area-max" type="number" min="0" max="100000" step="any" inputmode="decimal" placeholder="Maximum" value="${maxArea === null ? '' : maxArea}" aria-describedby="property-area-help property-filter-feedback"></label></div></fieldset><div class="property-filter-footer"><p id="property-area-help">Die Flächenart steht beim Objekt. Grundstücksflächen zählen hier nicht mit. Fehlende Werte werden bei aktiven Zahlenfiltern ausgeblendet.</p><button class="filter-reset" id="property-reset" type="button">Zurücksetzen</button></div><p id="property-filter-feedback" class="property-filter-feedback" role="status">${minArea !== null && maxArea !== null && minArea > maxArea ? 'Die Mindestfläche darf nicht größer als die Höchstfläche sein.' : ''}</p></form><p class="property-result-count" id="property-count" role="status" aria-live="polite">${list.length} ${list.length === 1 ? 'Objekt' : 'Objekte'} · ${sold ? 'Bereits verkauft' : 'Verfügbarkeit auf Anfrage'}</p><div class="property-grid" id="property-results">${resultMarkup(list)}</div><aside class="property-source-note"><span class="source-dot"></span><p>Sie suchen etwas Bestimmtes? Erzählen Sie uns von Ihren Wünschen. Preise, Verfügbarkeit und weiterführende Unterlagen besprechen wir gern persönlich mit Ihnen.</p></aside></section>${contactCta('Immobilien', 'Sie möchten<br> <em>Ihre Immobilie verkaufen?</em>', { href: '/immobilie-verkaufen', label: 'Immobilie verkaufen', description: 'Ein persönliches Vorgespräch schafft Raum für Ihre Pläne, Fragen und die nächsten Schritte.' })}`);
 }
+function listingAddress(property) {
+  const source = property.listingUrl || (property.expose ? 'https://www.immobilienscout24.de/expose/' + property.expose : '');
+  if (!source) return null;
+  try {
+    const url = new URL(source);
+    return ['http:', 'https:'].includes(url.protocol) ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+function propertyTerms(p) {
+  const entries = [
+    ['Kaufpreis', p.price],
+    ['Käuferprovision', p.commission],
+    ['Energieausweis', p.energyCertificate],
+    ['Baujahr laut Energieausweis', p.energyYear],
+  ].filter(([, value]) => value);
+  if (!entries.length) return '';
+  return `<section class="object-required-info" aria-label="Preis- und Energieinformationen">
+    <h2>Preis &amp; Energie</h2>
+    <dl>${entries.map(([label, value]) => `<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
+  </section>`;
+}
+
 function propertyDetail(p) {
   const sold = p.status === 'sold';
+  const offer = p.status === 'offer';
+  const original = originalProperties.find(item => item.id === p.id);
+  const movedToReferences = sold && original && original.status !== 'sold';
   const topic = `${p.city} – ${p.kind}`;
-  const contactUrl = '/kontakt?thema=Immobilien&' + (sold ? 'referenz=' : 'objekt=') + encodeURIComponent(topic);
-  const exposeUrl = p.expose ? `https://www.immobilienscout24.de/expose/${p.expose}` : '';
+  const contactUrl = contactHref('Immobilien', sold ? 'suche' : offer ? 'besichtigung' : 'information') + '&' + (sold ? 'referenz=' : 'objekt=') + encodeURIComponent(topic);
+  const status = sold ? 'Verkauft · Referenz' : offer ? 'Zum Verkauf' : 'Auslandsimmobilie · Informationen';
+  const moreUrl = '/immobilien' + (sold ? '?status=sold' : '');
+  const exposeUrl = !sold || original?.status === 'sold' ? listingAddress(p) : null;
+  const exposeIsScout = exposeUrl && (exposeUrl.hostname === 'immobilienscout24.de' || exposeUrl.hostname.endsWith('.immobilienscout24.de'));
   const exposeLink = exposeUrl ? (sold
-    ? `<a class="text-link" href="${esc(exposeUrl)}" target="_blank" rel="noopener noreferrer">Historisches Exposé (extern) ${arrow}</a>`
-    : splitButton(exposeUrl, 'Auf ImmoScout24 ansehen', 'object-expose-button', 'target="_blank" rel="noopener noreferrer"')) : '';
-  return wrapPage(`<div class="container object-back"><a class="text-link" href="/immobilien${sold ? '?status=sold' : ''}">${back} ${sold ? 'Alle verkauften Referenzen' : 'Alle Immobilien'}</a></div>${head(esc(p.city), accentLast(p.title), esc(p.kind), `<span class="detail-status-pill ${p.status}">${sold ? 'Verkauft · Referenz' : p.status === 'information' ? 'Auslandsimmobilie · Informationen' : 'Zum Verkauf laut bisheriger Website'}</span>`)}<figure class="object-hero container reveal">${propertyImage(p, true)}<figcaption>${p.image ? esc(`${p.imageRole || 'Objektabbildung'} der bisherigen Website basalic.de.`) : 'Kein Objektfoto: Das Beispielbild der Quelle wird nicht als Objektaufnahme dargestellt.'}</figcaption></figure><section class="object-detail container reveal"><div class="object-information">${facts(p)}<h2>Gut zu wissen.</h2><ul class="object-features">${p.features.map(feature => `<li>${check}<span>${esc(feature)}</span></li>`).join('')}</ul><p class="object-note">${esc(p.note)}</p><aside class="source-callout"><strong>Angaben der bisherigen Website · ${sourceDate}</strong><p>${sold ? 'Ausstattung, Zustand, Mietangaben und frühere Bezugsdaten beziehen sich auf das historische Inserat. Diese Referenz ist verkauft.' : 'Flächen, Ausstattung und Status sind Angaben der bisherigen Website. Bitte erfragen Sie den aktuellen Stand, den Preis und weiterführende Unterlagen direkt bei uns.'}</p></aside></div><aside class="object-contact"><span class="section-kicker">Persönlich weiter</span><h2>${sold ? 'Ähnliche<br><em>Vorstellungen?</em>' : 'Das könnte<br><em>passen?</em>'}</h2><p>${sold ? 'Die Referenz ist verkauft. Sprechen wir über eine ähnliche Immobilie oder den Verkauf Ihres Eigentums.' : 'Wir klären Ihre Fragen zur Immobilie und besprechen Ihren nächsten Schritt.'}</p>${splitButton(contactUrl, 'Kontakt aufnehmen')}<div class="object-contact-links"><a href="${mailto('immobilien@basalic.de', (sold ? 'Anfrage zu ähnlichen Immobilien: ' : 'Objektanfrage: ') + topic)}">${icon(envelopeSvg)}immobilien@basalic.de</a><a href="tel:+491786654819">${icon(phoneSvg)}+49 178 6654819</a></div>${p.expose ? `<div class="object-expose">${exposeLink}<small>${sold ? 'Originalverlinkung des verkauften Objekts, keine aktuelle Verkaufsanzeige.' : 'Externer Anbieter, öffnet einen neuen Tab.'} Der Link kann inzwischen deaktiviert sein.</small></div>` : ''}</aside></section><section class="related-objects container reveal"><div class="subsection-heading"><div><span class="section-kicker">Weiter entdecken</span><h2>${sold ? 'Weitere<br><em>Referenzen.</em>' : 'Weitere<br><em>Möglichkeiten.</em>'}</h2></div><a class="text-link" href="/immobilien${sold ? '?status=sold' : ''}">Alle ansehen ${arrow}</a></div><div class="property-grid">${properties.filter(item => item.id !== p.id && (sold ? item.status === 'sold' : item.status === 'offer')).slice(0, 3).map(propertyCard).join('')}</div></section>`);
+    ? `<a class="text-link" href="${esc(exposeUrl.href)}" target="_blank" rel="noopener noreferrer">Historisches Exposé (extern) ${arrow}</a>`
+    : splitButton(exposeUrl.href, exposeIsScout ? 'Auf ImmoScout24 ansehen' : 'Externes Exposé ansehen', 'object-expose-button', 'target="_blank" rel="noopener noreferrer"')) : '';
+  const features = movedToReferences ? p.features.filter(feature => !['Zuletzt als bezugsfrei angeboten', 'Preis auf Anfrage'].includes(feature)) : p.features;
+  const note = movedToReferences && p.note === original.note
+    ? 'Diese Immobilie wurde erfolgreich vermittelt. Die Angaben beziehen sich auf den Zeitpunkt der Vermarktung.'
+    : p.note;
+  const related = properties.filter(item => item.id !== p.id && item.status === (sold ? 'sold' : 'offer')).slice(0, 3);
+
+  return wrapPage(`
+    <div class="container object-back"><a class="text-link" href="${moreUrl}">${back} ${sold ? 'Alle verkauften Referenzen' : 'Alle Immobilien'}</a></div>
+    ${head(esc(p.city), accentLast(p.title), esc(p.kind), `<span class="detail-status-pill ${p.status}">${status}</span>`)}
+    ${renderPropertyGallery(p, propertyImage(p, true))}
+    <section class="object-detail container reveal">
+      <div class="object-information">
+        ${facts(p)}
+        ${features.length || note ? '<h2>Gut zu wissen.</h2>' : ''}
+        ${features.length ? `<ul class="object-features">${features.map(feature => `<li>${check}<span>${esc(feature)}</span></li>`).join('')}</ul>` : ''}
+        ${note ? `<p class="object-note">${esc(note).replace(/\r?\n/g, '<br>')}</p>` : ''}
+        ${offer ? propertyTerms(p) : ''}
+        <aside class="source-callout">
+          <strong>${sold ? 'Erfolgreich vermittelt' : 'Interesse an dieser Immobilie?'}</strong>
+          <p>${sold ? 'Diese Immobilie ist bereits verkauft. Wir begleiten Sie gern bei der Suche nach einem ähnlichen Objekt oder beim Verkauf Ihrer Immobilie.' : 'Weitere Informationen zu Preis, Verfügbarkeit und Besichtigung erhalten Sie im persönlichen Gespräch. Wir freuen uns auf Ihre Anfrage.'}</p>
+        </aside>
+      </div>
+      <aside class="object-contact">
+        <span class="section-kicker">Persönlich weiter</span>
+        <h2>${sold ? 'Ähnliche<br> <em>Vorstellungen?</em>' : 'Das könnte<br> <em>passen?</em>'}</h2>
+        <p>${sold ? 'Die Referenz ist verkauft. Sprechen wir über eine ähnliche Immobilie oder den Verkauf Ihres Eigentums.' : 'Wir klären Ihre Fragen zur Immobilie und besprechen Ihren nächsten Schritt.'}</p>
+        ${splitButton(contactUrl, sold ? 'Ähnliche Immobilie finden' : offer ? 'Besichtigung anfragen' : 'Objektinformationen anfragen')}
+        <div class="object-contact-links"><a href="${mailto('immobilien@basalic.de', (sold ? 'Anfrage zu ähnlichen Immobilien: ' : 'Objektanfrage: ') + topic)}">${icon(envelopeSvg)}immobilien@basalic.de</a><a href="tel:+491786654819">${icon(phoneSvg)}+49 178 6654819</a></div>
+        ${exposeLink ? `<div class="object-expose">${exposeLink}<small>${sold ? 'Exposé einer bereits verkauften Immobilie. Das ursprüngliche Inserat ist möglicherweise nicht mehr verfügbar.' : 'Externer Anbieter, öffnet einen neuen Tab.'}</small></div>` : ''}
+      </aside>
+    </section>
+    ${related.length ? `<section class="related-objects container reveal">
+      <div class="subsection-heading"><div><span class="section-kicker">Weiter entdecken</span><h2>${sold ? 'Weitere<br> <em>Referenzen.</em>' : 'Weitere<br> <em>Möglichkeiten.</em>'}</h2></div><a class="text-link" href="${moreUrl}">Alle ansehen ${arrow}</a></div>
+      <div class="property-grid">${related.map(propertyCard).join('')}</div>
+    </section>` : ''}
+  `);
 }
 
 const servicePages = {
   '/mietverwaltung': {
-    title: 'Mietverwaltung', headline: 'Weniger Aufwand.<br><em>Mehr Freiraum.</em>',
+    title: 'Mietverwaltung', headline: 'Weniger Aufwand.<br> <em>Mehr Freiraum.</em>',
     lead: 'Mietverwaltung bedeutet Freiheit. Wir unterstützen Sie als Kapitalanleger und vertreten Ihre Interessen als Vermieter.',
-    image: 'mietverwaltung', imageAlt: 'Menschenpyramide aus Figuren, das Motiv der bisherigen Mietverwaltungsseite',
-    intro: 'Ihr Eigentum.<br><em>Unsere Unterstützung.</em>',
+    image: 'services/mietverwaltung', imageAlt: 'Helles Mehrfamilienhaus mit grauen Balkonen und Pflanzen',
+    intro: 'Ihr Eigentum.<br> <em>Unsere Unterstützung.</em>',
     text: 'Sie möchten Ihre vermietete Immobilie in guten Händen wissen? Sprechen Sie mit uns darüber, welche Unterstützung Sie sich als Kapitalanleger oder Vermieter wünschen.',
     topics: [{ title: 'Für Kapitalanleger und Vermieter', text: 'Wir unterstützen Sie als Kapitalanleger und vertreten Sie in Ihren Angelegenheiten als Vermieter. Sprechen Sie uns mit Ihrem Anliegen an.' }],
     email: 'info@basalic.de',
-    faq: [['Für wen ist die Mietverwaltung gedacht?', 'Für Kapitalanleger und Vermieter, die sich Unterstützung bei ihren Angelegenheiten wünschen. Sprechen Sie uns zu Ihrer Immobilie an.'], ['Welche Aufgaben können übernommen werden?', 'Die bisherige Website beschreibt die Unterstützung von Kapitalanlegern und die Vertretung von Vermietern. Einzelne Aufgaben werden dort nicht aufgeführt. Bitte fragen Sie uns nach der gewünschten Unterstützung.']]
+    faq: [['Für wen ist die Mietverwaltung gedacht?', 'Für Kapitalanleger und Vermieter, die sich Unterstützung bei ihren Angelegenheiten wünschen. Sprechen Sie uns zu Ihrer Immobilie an.'], ['Welche Aufgaben können übernommen werden?', 'Wir unterstützen Kapitalanleger und vertreten Vermieter in ihren Angelegenheiten. Welche Aufgaben wir für Ihre Immobilie übernehmen, stimmen wir gemeinsam mit Ihnen ab.']]
   },
   '/finanzierung': {
-    title: 'Finanzierung', headline: 'Große Pläne.<br><em>Ein guter Anfang.</em>',
+    mandatoryInfo: '[Vermittlungsbefugnisse und Bindungen an Darlehensgeber ergänzen]',
+    title: 'Finanzierung', headline: 'Große Pläne.<br> <em>Ein guter Anfang.</em>',
     lead: 'Die eigenen vier Wände oder ein bestehender Privatkredit. Wir unterstützen Sie bei Ihren Finanzierungsfragen.',
-    image: 'finanzierung', imageAlt: 'Modellhaus und Münzen, das Baufinanzierungsmotiv der bisherigen Website', compact: true,
-    intro: 'Für Ihr Zuhause.<br><em>Und Ihre Möglichkeiten.</em>',
+    image: 'services/finanzierung', imageAlt: 'Blick über die Schulter eines Mannes am Küchentresen mit Laptop und Mappe',
+    intro: 'Für Ihr Zuhause.<br> <em>Und Ihre Möglichkeiten.</em>',
     text: 'Durch Kooperationen mit Banken, darunter auch regionale Institute, begleiten wir Sie auf dem Weg in die eigenen vier Wände. Ausgangspunkt ist Ihr persönliches Vorhaben.',
     topics: [{ title: 'Baufinanzierung', text: 'Sie planen den Kauf Ihrer eigenen vier Wände? Gemeinsam sprechen wir über Ihre Finanzierung und die Möglichkeiten unserer Bankkooperationen.' }, { title: 'Privatkredite und Umschuldung', text: 'Durch eine Umschuldung Ihres Privatkredits können unter Umständen Zinskosten sinken. Ob sich das für Sie lohnt, hängt von Ihrer persönlichen Situation und den Konditionen ab. Lassen Sie uns darüber sprechen.' }],
     email: 'finanzierung@basalic.de',
-    faq: [['Arbeiten Sie mit regionalen Banken zusammen?', 'Die bisherige Website nennt Kooperationen mit Banken, darunter regionale Institute. Welche Möglichkeiten für Ihr Vorhaben bestehen, besprechen wir persönlich.'], ['Spart eine Umschuldung immer Zinsen?', 'Die bisherige Website nennt eine mögliche Zinsersparnis durch Umschuldung. Eine Ersparnis ist nicht pauschal zugesichert. Bitte sprechen Sie uns auf Ihren Privatkredit an.']]
+    faq: [['Arbeiten Sie mit regionalen Banken zusammen?', 'Ja, wir arbeiten auch mit regionalen Banken zusammen. Welche Finanzierung zu Ihrem Vorhaben passt, besprechen wir auf Grundlage Ihrer Wünsche und Ihrer persönlichen Situation.'], ['Spart eine Umschuldung immer Zinsen?', 'Das hängt vom bestehenden Kredit, den neuen Konditionen und möglichen Ablösekosten ab. Wir prüfen mit Ihnen, ob sich eine Umschuldung für Ihre Situation rechnet.']]
   },
   '/vorsorge': {
-    title: 'Vorsorge', headline: 'Heute an das denken,<br><em>was morgen zählt.</em>',
+    secondaryImage: 'services/altersvorsorge', secondaryImageAlt: 'Ältere Frau beim Umtopfen in einer Gartenwerkstatt, zweite Person mit Tee im Hintergrund',
+    title: 'Vorsorge', headline: 'Heute an das denken,<br> <em>was morgen zählt.</em>',
     lead: 'Absicherung und Altersvorsorge gehören zusammen. Wir beraten Sie zu Versorgungslücken und unterstützen Sie dabei, für Ihre Zukunft vorzusorgen.',
-    image: 'absicherung', imageAlt: 'Ärztin im Gespräch mit einer älteren Frau, das Absicherungsmotiv der bisherigen Website',
-    intro: 'Für das Leben heute.<br><em>Und die Zeit danach.</em>',
+    image: 'services/absicherung', imageAlt: 'Elternteil hilft einem Kind beim Anziehen einer Jacke',
+    intro: 'Für das Leben heute.<br> <em>Und die Zeit danach.</em>',
     text: 'Krankheit, Berufsunfähigkeit, Pflege, Todesfall oder Ruhestand: Wir besprechen, wo Versorgungslücken bestehen und wie Sie Ihre Vorsorge darauf ausrichten können.',
-    topics: [{ title: 'Absicherung', text: 'Wir beraten Sie zu möglichen Versorgungslücken bei Krankheit, Berufsunfähigkeit, Pflege und im Todesfall.' }, { title: 'Altersvorsorge', text: 'Entstandene Rentenlücken können Ihre Pläne für den Ruhestand verändern. Wir unterstützen Sie dabei, diese Lücken zu erkennen und eine passende Vorsorge zu besprechen.', image: 'altersvorsorge', imageAlt: 'Älteres Paar im Golfcart, das Altersvorsorgemotiv der bisherigen Website' }],
+    topics: [{ title: 'Absicherung', text: 'Wir beraten Sie zu möglichen Versorgungslücken bei Krankheit, Berufsunfähigkeit, Pflege und im Todesfall.' }, { title: 'Altersvorsorge', text: 'Entstandene Rentenlücken können Ihre Pläne für den Ruhestand verändern. Wir unterstützen Sie dabei, diese Lücken zu erkennen und eine passende Vorsorge zu besprechen.' }],
     email: 'info@basalic.de',
-    faq: [['Welche Lebenssituationen umfasst die Absicherung?', 'Das Beratungsangebot umfasst Versorgungslücken bei Krankheit, Berufsunfähigkeit, Pflege und im Todesfall. Ihr persönlicher Bedarf steht am Anfang des Gesprächs.'], ['Wie beginnen wir mit der Altersvorsorge?', 'Wir besprechen Ihre Ausgangslage und mögliche Rentenlücken. Konkrete Produkte oder Ergebnisse werden auf dieser Website nicht vorweggenommen.']]
+    faq: [['Welche Lebenssituationen umfasst die Absicherung?', 'Das Beratungsangebot umfasst Versorgungslücken bei Krankheit, Berufsunfähigkeit, Pflege und im Todesfall. Ihr persönlicher Bedarf steht am Anfang des Gesprächs.'], ['Wie beginnen wir mit der Altersvorsorge?', 'Wir schauen gemeinsam auf Ihre bisherige Absicherung, Ihre Wünsche für den Ruhestand und mögliche Rentenlücken. Daraus entwickeln wir die nächsten Schritte für Ihre persönliche Vorsorge.']]
   }
 };
 function faq(items) {
-  return `<section class="page-faq container reveal"><div><span class="section-kicker">Häufige Fragen</span><h2>Ein paar Antworten.<br><em>Für den Anfang.</em></h2><p>Ihre Frage ist persönlicher? Wir sprechen gern mit Ihnen.</p></div><div class="faq-items">${items.map(([question, answer]) => `<details><summary>${question}<span>${plus}</span></summary><p>${answer}</p></details>`).join('')}</div></section>`;
+  return `<section class="page-faq container reveal"><div><span class="section-kicker">Häufige Fragen</span><h2>Ein paar Antworten.<br> <em>Für den Anfang.</em></h2><p>Ihre Frage ist persönlicher? Wir sprechen gern mit Ihnen.</p></div><div class="faq-items">${items.map(([question, answer]) => `<details><summary>${question}<span>${plus}</span></summary><p>${answer}</p></details>`).join('')}</div></section>`;
 }
 function servicePage(path) {
   const s = servicePages[path];
-  return wrapPage(`${head(s.title, s.headline, s.lead)}<section class="service-introduction container reveal"><figure class="service-illustration ${s.compact ? 'compact' : ''}">${img(s.image, s.imageAlt, true)}</figure><div><span class="section-kicker">Einfach individuell.</span><h2>${s.intro}</h2><p>${s.text}</p>${splitButton('/kontakt?thema=' + encodeURIComponent(s.title), 'Kontakt aufnehmen')}<a class="service-email" href="${mailto(s.email, s.title + ' – Gesprächsanfrage')}">${s.email} ${arrow}</a></div></section><section class="service-topics container reveal">${s.topics.map((topic, index) => `<article>${topic.image ? `<figure>${img(topic.image, topic.imageAlt)}</figure>` : `<span class="topic-number">0${index + 1}</span>`}<div><h2>${topic.title}</h2><p>${topic.text}</p></div></article>`).join('')}</section>${faq(s.faq)}<section class="other-service-links container reveal"><p>Weitere Perspektiven</p>${services.filter(service => service.path !== path).map(service => `<a href="${service.path}">${service.title}${arrow}</a>`).join('')}</section>`);
+  return wrapPage(`${head(s.title, s.headline, s.lead, s.mandatoryInfo ? `<p class="mandatory-placeholder">${esc(s.mandatoryInfo)}</p>` : '')}<section class="service-introduction container reveal"><figure class="service-illustration ${s.compact ? 'compact' : ''}">${primaryImageMarkup(path, s.image, s.imageAlt)}<figcaption class="image-disclosure">KI-generiertes Beispielbild</figcaption></figure><div><span class="section-kicker">Einfach individuell.</span><h2>${s.intro}</h2><p>${s.text}</p>${splitButton(contactHref(s.title), contextActions[s.title])}<a class="service-email" href="${mailto(s.email, s.title + ' – Gesprächsanfrage')}">${s.email} ${arrow}</a></div></section><section class="service-topics container reveal" aria-label="Beratungsschwerpunkte">${s.topics.map(topic => `<article><h2>${topic.title}</h2><p>${topic.text}</p></article>`).join('')}</section>${s.secondaryImage ? `<figure class="service-outlook container reveal"><div class="service-outlook-media">${img(s.secondaryImage, s.secondaryImageAlt, false, '(max-width: 1100px) calc(100vw - 48px), 1100px')}<span class="image-disclosure">KI-generiertes Beispielbild</span></div><figcaption><span>Zeit für das, was Ihnen wichtig ist.</span></figcaption></figure>` : ''}${path === '/finanzierung' ? financingJourney() : ''}${faq(s.faq)}<section class="other-service-links container reveal"><p>Weitere Perspektiven</p>${services.filter(service => service.path !== path).map(service => `<a href="${service.path}">${service.title}${arrow}</a>`).join('')}</section>`);
+}
+function advisorPanel(topic, label, intro) {
+  return `<aside class="journey-advisor"><figure>${img('senad-basalic', 'Senad Basalic, Ihr persönlicher Ansprechpartner', false, '(max-width: 600px) 84px, (max-width: 900px) 74px, 88px')}<figcaption>Senad Basalic</figcaption></figure><div><span class="section-kicker">Ihr Ansprechpartner</span><h3>Persönlich<br> <em>weiterdenken.</em></h3><p>${intro}</p>${splitButton(contactHref(topic, topic === 'Immobilien' ? 'verkauf' : ''), label)}</div></aside>`;
+}
+function financingJourney() {
+  return `<section class="journey-section container reveal"><div class="journey-heading"><span class="section-kicker">Vom Vorhaben ins Gespräch</span><h2>So kann Ihre<br> <em>Finanzierung starten.</em></h2><p>Jedes Vorhaben hat eine andere Ausgangslage. Diese Schritte können helfen, das erste Gespräch vorzubereiten.</p></div><ol class="journey-steps"><li><span class="journey-step-index" aria-hidden="true">01</span><h3>Erstgespräch</h3><p>Wir können Ihre Pläne, offene Fragen und Ihre persönliche Ausgangslage gemeinsam einordnen.</p></li><li><span class="journey-step-index" aria-hidden="true">02</span><h3>Unterlagen</h3><p>Je nach Vorhaben sind Einkommens-, Eigenkapital- und Objektunterlagen hilfreich. Was genau benötigt wird, stimmen wir persönlich ab.</p></li><li><span class="journey-step-index" aria-hidden="true">03</span><h3>Möglichkeiten</h3><p>Auf Basis Ihrer Angaben lassen sich Finanzierungsmöglichkeiten über unsere Bankkooperationen besprechen. Maßgeblich sind die tatsächlich verfügbaren Angebote.</p></li></ol><div class="journey-preparation"><div class="journey-document-list"><span class="section-kicker">Gut vorbereitet</span><h2>Was für den Anfang<br> <em>hilfreich sein kann.</em></h2><ul><li>${check}<span>Eine kurze Beschreibung Ihres Vorhabens und Ihrer Fragen</span></li><li>${check}<span>Ein Überblick über Einkommen, laufende Verpflichtungen und vorhandenes Eigenkapital</span></li><li>${check}<span>Falls vorhanden: Exposé oder Eckdaten der Immobilie</span></li><li>${check}<span>Bei einer Umschuldung: Angaben zur bestehenden Finanzierung</span></li></ul><p>Vertrauliche Unterlagen müssen Sie nicht über diese Website übermitteln. Den passenden Weg besprechen wir persönlich mit Ihnen.</p></div>${advisorPanel('Finanzierung', 'Finanzierung besprechen', 'Sie müssen noch nicht auf jede Frage eine Antwort haben. Erzählen Sie uns zuerst von Ihrem Vorhaben.')}</div></section>`;
+}
+function sellerPage() {
+  const sellerContact = contactHref('Immobilien', 'verkauf');
+  return wrapPage(`${head('Immobilie verkaufen', 'Ihre Immobilie.<br> <em>Der nächste Schritt.</em>', 'Sie denken über einen Verkauf nach? Besprechen wir Ihre Situation, Ihre Fragen und was Ihnen dabei wichtig ist.', `<div class="seller-hero-action">${splitButton(sellerContact, 'Verkauf besprechen')}</div>`)}<section class="journey-section seller-journey container reveal"><div class="journey-heading"><span class="section-kicker">Ein persönlicher Einstieg</span><h2>Erst einmal<br> <em>in Ruhe sprechen.</em></h2><p>Ob der Verkauf schon konkret ist oder Sie sich zunächst orientieren möchten: Umfang und nächste Schritte stimmen wir passend zu Ihrer Immobilie ab.</p></div><ol class="journey-steps"><li><span class="journey-step-index" aria-hidden="true">01</span><h3>Vorgespräch</h3><p>Welche Immobilie möchten Sie verkaufen? Wo stehen Sie mit Ihren Plänen, und welche Fragen sollen zuerst geklärt werden?</p></li><li><span class="journey-step-index" aria-hidden="true">02</span><h3>Objektunterlagen</h3><p>Vorhandene Unterlagen helfen dabei, das Objekt einzuordnen. Gemeinsam lässt sich klären, welche Angaben noch benötigt werden.</p></li><li><span class="journey-step-index" aria-hidden="true">03</span><h3>Nächste Schritte</h3><p>Wie es weitergehen kann und welche Leistungen für Ihr Vorhaben sinnvoll sind, besprechen und vereinbaren wir persönlich.</p></li></ol><div class="journey-preparation"><div class="journey-document-list"><span class="section-kicker">Falls bereits vorhanden</span><h2>Unterlagen, die<br> <em>weiterhelfen können.</em></h2><ul><li>${check}<span>Grundrisse, Flächenaufstellung und Eckdaten zu Haus oder Wohnung</span></li><li>${check}<span>Energieausweis oder Informationen zum Ausweisstatus</span></li><li>${check}<span>Angaben zu Baujahr, Modernisierungen und Ausstattung</span></li><li>${check}<span>Bei vermieteten Immobilien: ein Überblick über die Mietverhältnisse</span></li><li>${check}<span>Bei Eigentumswohnungen: vorhandene Unterlagen zur Wohnungseigentümergemeinschaft</span></li></ul><p>Für die erste Anfrage genügen Objektart, Ort und Ihre Fragen. Vertrauliche Dokumente übermitteln Sie erst auf einem persönlich abgestimmten Weg.</p><a class="text-link" href="/immobilien?status=sold">Verkaufte Referenzen ansehen ${arrow}</a></div>${advisorPanel('Immobilien', 'Verkauf besprechen', 'Ich freue mich darauf, Ihre Immobilie und Ihre Pläne kennenzulernen. Gemeinsam besprechen wir, was für Sie als Nächstes wichtig ist.')}</div></section>${contactCta('Immobilien', 'Was haben Sie<br> <em>mit Ihrer Immobilie vor?</em>', { href: sellerContact, label: 'Verkauf besprechen', description: 'Schildern Sie uns Ihr Vorhaben. Ihre Anfrage wird mit dem Anliegen „Immobilienverkauf“ für Sie vorbereitet.' })}`);
 }
 function aboutPage() {
-  return wrapPage(`${head('Senad Basalic & Partner', 'Einfach individuell.<br><em>Seit 2001.</em>', 'Immobilien und Finanzen berühren das eigene Leben. Gut, ein Gegenüber zu haben, das verständlich erklärt und persönlich begleitet.')}<section class="about-profile container reveal"><figure>${img('senad-basalic', 'Senad Basalic, Immobilienmakler, Immobiliardarlehensvermittler und Versicherungsmakler', true)}<figcaption>Senad Basalic · Ihr persönlicher Ansprechpartner</figcaption></figure><div><span class="section-kicker">In Göppingen verwurzelt.</span><h2>Ihr Vorhaben.<br><em>Persönlich begleitet.</em></h2><p>In Göppingen geboren, seit 2001 am Markt tätig: Senad Basalic ist Ihr Ansprechpartner als Immobilienmakler, Immobiliardarlehensvermittler und Versicherungsmakler.</p><p>Sein Anspruch ist, komplexe Finanzfragen einfach zu erklären und Menschen bei ihrer Immobiliensuche, dem Verkauf und der Finanzierung zu begleiten. Dafür erstellen wir gemeinsam ein passendes Profil für Ihr Vorhaben.</p><p>Basalic & Partner arbeitet mit zahlreichen Kooperationen und Partnern zusammen, wenn möglich aus der Region. Wir sind IHK-Ausbildungsbetrieb.</p>${splitButton('/kontakt', 'Kontakt aufnehmen')}</div></section><section class="about-perspectives container reveal"><div class="subsection-heading"><span class="section-kicker">Was uns verbindet</span><h2>Ein Ansprechpartner.<br><em>Mehrere Perspektiven.</em></h2></div><div class="perspective-grid">${[['Verständlich erklären.', 'Fragen zu Immobilien und Finanzen in eine Sprache übersetzen, die im Alltag weiterhilft.'], ['Persönlich begleiten.', 'Ihre Ausgangslage und Ihre Wünsche gemeinsam besprechen.'], ['Zusammen denken.', 'Immobilie, Finanzierung, Verwaltung und Vorsorge als zusammenhängende Lebensfragen betrachten.']].map(([title, text], index) => `<article><span>0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join('')}</div></section><section class="about-service-list container reveal">${services.map(service => `<a href="${service.path}"><span>${service.number}</span><h2>${service.title}</h2><p>${service.description}</p>${arrow}</a>`).join('')}</section>`);
+  return wrapPage(`${head('Senad Basalic & Partner', 'Einfach individuell.<br> <em>Seit 2001.</em>', 'Immobilien und Finanzen berühren das eigene Leben. Gut, ein Gegenüber zu haben, das verständlich erklärt und persönlich begleitet.')}<section class="about-profile container reveal"><figure>${primaryImageMarkup('/ueber-uns', 'senad-basalic', 'Senad Basalic, Immobilienmakler, Immobiliardarlehensvermittler und Versicherungsmakler')}<figcaption>Senad Basalic · Ihr persönlicher Ansprechpartner</figcaption></figure><div><span class="section-kicker">In Göppingen verwurzelt.</span><h2>Ihr Vorhaben.<br> <em>Persönlich begleitet.</em></h2><p>In Göppingen geboren, seit 2001 am Markt tätig: Senad Basalic ist Ihr Ansprechpartner als Immobilienmakler, Immobiliardarlehensvermittler und Versicherungsmakler.</p><p>Sein Anspruch ist, komplexe Finanzfragen einfach zu erklären und Menschen bei ihrer Immobiliensuche, dem Verkauf und der Finanzierung zu begleiten. Dafür erstellen wir gemeinsam ein passendes Profil für Ihr Vorhaben.</p><p>Basalic & Partner arbeitet mit zahlreichen Kooperationen und Partnern zusammen, wenn möglich aus der Region. Wir sind IHK-Ausbildungsbetrieb.</p>${splitButton('/kontakt', 'Persönliches Gespräch anfragen')}</div></section><section class="about-perspectives container reveal"><div class="subsection-heading"><span class="section-kicker">Was uns verbindet</span><h2>Ein Ansprechpartner.<br> <em>Mehrere Perspektiven.</em></h2></div><div class="perspective-grid">${[['Verständlich erklären.', 'Fragen zu Immobilien und Finanzen in eine Sprache übersetzen, die im Alltag weiterhilft.'], ['Persönlich begleiten.', 'Ihre Ausgangslage und Ihre Wünsche gemeinsam besprechen.'], ['Zusammen denken.', 'Immobilie, Finanzierung, Verwaltung und Vorsorge als zusammenhängende Lebensfragen betrachten.']].map(([title, text], index) => `<article><span>0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join('')}</div></section><section class="about-service-list container reveal">${services.map(service => `<a href="${service.path}"><span>${service.number}</span><h2>${service.title}</h2><p>${service.description}</p>${arrow}</a>`).join('')}</section>`);
 }
 function contactPage(params) {
-  const topic = params.get('thema') || '';
-  const object = params.get('objekt') || '';
-  const reference = params.get('referenz') || '';
-  const message = object ? `Ich interessiere mich für: ${object}. Bitte informieren Sie mich über den aktuellen Stand.` : reference ? `Die verkaufte Referenz ${reference} gefällt mir. Ich suche eine ähnliche Immobilie und möchte meine Wünsche mit Ihnen besprechen.` : '';
-  return wrapPage(`${head('Kontakt', 'Ein paar Worte.<br><em>Ein guter Anfang.</em>', 'Eine Immobilie. Ein Vorhaben. Eine Frage. Erzählen Sie uns, was Sie bewegt.')}<section class="contact-layout container reveal"><div class="contact-information"><span class="section-kicker">Direkt zu Senad Basalic</span><h2>Wir freuen uns<br><em>auf Ihre Pläne.</em></h2><div class="contact-large-links"><a href="tel:+491786654819">${icon(phoneSvg)}<span>+49 178 6654819</span>${arrow}</a><a href="mailto:info@basalic.de">${icon(envelopeSvg)}<span>info@basalic.de</span>${arrow}</a></div><div class="specialist-contacts"><div><span>Immobilien</span><a href="mailto:immobilien@basalic.de">immobilien@basalic.de ${arrow}</a></div><div><span>Finanzierung</span><a href="mailto:finanzierung@basalic.de">finanzierung@basalic.de ${arrow}</a></div><div><span>Mietverwaltung & Vorsorge</span><a href="mailto:info@basalic.de">info@basalic.de ${arrow}</a></div></div><aside class="address-information"><strong>Besuch nach Absprache.</strong><p>Die bisherige Website nennt unterschiedliche Betriebsanschriften in Dürnau und Heiningen. Bitte erfragen Sie die aktuelle Besuchsadresse direkt vor einem Termin. Die vollständigen Quellangaben stehen im <a href="/impressum">Impressumsentwurf</a>.</p></aside></div><div class="contact-form-panel"><h2>Was haben Sie vor?</h2><p>Bereiten Sie eine E-Mail vor. Sie prüfen und versenden sie anschließend in Ihrem eigenen E-Mail-Programm.</p><form id="page-contact-form"><label for="contact-topic">Worum geht es?</label><select id="contact-topic" name="topic" required><option value="">Bitte wählen</option>${[...services.map(service => service.title), 'Allgemeine Anfrage'].map(value => `<option ${topic === value ? 'selected' : ''}>${esc(value)}</option>`).join('')}</select><div class="form-columns"><div><label for="contact-name">Ihr Name <span>(optional)</span></label><input id="contact-name" name="name" autocomplete="name" maxlength="100"></div><div><label for="contact-phone">Telefon <span>(optional)</span></label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div></div><label for="contact-email">Ihre E-Mail-Adresse <span>(optional)</span></label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" value="${esc((params.get('email') || '').slice(0, 200))}"><label for="contact-message">Ihr Anliegen</label><textarea id="contact-message" name="message" rows="5" required maxlength="3000" placeholder="Erzählen Sie uns von Ihren Plänen.">${esc(message)}</textarea><p class="form-note">Bitte übermitteln Sie hier keine Gesundheits- oder Finanzunterlagen. Die Website speichert Ihre Eingaben nicht. <a href="/datenschutz">Datenschutzhinweise</a></p><button class="button" type="submit"><span class="button-label">E-Mail vorbereiten</span><span class="button-icon">${arrow}</span></button><p class="mail-help" id="page-mail-help" role="status">Die Website versendet keine Nachricht. Ohne E-Mail-Programm schreiben Sie bitte direkt an die oben genannte Adresse.</p></form></div></section>`);
+  const topic = (params.get('thema') || '').slice(0, 80);
+  const object = (params.get('objekt') || '').slice(0, 300);
+  const reference = (params.get('referenz') || '').slice(0, 300);
+  const intent = params.get('anliegen') || '';
+  const topicMessages = {
+    Mietverwaltung: 'Ich möchte die Verwaltung meiner vermieteten Immobilie besprechen.\n\nOrt / Objektart:\nGewünschte Unterstützung:',
+    Finanzierung: 'Ich möchte eine Finanzierung besprechen.\n\nMein Vorhaben:\nGeplanter Zeitraum:\nMeine Fragen:',
+    Vorsorge: 'Ich möchte meine Absicherung oder Altersvorsorge besprechen.\n\nMein Anliegen:\nMeine Fragen:'
+  };
+  const message = object ? (intent === 'information' ? `Ich interessiere mich für: ${object}. Bitte stellen Sie mir weitere Informationen zum Objekt und zum aktuellen Stand zur Verfügung.` : `Ich möchte eine Besichtigung für folgende Immobilie anfragen: ${object}. Bitte informieren Sie mich über die aktuelle Verfügbarkeit und mögliche Termine.`)
+    : reference ? `Die verkaufte Referenz ${reference} gefällt mir. Ich suche eine ähnliche Immobilie und möchte meine Wünsche mit Ihnen besprechen.`
+    : intent === 'verkauf' ? 'Ich möchte meine Immobilie verkaufen und ein persönliches Vorgespräch vereinbaren.\n\nObjektart:\nOrt:\nMeine Fragen / Wünsche:'
+    : intent === 'suche' ? 'Ich suche eine Immobilie und möchte meine Wünsche mit Ihnen besprechen.\n\nGesuchter Ort / Region:\nObjektart:\nMeine Wünsche:'
+    : topicMessages[topic] || '';
+  return wrapPage(`${head('Kontakt', 'Ein paar Worte.<br> <em>Ein guter Anfang.</em>', 'Eine Immobilie. Ein Vorhaben. Eine Frage. Erzählen Sie uns, was Sie bewegt.')}<section class="contact-layout container reveal"><div class="contact-information"><span class="section-kicker">Direkt zu Senad Basalic</span><h2>Wir freuen uns<br> <em>auf Ihre Pläne.</em></h2><div class="contact-large-links"><a href="tel:+491786654819">${icon(phoneSvg)}<span>+49 178 6654819</span>${arrow}</a><a href="mailto:info@basalic.de">${icon(envelopeSvg)}<span>info@basalic.de</span>${arrow}</a></div><div class="specialist-contacts"><div><span>Immobilien</span><a href="mailto:immobilien@basalic.de">immobilien@basalic.de ${arrow}</a></div><div><span>Finanzierung</span><a href="mailto:finanzierung@basalic.de">finanzierung@basalic.de ${arrow}</a></div><div><span>Mietverwaltung & Vorsorge</span><a href="mailto:info@basalic.de">info@basalic.de ${arrow}</a></div></div><aside class="address-information"><strong>Besuch nach Absprache.</strong><p>Für ein persönliches Gespräch vereinbaren wir gern einen Termin mit Ihnen. Die passende Besuchsadresse erhalten Sie mit der Terminbestätigung.</p></aside></div><div class="contact-form-panel"><h2>Was haben Sie vor?</h2><p>Bereiten Sie eine E-Mail vor. Sie prüfen und versenden sie anschließend in Ihrem eigenen E-Mail-Programm.</p><form id="page-contact-form"><label for="contact-topic">Worum geht es?</label><select id="contact-topic" name="topic" required><option value="">Bitte wählen</option>${[...services.map(service => service.title), 'Allgemeine Anfrage'].map(value => `<option ${topic === value ? 'selected' : ''}>${esc(value)}</option>`).join('')}</select><div class="form-columns"><div><label for="contact-name">Ihr Name <span>(optional)</span></label><input id="contact-name" name="name" autocomplete="name" maxlength="100"></div><div><label for="contact-phone">Telefon <span>(optional)</span></label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div></div><label for="contact-email">Ihre E-Mail-Adresse <span>(optional)</span></label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="200" value="${esc((params.get('email') || '').slice(0, 200))}"><label for="contact-message">Ihr Anliegen</label><textarea id="contact-message" name="message" rows="5" required maxlength="3000" placeholder="Erzählen Sie uns von Ihren Plänen.">${esc(message)}</textarea><p class="form-note">Bitte übermitteln Sie hier keine Gesundheits- oder Finanzunterlagen. Die Website speichert Ihre Eingaben nicht. <a href="/datenschutz">Datenschutzhinweise</a></p><button class="button" type="submit"><span class="button-label">E-Mail vorbereiten</span><span class="button-icon">${arrow}</span></button><p class="mail-help" id="page-mail-help" role="status">Die Website versendet keine Nachricht. Ohne E-Mail-Programm schreiben Sie bitte direkt an die oben genannte Adresse.</p></form></div></section>`);
 }
 
-const next = arrow;
-const legalContent = {
- '/impressum':{title:'Impressum.',intro:'Recherchierter Quellenstand vom 03.11.2026. Die folgenden Angaben sind noch nicht zur Veröffentlichung freigegeben.',body:`<h2>Betreiber laut Quellwebsite</h2><p>Senad Basalic<br>Geschäftsbezeichnung: Senad Basalic &amp; Partner<br><a href="mailto:info@basalic.de">info@basalic.de</a><br><a href="tel:+491786654819">+49 178 6654819</a></p><h2>Betriebsanschrift: Klärung erforderlich</h2><p>Das Quell-Impressum nennt Zeppelinstrasse 4, 73105 Dürnau. Die Quell-Datenschutzerklärung nennt Buchenstrasse 6, 73092 Heiningen. Keine dieser Adressen wird hier als aktuelle ladungsfähige Anschrift bestätigt. Rechtsform und gegebenenfalls Registerart mit Registernummer sind ebenfalls offen. Die bisherige Website nennt „Amtsgericht Göppingen“, jedoch keine Registerart oder Registernummer; diese Angabe ist zu klären.</p><h2>Vermittlung und Aufsicht</h2><p>Laut Quelle: Immobilienmakler nach § 34c Abs. 1 Satz 1 Nr. 1 GewO, Erlaubnis ausgestellt vom Landratsamt Göppingen; Versicherungsmakler nach § 34d Abs. 1 GewO; Immobiliardarlehensvermittler nach § 34i Abs. 1 Satz 1 GewO. Als Aufsicht wird die IHK Region Stuttgart genannt. Aktuelle Zuständigkeit und Erlaubnisse sind je Tätigkeit zu bestätigen.</p><p>Quellseitig genannte Registerangaben: Versicherung D-ITJM-VPCW6-67; Immobiliardarlehen D-W-175-RJTU-55. Die aktuelle persönliche Registereintragung wurde nicht unabhängig bestätigt. <a href="https://www.vermittlerregister.info/recherche" target="_blank" rel="noopener noreferrer">Offizielles Vermittlerregister (extern) ${arrow}</a>.</p><p>Für Wohnimmobilienverwaltung (§ 34c Abs. 1 Satz 1 Nr. 4 GewO) und die quellseitig erwähnte allgemeine Darlehensvermittlung (Nr. 2) sind Erlaubnisumfang und Aufsicht gesondert offen.</p><h2>Weitere Pflichtangaben offen</h2><p>Vorhandene Umsatzsteuer- oder Wirtschafts-Identifikationsnummer, gegebenenfalls Berufs- und Registerinformationen sowie Angaben zur Berufshaftpflicht sind zu klären. Eine persönliche Steuernummer wird nicht veröffentlicht.</p><h2>Verbraucherstreitbeilegung</h2><p>Bereitschaft oder Verpflichtung zur Teilnahme an Streitbeilegungsverfahren sowie die jeweils zuständige Stelle müssen bestätigt werden. Eine Ausnahme nach Beschäftigtenzahl wird nicht unterstellt. Die frühere EU-OS-Plattform ist seit dem 20.07.2025 eingestellt.</p><p><a href="/erstinformationen">Vermittler- und Verbraucherinformationen · Entwurf ${next}</a></p><h2>Quellen</h2><p><a href="https://www.basalic.de/impressum" target="_blank" rel="noopener noreferrer">Quell-Impressum (extern) ${arrow}</a> · <a href="https://www.basalic.de/datenschutz" target="_blank" rel="noopener noreferrer">Quell-Datenschutz (extern) ${arrow}</a> · <a href="https://www.gesetze-im-internet.de/ddg/__5.html" target="_blank" rel="noopener noreferrer">§ 5 DDG (extern) ${arrow}</a></p>`},
- '/datenschutz':{title:'Datenschutz.',intro:'Für die tatsächlich umgesetzte lokale Vorschau. Angaben zu einem künftigen öffentlichen Betrieb müssen neu geprüft und vervollständigt werden.',body:`<h2>1. Zweck und Verantwortlichkeit</h2><p>Diese Website ist eine lokal auf dem Rechner bereitgestellte Gestaltungsvorschau von Schaf &amp; Grimm für Senad Basalic &amp; Partner. Sie ist nicht das produktive Internetangebot von basalic.de. Für einen öffentlichen Betrieb sind die verantwortliche Rechtsperson und ihre aktuelle Anschrift noch festzulegen und zu bestätigen. Die widersprüchlichen Quellanschriften finden Sie im <a href="/impressum">Impressumsentwurf</a>. Kontakt laut Quelle: <a href="mailto:info@basalic.de">info@basalic.de</a>.</p><h2>2. Technische Bereitstellung</h2><p>Der lokale Vorschau-Server ist ausschließlich an 127.0.0.1 gebunden. Er verarbeitet beim Seitenabruf technisch die lokale Verbindung, angeforderte Pfade und HTTP-Header. Die Anwendung richtet keine Zugriffsprotokolle ein und speichert selbst keine Besucherprofile. Der Browser und das Betriebssystem können übliche lokale Verlaufs- und Cache-Daten speichern. Ein späterer Hoster mit Protokollierung, Löschfristen und Auftragsverarbeitung ist noch nicht bestimmt.</p><h2>3. Keine Analyse und keine Einbettungen</h2><p>Die Anwendung setzt keine Cookies und verwendet weder LocalStorage noch SessionStorage. Sie enthält kein Tracking. Schriften, Fotos und Gestaltungselemente werden lokal geladen. Es gibt keine extern eingebetteten Karten, Videos, Social-Widgets oder automatisch geladenen Exposés. Deshalb enthält diese Technik keinen Cookie-Einwilligungsdialog.</p><h2>4. Kontakt</h2><p>Das Kontaktformular übermittelt nichts an einen Server. Beim Auslösen wird ein mailto-Link aus Ihren Eingaben erstellt und an Ihr E-Mail-Programm übergeben. Sie prüfen und versenden selbst. Bis zum Verlassen oder Neuladen der Seite bleiben die Eingaben im Arbeitsspeicher der Seite. Die Anwendung speichert sie nicht dauerhaft. Telefonlinks öffnen die Telefonfunktion Ihres Geräts.</p><p>Bei einer tatsächlichen Kontaktaufnahme werden Ihre übermittelten Angaben zur Bearbeitung Ihres Anliegens benötigt. Als Grundlage kommen je nach Anliegen Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche oder vertragliche Bearbeitung) oder lit. f DSGVO (berechtigtes Interesse an der Beantwortung) in Betracht. Empfänger, E-Mail-Dienstleister, konkrete Speicher- und Löschfristen sowie gesetzliche Aufbewahrungspflichten muss der künftige Betreiber ergänzen. Sensible Unterlagen bitte erst nach Abstimmung senden.</p><h2>5. Externe Links</h2><p>Erst nach dem bewussten Öffnen externer Links, etwa zu ImmoScout24 oder einer amtlichen Quelle, erfolgt ein Abruf beim jeweiligen Anbieter. Dort gelten dessen Datenschutzhinweise. Externe Links sind erkennbar gekennzeichnet und öffnen einen neuen Tab.</p><h2>6. Ihre Rechte</h2><p>Im Rahmen der gesetzlichen Voraussetzungen bestehen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung und Datenübertragbarkeit sowie auf Widerspruch. Erteilte Einwilligungen können mit Wirkung für die Zukunft widerrufen werden. Zudem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde. Die zuständige Stelle und die vollständigen Angaben nach Art. 13 DSGVO sind vor öffentlichem Betrieb zu bestätigen.</p><h2>7. Stand und Freigabe</h2><p>Technikstand: ${sourceDate}. Keine automatisierte Entscheidungsfindung oder Profilbildung durch diese Anwendung. Die Hinweise gelten für den mitgelieferten lokalen Produktions-Vorschau-Server; ein Entwicklungsserver kann zusätzliche technische Verbindungen zur lokalen Aktualisierung verwenden. Bei Hosting, Formularversand, Analyse oder Einbettungen muss dieser Text angepasst werden.</p>`},
- '/erstinformationen':{title:'Gut informiert.<br><em>Von Anfang an.</em>',intro:'Vermittler- und Verbraucherinformationen. Dieser recherchierte Entwurf muss vor einem echten Geschäftskontakt vervollständigt und in der gesetzlich vorgesehenen Form übermittelt werden.',body:`<h2>Identität und Vermittlerstatus</h2><p>Senad Basalic, Geschäftsbezeichnung Senad Basalic &amp; Partner. Die aktuelle Geschäftsanschrift ist offen. Kontakt: <a href="mailto:info@basalic.de">info@basalic.de</a>, <a href="tel:+491786654819">+49 178 6654819</a>.</p><p>Laut Quellwebsite Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO (D-ITJM-VPCW6-67) und Immobiliardarlehensvermittler nach § 34i Abs. 1 Satz 1 GewO (D-W-175-RJTU-55). Registerdaten sind noch aktuell zu verifizieren. Prüfung über das <a href="https://www.vermittlerregister.info/recherche" target="_blank" rel="noopener noreferrer">offizielle Vermittlerregister (extern) ${arrow}</a>, DIHK, Breite Straße 29, 10178 Berlin.</p><h2>Versicherungsvermittlung</h2><p>Die Quelle beschreibt ein Beratungsangebot zu Absicherung und Altersvorsorge. Für die Erstinformation nach §§ 15, 16 VersVermV fehlen insbesondere bestätigte Vergütungsart, Herkunft der Vergütung einschließlich weiterer Zuwendungen, Angaben zu unmittelbaren oder mittelbaren Beteiligungen von mehr als 10 % in beide Richtungen und aktuelle Schlichtungsinformationen. Dazu werden keine Annahmen getroffen.</p><h2>Immobiliardarlehensvermittlung</h2><p>Die Quelle nennt Kooperationen mit Banken, auch regional. Der genaue Umfang der Befugnisse und Bindungen an Darlehensgeber ist offen. Unabhängigkeit oder Marktbreite werden nicht behauptet. Vergütung, Nebenentgelte, Drittvergütung, Beratungsangebot, Beschwerdeverfahren und vollständige Informationen nach Art. 247 §§ 13, 13b EGBGB sind zu ergänzen. Werbung ist vor Veröffentlichung insbesondere auf § 13 Abs. 4 zu prüfen.</p><h2>Beschwerde und Schlichtung</h2><p>Aktuelle Anlaufstellen im Versicherungsbereich sind der <a href="https://www.versicherungsombudsmann.de/kontakt/" target="_blank" rel="noopener noreferrer">Versicherungsombudsmann e. V. (extern) ${arrow}</a>, Postfach 080632, 10006 Berlin, sowie der <a href="https://www.pkv-ombudsmann.de/servicebereich/kontakt/" target="_blank" rel="noopener noreferrer">Ombudsmann Private Kranken- und Pflegeversicherung (extern) ${arrow}</a>, Postfach 06 02 22, 10052 Berlin. Die konkrete Zuständigkeit, Teilnahme und Beschwerdewege je Tätigkeit sind noch zu bestätigen.</p><h2>Immobilien und Dienstleistungen</h2><p>Leistungsumfang, Preise, gegebenenfalls Provision und anwendbare Angaben nach DL-InfoV sind vor einer Beauftragung bereitzustellen. Für Kaufmaklerverträge über Wohnungen und Einfamilienhäuser ist § 656a BGB (Textform) zu beachten, bei Verbraucherkäufern zusätzlich die Provisionsregeln der §§ 656c, 656d BGB. Diese Vorschau schließt keine Verträge.</p><h2>Fernabsatz und Widerruf</h2><p>Für tatsächliche Fernabsatz- oder außerhalb von Geschäftsräumen geschlossene Verträge sind die passenden Verbraucherinformationen und Widerrufsbelehrungen gesondert zu erteilen. Ein E-Mail-Kontakt ist hier weder Vertragsabschluss noch Auftrag. Ein späterer Online-Vertragsprozess muss auch die dann anwendbaren Vorgaben zur Widerrufsfunktion erfüllen.</p><h2>Objektinformationen</h2><p>Objekte werden nach dem Quellenstand ${sourceDate} dargestellt. Eine aktuelle Verfügbarkeit wird nicht bestätigt. Ausweisstatus und Energiepflichtangaben nach dem aktuellen § 87 GModG (vormals GEG), Preis, Provision und Angaben zu Auslandsobjekten sind vor öffentlicher Objektwerbung zu prüfen und zu vervollständigen.</p>`},
- '/barrierefreiheit':{title:'Zugänglich<br><em>gedacht.</em>',intro:'Informationen zum Entwicklungsstand der lokalen Vorschau. Keine Erklärung einer geprüften gesetzlichen Konformität.',body:`<h2>Was umgesetzt wurde</h2><p>Semantische Seitenbereiche, eine Sprungnavigation zum Inhalt, per Tastatur erreichbare Bedienelemente, sichtbare Fokusmarkierungen, beschriftete Formularfelder, Bildbeschreibungen und eine anpassbare Darstellung auf schmalen Bildschirmen. Bewegungen werden bei entsprechender Systemeinstellung reduziert.</p><h2>Anwendbarkeit des BFSG: offen</h2><p>Das BFSG gilt seit 28.06.2025 für erfasste Dienstleistungen. Die Einordnung hängt unter anderem von der konkreten digitalen Dienstleistung und Interaktion ab. Kontaktmöglichkeiten können für den elektronischen Geschäftsverkehr relevant sein. Die Unternehmensgröße ist nicht belegt; eine Kleinstunternehmensausnahme wird nicht unterstellt.</p><p>Vor einem öffentlichen Betrieb sind die Anwendbarkeit, die Anforderungen und gegebenenfalls Informationen nach § 14 BFSG in Verbindung mit Anlage 3 sowie die zuständige Marktüberwachungsstelle zu klären. Diese Seite ersetzt solche Pflichtinformationen nicht.</p><h2>Rückmeldung zur Bedienung</h2><p>Wenn Sie auf eine Barriere stoßen, können Sie Ihr Anliegen über <a href="mailto:info@basalic.de?subject=Hinweis%20zur%20Barrierefreiheit">info@basalic.de</a> oder telefonisch unter <a href="tel:+491786654819">+49 178 6654819</a> mitteilen.</p><p><a href="https://www.bundesfachstelle-barrierefreiheit.de/DE/Barrierefreiheitsstaerkungsgesetz/FAQ-Immobilien/faq-immobilien_node" target="_blank" rel="noopener noreferrer">Offizielle BFSG-Informationen zur Immobilienbranche (extern) ${arrow}</a></p>`},
- '/bildnachweise':{title:'Bilder mit<br><em>Herkunft.</em>',intro:'Alle verwendeten Fotografien und Illustrationsmotive stammen von der bisherigen Website basalic.de. Geprüft am 03.11.2026.',body:`<h2>Startseite und Leistungen</h2><p>Das Startseitenmotiv mit Sonnenaufgang stammt aus dem Hintergrundbild der bisherigen Startseite. Die Motive zur Mietverwaltung, Baufinanzierung, Absicherung und Altersvorsorge wurden den jeweiligen Originalseiten entnommen. Die Dateien sind lokal als WebP gespeichert. Das zuvor verwendete Unsplash-Villenmotiv wurde entfernt.</p><h2>Immobilien und Porträt</h2><p>48 Immobilienabbildungen stammen von der Immobilienseite auf basalic.de und sind anhand derselben Quellzeile wie der zugehörige Objekttext zugeordnet. Das Porträt stammt von der Seite „Über uns“. Eine der Referenzabbildungen ist ein Grundriss und entsprechend bezeichnet. Für Salach ist kein echtes Objektfoto übernommen: Das Original zeigt dort ausdrücklich ein Beispielbild.</p><p>Alle 49 Objekte sind vollständig übernommen; Angebote und verkaufte Referenzen sind getrennt. Angebote und Referenzen aus Plochingen besitzen unterschiedliche Flächenangaben und Bilder. Die Bildherkunft bestätigt keine freie Lizenz; die bestehenden Hinweise zu Bildfreigaben für einen späteren öffentlichen Betrieb bleiben bestehen.</p><h2>Schriften</h2><p>Geist wird lokal über Fontsource eingebunden und steht unter der SIL Open Font License 1.1. Für kursive Akzente werden die auf dem Gerät vorhandenen Systemschriften Georgia beziehungsweise Times New Roman verwendet. Die Symbole stammen aus der Phosphor-Icons-Bibliothek unter MIT-Lizenz. Es erfolgt kein Abruf bei Google Fonts oder einem externen Schriftdienst.</p><h2>Gestaltung</h2><p>Wortmarken-Satz, Flächen, Linien und grafische Elemente wurden für diesen Entwurf entwickelt. Die Angabe IHK-Ausbildungsbetrieb ist als Text von der bisherigen Website übernommen; es wird kein neues Siegel dargestellt.</p>`}
-};
+const legalContent = getLegalContent(arrow);
 
 const legalLabels = { '/impressum': 'Impressum', '/datenschutz': 'Datenschutz', '/erstinformationen': 'Erstinformationen', '/barrierefreiheit': 'Barrierefreiheit', '/bildnachweise': 'Bildnachweise' };
 function legalPage(path) {
   const page = legalContent[path];
-  const isLegalDraft = ['/impressum', '/datenschutz', '/erstinformationen'].includes(path);
-  return wrapPage(`${head(legalLabels[path], page.title, page.intro)}<section class="legal-layout container"><nav class="legal-page-nav" aria-label="Rechtliche Informationen">${Object.entries(legalLabels).map(([url, label]) => `<a href="${url}" ${path === url ? 'aria-current="page"' : ''}>${label}${arrow}</a>`).join('')}</nav><article class="legal-copy">${isLegalDraft ? '<aside class="legal-draft"><strong>Rechtliche Informationen · Entwurf</strong><p>Lokale Gestaltungsvorschau, nicht zur Veröffentlichung freigegeben. Betreiberanschrift, Erlaubnisumfang und vollständige Vermittlerinformationen müssen noch bestätigt werden. Diese Seite ersetzt keine vollständig erteilten Pflichtinformationen.</p></aside>' : ''}${page.body}</article></section>`);
+  return wrapPage(`${head(legalLabels[path], page.title, page.intro)}<section class="legal-layout container"><nav class="legal-page-nav" aria-label="Rechtliche Informationen">${Object.entries(legalLabels).map(([url, label]) => `<a href="${url}" ${path === url ? 'aria-current="page"' : ''}>${label}${arrow}</a>`).join('')}</nav><article class="legal-copy">${page.body}</article></section>`);
 }
 
 export function renderPage(path, search = '') {
   const params = paramsFor(search);
   if (path === '/immobilien') return { html: listing(params), title: 'Immobilien' };
+  if (path === '/immobilie-verkaufen') return { html: sellerPage(), title: 'Immobilie verkaufen' };
   if (path.startsWith('/immobilien/')) {
-    const property = properties.find(item => item.id === path.split('/')[2]);
+    const property = propertyForPath(path);
     return property ? { html: propertyDetail(property), title: `${property.kind} in ${property.city}` } : null;
   }
   if (servicePages[path]) return { html: servicePage(path), title: servicePages[path].title };
@@ -153,26 +280,42 @@ export function renderPage(path, search = '') {
 }
 
 export function setupPage(path) {
+  const cleanupGallery = setupPropertyGallery(propertyForPath(path));
   if (path === '/immobilien') {
     const params = new URLSearchParams(location.search);
     let status = params.get('status') === 'sold' ? 'sold' : 'offers';
     const search = document.querySelector('#property-search');
     const type = document.querySelector('#property-type');
+    const rooms = document.querySelector('#property-rooms');
+    const minArea = document.querySelector('#property-area-min');
+    const maxArea = document.querySelector('#property-area-max');
+    const feedback = document.querySelector('#property-filter-feedback');
     const update = () => {
       const nextParams = new URLSearchParams();
       if (status === 'sold') nextParams.set('status', 'sold');
-      if (type.value) nextParams.set('art', type.value);
-      if (search.value) nextParams.set('suche', search.value);
-      const list = filteredProperties(nextParams);
+      for (const [key, value] of [['art', type.value], ['suche', search.value], ['zimmer', rooms.value], ['flaeche_von', minArea.value], ['flaeche_bis', maxArea.value]]) {
+        if (value !== '') nextParams.set(key, value);
+      }
+      const lower = positiveNumber(minArea.value);
+      const upper = positiveNumber(maxArea.value);
+      const invalidRange = lower !== null && upper !== null && lower > upper;
+      const invalidNumber = [minArea, maxArea].some(input => input.validity.badInput || input.validity.rangeUnderflow || input.validity.rangeOverflow);
+      feedback.textContent = invalidNumber ? 'Bitte geben Sie für die Fläche einen Wert zwischen 0 und 100.000 m² ein.' : invalidRange ? 'Die Mindestfläche darf nicht größer als die Höchstfläche sein.' : '';
+      minArea.setAttribute('aria-invalid', String(invalidNumber || invalidRange));
+      maxArea.setAttribute('aria-invalid', String(invalidNumber || invalidRange));
+      const list = invalidNumber ? [] : filteredProperties(nextParams);
       document.querySelectorAll('[data-property-status]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.propertyStatus === status)));
       document.querySelector('#property-results').innerHTML = resultMarkup(list);
-      document.querySelector('#property-count').textContent = `${list.length} ${list.length === 1 ? 'Objekt' : 'Objekte'} · ${status === 'sold' ? 'Verkauft laut bisheriger Website' : 'Aktuellen Objektstand bitte erfragen'}`;
+      document.querySelector('#property-count').textContent = `${list.length} ${list.length === 1 ? 'Objekt' : 'Objekte'} · ${status === 'sold' ? 'Bereits verkauft' : 'Verfügbarkeit auf Anfrage'}`;
       history.replaceState({}, '', '/immobilien' + (nextParams.size ? '?' + nextParams.toString() : ''));
     };
     document.querySelectorAll('[data-property-status]').forEach(button => button.addEventListener('click', () => { status = button.dataset.propertyStatus; update(); }));
     search.addEventListener('input', update);
     type.addEventListener('change', update);
-    document.querySelector('#property-reset').addEventListener('click', () => { search.value = ''; type.value = ''; update(); });
+    rooms.addEventListener('change', update);
+    minArea.addEventListener('input', update);
+    maxArea.addEventListener('input', update);
+    document.querySelector('#property-reset').addEventListener('click', () => { search.value = ''; type.value = ''; rooms.value = ''; minArea.value = ''; maxArea.value = ''; update(); });
     document.querySelector('#property-filter').addEventListener('submit', event => { event.preventDefault(); update(); });
   }
   // Native details elements remain operable without JavaScript; this only keeps
@@ -193,4 +336,5 @@ export function setupPage(path) {
     document.querySelector('#page-mail-help').innerHTML = `E-Mail-Entwurf für ${address} vorbereitet. Bitte prüfen und versenden Sie ihn in Ihrem E-Mail-Programm. <a href="${esc(href)}">E-Mail-Programm erneut öffnen</a>. Die Website hat keine Nachricht versendet.`;
     location.href = href;
   });
+  return cleanupGallery;
 }

@@ -1,0 +1,192 @@
+/* Short transitions and optional movement for the Finance layout. */
+:root { --ease: cubic-bezier(.22, 1, .36, 1); }
+
+.finance-property,
+.finance-service,
+.finance-contact-card,
+.subpage .object-card {
+  transition: transform 300ms var(--ease), border-color 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.finance-service-image img,
+.subpage .object-card-media img {
+  transition: transform 500ms var(--ease);
+}
+
+/* Touch devices retain a stable card after tapping. */
+.finance-property:hover,
+.finance-service:hover,
+.finance-contact-card:hover,
+.subpage .object-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+.finance-property:hover,
+.finance-service:hover,
+.subpage .object-card:hover { border-color: var(--line); }
+.finance-service:hover img,
+.subpage .object-card:hover .object-card-media:not(.object-card-media-full) img { transform: none; }
+
+.button {
+  transition: transform 150ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
+}
+.button:active { transform: scale(.97); }
+.button-icon svg,
+.subtle-link .icon svg,
+.finance-property-copy > div > .icon svg,
+.finance-reference > div > .icon svg,
+.subpage .object-card-arrow svg {
+  transition: transform 250ms var(--ease);
+}
+.button:hover .button-icon svg,
+.button:focus-visible .button-icon svg,
+.subtle-link:hover .icon svg { transform: translateX(2px); }
+
+.finance-reference {
+  transition: border-color 200ms var(--ease);
+}
+.finance-reference:focus-visible {
+  border-color: color-mix(in srgb, var(--text) 35%, transparent);
+  outline-offset: -4px;
+}
+.finance-reference-controls > div { align-items: center; }
+.finance-reference-controls button { min-width: 44px; min-height: 44px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .finance-property:hover,
+  .finance-service:hover,
+  .finance-contact-card:hover,
+  .subpage .object-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--text) 35%, transparent);
+    box-shadow: 0 12px 28px #00000014;
+  }
+  .finance-service:hover .finance-service-image img,
+  .subpage .object-card:hover .object-card-media:not(.object-card-media-full) img { transform: scale(1.05); }
+  .finance-reference:hover { border-color: color-mix(in srgb, var(--text) 25%, transparent); }
+  .finance-property:hover .finance-property-copy > div > .icon svg,
+  .finance-reference:hover > div > .icon svg,
+  .subpage .object-card:hover .object-card-arrow svg { transform: translateX(2px); }
+}
+
+@media (max-width: 700px) {
+  .finance-reference-controls { flex-wrap: wrap; }
+  .finance-reference-controls > div { gap: 8px; }
+}
+
+:root[data-motion=reduced] :is(.finance-property, .finance-service, .finance-contact-card, .object-card, .finance-reference, .button, .subtle-link svg, .button-icon svg, .object-card-arrow svg),
+:root[data-motion=reduced] .finance-property-copy > div > .icon svg,
+:root[data-motion=reduced] .finance-reference > div > .icon svg,
+:root[data-motion=reduced] :is(.finance-service-image, .object-card-media) img {
+  transition: none !important;
+}
+:root[data-motion=reduced] :is(.finance-property, .finance-service, .finance-contact-card, .object-card, .button):is(:hover, :active, :focus-visible),
+:root[data-motion=reduced] .finance-service:hover img,
+:root[data-motion=reduced] :is(.finance-property, .finance-reference, .object-card):hover .icon svg,
+:root[data-motion=reduced] .subpage .object-card:hover .object-card-media img,
+:root[data-motion=reduced] .subpage .object-card:hover .object-card-arrow svg,
+:root[data-motion=reduced] .button:is(:hover, :focus-visible) .button-icon svg,
+:root[data-motion=reduced] .subtle-link:hover .icon svg {
+  transform: none !important;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .finance-property,
+  .finance-service,
+  .finance-contact-card,
+  .subpage .object-card,
+  .finance-reference,
+  .finance-reference > div > .icon svg,
+  .finance-service-image img,
+  .subpage .object-card-media img,
+  .button,
+  .button-icon svg,
+  .subtle-link .icon svg { transition: none !important; }
+  .finance-property:hover,
+  .finance-service:hover,
+  .finance-contact-card:hover,
+  .subpage .object-card:hover,
+  .finance-service:hover .finance-service-image img,
+  .subpage .object-card:hover .object-card-media:not(.object-card-media-full) img,
+  .button:active,
+  .button:is(:hover, :focus-visible) .button-icon svg,
+  .subtle-link:hover .icon svg,
+  .finance-property:hover .finance-property-copy > div > .icon svg,
+  .finance-reference:hover > div > .icon svg,
+  .subpage .object-card:hover .object-card-arrow svg {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.faq-item summary>.icon{transition:transform 200ms var(--ease)}
+.faq-item[open] summary>.icon{transform:rotate(45deg)}
+.motion-toggle[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+.motion-toggle:disabled{opacity:.5;cursor:default}
+.menu-bars{display:flex;flex-direction:column;justify-content:center;gap:6px;width:22px;height:22px}
+.menu-bars>span{height:1.5px;width:22px;background:currentColor;transition:transform 250ms var(--ease)}
+.mobile-toggle[aria-expanded=true] .menu-bars>span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.mobile-toggle[aria-expanded=true] .menu-bars>span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+.finance-reference-track{scroll-padding:0;position:relative}
+@media(max-width:700px){.finance-reference-buttons{max-width:100%}}
+:root[data-motion=reduced] .menu-bars>span{transition:none}
+
+/* Only the enhanced desktop row changes; cleanup restores the original grid. */
+nav.finance-disciplines.is-animated {
+  display: block;
+  overflow: hidden;
+}
+nav.finance-disciplines.is-animated .finance-discipline-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+nav.finance-disciplines.is-animated .finance-discipline-set {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(64px, 5.5vw, 80px);
+  padding-right: clamp(64px, 5.5vw, 80px);
+}
+nav.finance-disciplines.is-animated .finance-discipline-set > a {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  nav.finance-disciplines.is-animated .finance-discipline-track {
+    transform: none !important;
+    width: 100%;
+  }
+  nav.finance-disciplines.is-animated .finance-discipline-set {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 10px;
+    padding: 0;
+  }
+  nav.finance-disciplines.is-animated .finance-discipline-set[aria-hidden=true] { display: none; }
+}
+:root[data-motion=reduced] nav.finance-disciplines.is-animated .finance-discipline-track {
+  transform: none !important;
+  width: 100%;
+}
+:root[data-motion=reduced] nav.finance-disciplines.is-animated .finance-discipline-set {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  gap: 20px;
+  padding: 0;
+}
+:root[data-motion=reduced] nav.finance-disciplines.is-animated .finance-discipline-set[aria-hidden=true] {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  nav.finance-disciplines.is-animated .finance-discipline-track { transform: none !important; width: 100%; }
+  nav.finance-disciplines.is-animated .finance-discipline-set { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); width: 100%; gap: 20px; padding: 0; }
+  nav.finance-disciplines.is-animated .finance-discipline-set[aria-hidden=true] { display: none; }
+}
+@media (max-width: 700px) {
+  :root[data-motion=reduced] nav.finance-disciplines.is-animated .finance-discipline-set { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  nav.finance-disciplines.is-animated .finance-discipline-set { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}

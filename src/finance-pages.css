@@ -1,0 +1,308 @@
+/* Finance variant: the shared content keeps its routes and behaviour. */
+.subpage .page-head {
+  max-width: 1060px;
+  padding-top: 166px;
+  padding-bottom: 64px;
+}
+.subpage .page-head h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 5.5vw, 78px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: 1.06;
+  margin: 24px 0;
+}
+.subpage .page-head h1 em,
+.subpage h2 em {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+}
+.subpage .page-head > p { max-width: 640px; }
+.subpage h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+.subpage .section-kicker { border-radius: 40px; font-size: 12px; }
+.subpage :is(a, button, summary, input, select, textarea):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 5px;
+}
+.subpage .text-link:hover { color: var(--text); text-decoration: underline; text-underline-offset: 5px; }
+.subpage .status-tabs { padding: 5px; background: transparent; }
+.subpage .status-tabs button { font-size: 13px; }
+.subpage .property-filter-expanded {
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--surface);
+}
+.subpage .property-filter input,
+.subpage .property-filter select,
+.subpage .contact-form-panel input,
+.subpage .contact-form-panel select,
+.subpage .contact-form-panel textarea {
+  border-radius: 12px;
+  background: var(--bg);
+  transition: border-color .2s;
+}
+.subpage .property-filter input:hover,
+.subpage .property-filter select:hover,
+.subpage .contact-form-panel input:hover,
+.subpage .contact-form-panel select:hover,
+.subpage .contact-form-panel textarea:hover {
+  border-color: color-mix(in srgb, var(--text) 35%, transparent);
+}
+.subpage .property-refinements legend,
+.subpage .property-refinement-fields label,
+.subpage .property-filter-feedback { font-size: 13px; }
+.subpage .property-filter-footer p { font-size: 12px; }
+.subpage .filter-reset { min-height: 44px; }
+.subpage .property-result-count { margin: 26px 0; }
+.subpage .property-grid { gap: 24px; }
+.subpage .object-card { border-radius: 24px; background: var(--surface); }
+.subpage .object-card > a { padding: 8px; }
+.subpage .object-card-media { border-radius: 17px; aspect-ratio: 1.4; }
+.subpage .object-card-body { padding: 24px 20px 16px; }
+.subpage .object-card .object-card-title {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -.035em;
+  min-height: 3.54em;
+  margin-bottom: 16px;
+}
+.subpage .object-card-story { min-height: 3.3em; }
+.subpage .object-card-bottom { padding-top: 18px; }
+.subpage .object-card-arrow { width: 36px; height: 36px; }
+.subpage .object-card:hover { border-color: color-mix(in srgb, var(--text) 35%, transparent); }
+.subpage .object-status { font-size: 11px; padding: 8px 11px; }
+.subpage .object-status.information { background: #dbe6ce; color: #283125; }
+.subpage .object-back { padding-top: 128px; }
+.subpage .object-back + .page-head { padding-top: 38px; padding-bottom: 52px; }
+.subpage .object-back .text-link { font-size: 13px; }
+.subpage .gallery-main,
+.subpage .object-hero > img,
+.subpage .object-hero .object-no-photo { border-radius: 24px; }
+.subpage .gallery-thumbnails { gap: 16px; }
+.subpage .gallery-thumbnails button { border-radius: 16px; }
+.subpage .gallery-thumbnails button > span { font-size: 12px; }
+.subpage .gallery-count { border-radius: 30px; }
+.subpage .object-hero figcaption { font-size: 12px; }
+.subpage .object-detail { gap: 64px; padding-top: 64px; padding-bottom: 64px; }
+.subpage .object-facts dd { font-family: var(--serif); font-size: 34px; }
+.subpage .object-information > h2 { font-size: 36px; }
+.subpage .object-contact { top: 112px; padding: 30px; }
+.subpage .object-contact h2 { font-size: 38px; }
+.subpage .source-callout,
+.subpage .legal-draft { background: var(--surface); border-radius: 18px; }
+.subpage .source-dot { background: var(--text); }
+/* Image/copy layouts have one geometry owner. Replaced images never determine
+   a grid track's minimum size; the frame reserves their space independently. */
+.subpage .service-introduction,
+.subpage .about-profile {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(40px, 5vw, 72px);
+  padding-bottom: 72px;
+}
+.subpage .about-profile {
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
+  padding-bottom: 88px;
+}
+.subpage .service-introduction > *,
+.subpage .about-profile > * {
+  min-width: 0;
+  max-width: 100%;
+}
+.subpage .service-introduction > div,
+.subpage .about-profile > div { overflow-wrap: anywhere; }
+.subpage .service-illustration {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+}
+.subpage .service-illustration > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+.subpage .about-profile > figure {
+  width: 100%;
+  max-width: 480px;
+  margin: 0;
+}
+.subpage .about-profile > figure > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 24px;
+}
+.subpage .service-introduction .button,
+.subpage .about-profile .button { white-space: normal; }
+.subpage .service-email { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.subpage .service-email svg { flex: 0 0 16px; }
+.subpage .service-introduction h2 { font-size: clamp(34px, 3.8vw, 50px); }
+.subpage .service-topics { gap: 24px; padding-bottom: 80px; }
+.subpage .service-topics > article { padding: 36px; }
+.subpage .service-topics h2 { font-size: 32px; }
+.subpage .journey-section { padding-bottom: 80px; }
+.subpage .journey-steps { gap: 32px; }
+.subpage .journey-steps h3 { font-size: 21px; }
+.subpage .journey-step-index { color: var(--text); }
+.subpage .journey-advisor { padding: 32px; }
+.subpage .journey-advisor h3 { font-family: var(--serif); font-size: 34px; font-weight: 400; }
+.subpage .page-faq { padding-block: 72px 88px; }
+.subpage .page-faq h2 { font-size: 46px; }
+.subpage .faq-items summary { font-size: 16px; padding-block: 24px; }
+.subpage .faq-items summary span { width: 32px; height: 32px; }
+.subpage .about-profile h2 { font-size: clamp(36px, 4vw, 54px); }
+.subpage .about-profile p,
+.subpage .perspective-grid p { font-size: 16px; }
+.subpage .perspective-grid h3 { font-family: var(--serif); font-size: 29px; font-weight: 400; }
+.subpage .perspective-grid article > span { color: var(--muted); }
+.subpage .about-service-list h2 { font-size: 30px; }
+.subpage .about-service-list p { font-size: 14px; }
+.subpage .contact-layout { gap: 80px; padding-bottom: 80px; }
+.subpage .contact-information h2 { font-size: 50px; }
+.subpage .specialist-contacts > div > span { font-size: 12px; }
+.subpage .specialist-contacts a { font-size: 15px; overflow-wrap: anywhere; }
+.subpage .contact-form-panel { padding: 38px; border-radius: 24px; }
+.subpage .contact-form-panel > h2 { font-size: 36px; }
+.subpage .contact-form-panel label { font-size: 13px; }
+.subpage .contact-form-panel label span { font-size: 12px; }
+.subpage .contact-form-panel :is(input, select, textarea) { font-size: 16px; }
+.subpage .form-note,
+.subpage .mail-help { font-size: 12px; }
+.subpage .legal-layout { gap: 72px; padding-bottom: 80px; }
+.subpage .legal-page-nav a { font-size: 12px; min-height: 48px; }
+.subpage .legal-copy h2 { font-size: 32px; line-height: 1.2; margin-top: 42px; }
+.subpage .legal-copy p { max-width: 70ch; }
+.subpage .legal-draft strong { font-size: 14px; }
+.subpage .legal-draft p { font-size: 14px; }
+.subpage .page-cta { margin-top: 48px; padding-block: 72px; }
+.subpage .page-cta h2 { font-size: clamp(38px, 4.5vw, 60px); }
+.gallery-dialog { border-radius: 24px; background: var(--bg); }
+.gallery-dialog header h2 { font-family: var(--serif); font-weight: 400; font-size: 30px; }
+
+@media (max-width: 1000px) {
+  .subpage .page-head { padding-top: 140px; }
+  .subpage .object-detail { gap: 32px; grid-template-columns: minmax(0,1fr) 310px; }
+  .subpage .object-contact { padding: 25px; }
+  .subpage .object-contact h2 { font-size: 34px; }
+  .subpage .contact-layout { gap: 40px; }
+  .subpage .contact-form-panel { padding: 28px; }
+  .subpage .object-card-body { padding-inline: 15px; }
+  .subpage .object-card .object-card-title { font-size: 25px; }
+}
+@media (max-width: 900px) {
+  .subpage .service-introduction,
+  .subpage .about-profile {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 34px;
+    padding-bottom: 56px;
+  }
+  .subpage .about-profile > figure {
+    max-width: 440px;
+    justify-self: center;
+  }
+}
+@media (max-width: 800px) {
+  .subpage .object-detail { grid-template-columns: minmax(0,1fr); }
+  .subpage .object-contact { position: static; }
+  .subpage .contact-layout { grid-template-columns: 1fr; }
+  .subpage .contact-information h2 { font-size: 44px; }
+  .subpage .page-faq { gap: 40px; }
+  .subpage .legal-layout { gap: 32px; }
+}
+@media (max-width: 700px) {
+  .subpage .page-head { padding-top: 120px; padding-bottom: 42px; }
+  .subpage .page-head h1 { font-size: clamp(39px, 8vw, 55px); line-height: 1.08; }
+  .subpage .page-head > p { font-size: 16px; }
+  .subpage .property-filter-expanded { padding: 20px; }
+  .subpage .property-filter-primary { grid-template-columns: 1fr; }
+  .subpage .property-grid { grid-template-columns: 1fr; max-width: 540px; margin-inline: auto; }
+  .subpage .object-card .object-card-title { font-size: 30px; min-height: 0; }
+  .subpage .object-card-story { min-height: 0; }
+  .subpage .service-topics,
+  .subpage .page-faq,
+  .subpage .perspective-grid { grid-template-columns: minmax(0,1fr); }
+  .subpage .service-introduction h2,
+  .subpage .about-profile h2 { font-size: 40px; }
+  .subpage .journey-preparation { grid-template-columns: 1fr; }
+  .subpage .journey-steps p { font-size: 16px; }
+  .subpage .journey-advisor { padding: 26px; }
+  .subpage .page-faq { gap: 18px; padding-block: 48px; }
+  .subpage .page-faq h2 { font-size: 40px; }
+  .subpage .about-service-list > a { grid-template-columns: 28px minmax(0,1fr) 22px; }
+  .subpage .about-service-list h2 { font-size: 28px; }
+  .subpage .about-service-list p { grid-column: 2; grid-row: 2; }
+  .subpage .about-service-list svg { grid-column: 3; grid-row: 1; }
+  .subpage .contact-information { display: block; }
+  .subpage .contact-information h2 { font-size: 40px; }
+  .subpage .specialist-contacts { padding-top: 28px; }
+  .subpage .contact-form-panel { padding: 28px 24px; }
+  .subpage .contact-layout { max-width: 680px; padding-bottom: 48px; }
+  .subpage .page-cta { display: block; padding-block: 48px; }
+  .subpage .page-cta h2 { font-size: 42px; }
+  .subpage .page-cta p { margin-bottom: 28px; }
+  .subpage .legal-copy h2 { font-size: 30px; }
+}
+@media (max-width: 480px) {
+  .subpage .service-introduction,
+  .subpage .about-profile { gap: 28px; padding-bottom: 48px; }
+  .subpage .page-head { padding-top: 112px; }
+  .subpage .page-head h1 { font-size: clamp(37px, 10.4vw, 46px); }
+  .subpage .status-tabs button { font-size: 11px; gap: 7px; padding-inline: 10px; }
+  .subpage .property-filter-expanded { padding: 18px; }
+  .subpage .property-refinement-fields { gap: 12px; }
+  .subpage .property-filter-footer { display: block; }
+  .subpage .property-filter-expanded .filter-reset { width: 100%; margin-top: 16px; }
+  .subpage .property-refinement-fields label { font-size: 12px; }
+  .subpage .object-card-body { padding-inline: 16px; }
+  .subpage .object-card .object-card-title { font-size: 28px; }
+  .subpage .object-back { padding-top: 108px; }
+  .subpage .object-back + .page-head { padding-top: 24px; padding-bottom: 34px; }
+  .subpage .object-detail { padding-block: 40px; gap: 32px; }
+  .subpage .object-contact { padding: 24px; }
+  .subpage .object-facts dd { font-size: 30px; }
+  .subpage .gallery-thumbnails { gap: 12px; }
+  .subpage .gallery-thumbnails button > span { font-size: 11px; }
+  .subpage .gallery-count { padding: 12px 15px; font-size: 12px; }
+  .subpage .service-topics > article { padding: 28px; }
+  .subpage .service-topics h2 { font-size: 30px; }
+  .subpage .contact-form-panel { padding: 26px 20px; }
+  .subpage .contact-form-panel > h2 { font-size: 32px; }
+  .subpage .contact-large-links > a { font-size: 16px; gap: 10px; overflow-wrap: anywhere; }
+  .subpage .form-columns { grid-template-columns: 1fr; gap: 0; }
+  .subpage .legal-page-nav a { font-size: 11px; }
+  .subpage .page-cta h2 { font-size: 38px; }
+  .gallery-dialog header h2 { font-size: 25px; }
+}
+@media (max-width: 360px) {
+  .subpage .status-tabs button { font-size: 10px; gap: 5px; padding-inline: 6px; }
+  .subpage .property-filter-expanded { padding: 14px; }
+  .subpage .object-contact { padding: 22px 18px; }
+  .subpage .contact-form-panel { padding-inline: 17px; }
+  .subpage .contact-large-links > a { font-size: 14px; }
+  .subpage .specialist-contacts a { font-size: 14px; gap: 10px; }
+}

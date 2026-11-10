@@ -1,77 +1,102 @@
-# Rechtliche Prüfung und ausstehende Betreiberfreigabe
+# Rechtliche Prüfung und ausstehende Betreiberangaben
 
-**Stand: 01.11.2026. Interne lokale Gestaltungsvorschau. Keine Freigabe für einen öffentlichen Betrieb.** Die verlinkten Primärquellen wurden für diesen Stand recherchiert. Die folgenden Punkte sind Arbeitsaufträge für Betreiber/Fachprüfung, keine behauptete abgeschlossene Rechtsberatung. Auf der Website sind unvollständige Rechtstexte als Entwurf gekennzeichnet.
+**Stand: 03.11.2026.** Prüfung der beschriebenen Website-Funktionen und der verlinkten amtlichen Grundlagen. Die Website wird weiterhin lokal bereitgestellt. Es wurde keine allgemeine Rechtskonformität festgestellt und kein öffentlicher Betrieb eingerichtet.
 
-## Vor öffentlicher Nutzung zwingend klären
+Der Nutzer hat ausdrücklich sichtbare Platzhalter für noch fehlende Pflichtangaben angeordnet. Diese Felder stehen in eckigen Klammern; sie sind **keine tatsächlich erteilten Angaben**. Rechtliche Informationen, Registerstatus und Bildfreigaben dürfen nicht durch Vermutungen ersetzt werden.
 
-| Punkt | Befund | Benötigte Freigabe / Nachweis |
-| --- | --- | --- |
-| Betreiber und Adresse | Impressum: Senad Basalic, Zeppelinstrasse 4, 73105 Dürnau. Datenschutz: Buchenstrasse 6, 73092 Heiningen. Widerspruch nicht aufgelöst. | Aktuelle Rechtsperson/Rechtsform, ladungsfähige Niederlassungsanschrift und Besuchsadresse bestätigen. Keine Adresse erraten. |
-| Register / IDs | Quelle nennt „Amtsgericht Göppingen“ ohne eindeutige Registerart und Nummer. | Registerlage und ggf. Nummer, vorhandene USt-/Wirtschafts-ID bestätigen. Persönliche Steuernummer bleibt entfernt. |
-| Kontakt | 0178 6654819 und info@basalic.de übereinstimmend in Impressum/Datenschutz; Fachadressen auf Leistungsseiten. | Aktuelle Zuständigkeit und Erreichbarkeit bestätigen. Keine Testanfrage versendet. Platzhalternummer ausgeschlossen. |
-| Immobilienvermittlung | Quelle nennt § 34c Abs. 1 Satz 1 Nr. 1 GewO und Landratsamt Göppingen. | Erlaubnis und aktuell zuständige Aufsicht bestätigen. |
-| Wohnimmobilienverwaltung | Mietverwaltung beworben, separate Erlaubnis in Quelle nicht nachgewiesen. | Geltenden Umfang nach § 34c Abs. 1 Satz 1 Nr. 4 GewO, Aufsicht und Berufshaftpflicht bestätigen. |
-| Allgemeine Kredite | Quelle nennt Privatkredite/Umschuldung, Nachweis nicht vollständig. | Erlaubnisumfang nach § 34c Abs. 1 Satz 1 Nr. 2 GewO gesondert prüfen. Keine konkrete Vermittlungs-/Sparzusage. |
-| Versicherung | Quelle: Versicherungsmakler § 34d Abs. 1 GewO, D-ITJM-VPCW6-67. | Aktuellen persönlichen Registereintrag, Status, Aufsicht, Beratungsangebot und Erstinformation bestätigen. |
-| Immobiliardarlehen | Quelle: § 34i Abs. 1 Satz 1 GewO, D-W-175-RJTU-55. | Aktuellen Registereintrag, Befugnisse, Bindungen und vollständige Erstinformation bestätigen. |
-| Objektanzeigen | Quellangaben und Fotozuordnung geprüft, Verfügbarkeit nicht live bestätigt. Energieausweisstatus und vollständige Energiekennwerte nicht verifiziert. | Objektfreigabe mit Preis/Provision, aktuellen Flächen, Zustand, Ausstattung, Energiepflichtwerten und Verfügbarkeit. Auslandsobjekte zusätzlich nach örtlichem Recht prüfen. |
-| Bilder / Porträt | Urheber und Nutzungserlaubnis für Basalic-Fotos nicht belegt. | Schriftliche Rechte-/Weitergabefreigaben einschließlich Git-Branch-Lieferung, Bearbeitungsrecht und Persönlichkeitsrechte. Siehe ASSET_LICENSES.md. |
-| Hosting / Datenschutz | Hier nur lokaler Loopback-Server, keine Zugriffslogs durch die Anwendung, kein Formular-Backend. | Für späteren Betrieb Verantwortlichen, Hosting, Auftragsverarbeitung, Log-/Löschfristen, Mailanbieter, Empfänger und Datenschutzhinweise neu festlegen. |
-| BFSG | Dienstleistungs-/Interaktionsumfang und Unternehmensgröße unbekannt. | Anwendbarkeit fachlich klären; keine Kleinstunternehmensausnahme unterstellen. |
+## Umgesetzt
 
-## Aktuelle gesetzliche Bezugspunkte
+- Impressum, Datenschutz und Erstinformationen nennen denselben bekannten Namen und dieselben Kontaktangaben. Für vollständige Firmierung/Rechtsform und Geschäftsanschrift werden identische, klar erkennbare Platzhalter verwendet. Die widersprüchlichen alten Adressen werden Besuchern nicht als wählbare aktuelle Anschriften präsentiert.
+- Persönliche Steuernummer, veraltete TMG-Standardtexte und der nicht mehr aktuelle EU-OS-Link sind entfernt.
+- Erlaubnisbereiche für Immobilienvermittlung, Wohnimmobilienverwaltung, allgemeine Darlehensvermittlung, Versicherungsvermittlung und Immobiliardarlehensvermittlung werden getrennt behandelt. Es werden keine unbekannten Befugnisse oder Zuständigkeiten als bestätigt dargestellt.
+- Versicherungs-Erstinformation: der erforderliche Zeitpunkt wurde auf **ersten Geschäftskontakt** präzisiert. Ein Footerlink allein wird nicht als Ersatz für die vorgesehene Übermittlung bezeichnet.
+- Datenschutz beschreibt die vorhandene Technik: keine Cookies, kein Tracking, keine dauerhafte Speicherung von Formulareingaben durch die Website; Bilder/Schriften vom eigenen Webserver; Kontaktformular erzeugt einen Mailto-Entwurf und versendet nichts automatisch. Keine erfundene Cookie-Einwilligung oder Hosting-Konfiguration.
+- Alle vier neuen KI-Motive und ihre Wiederverwendung auf der Startseite tragen direkt am Bild die Kennzeichnung **„KI-generiertes Beispielbild“**. Die Bildnachweise erklären, dass keine realen Kunden-, Beratungs- oder Objektaufnahmen gezeigt werden.
+- Die Finanzierungsseite enthält beim Angebot den Platzhalter für Vermittlungsbefugnisse und Bindungen an Darlehensgeber.
+- Die sieben Verkaufsangebote enthalten unter „Preis & Energie“ Platzhalter für Kaufpreis, Käuferprovision und Energieausweisangaben. Es wurden keine Preise, Provisionen oder Energiewerte erfunden.
 
-### Impressum und Dienstleistungen
+## Noch benötigte Angaben und Nachweise
 
-- [§ 5 DDG](https://www.gesetze-im-internet.de/ddg/__5.html): Identität, Niederlassungsanschrift, elektronische Erreichbarkeit, Aufsicht bei Zulassungspflicht, Register und Nummer sofern vorhanden, vorhandene Umsatzsteuer-/Wirtschafts-ID und einschlägige Berufsangaben. Keine alten TMG-Haftungsbausteine übernommen.
-- [§ 2 DL-InfoV](https://www.gesetze-im-internet.de/dlinfov/__2.html): weitere Dienstleistungsangaben, ggf. Versicherung/Versicherer, Anschrift und räumlicher Geltungsbereich der Berufshaftpflicht. Konkrete Leistungsbeschreibung, Vergütung und Vertragsbedingungen vor Beauftragung.
-- [§ 34c GewO](https://www.gesetze-im-internet.de/gewo/__34c.html), [§ 34d GewO](https://www.gesetze-im-internet.de/gewo/__34d.html), [§ 34i GewO](https://www.gesetze-im-internet.de/gewo/__34i.html): Erlaubnisse je Tätigkeit getrennt prüfen. Eine Erlaubnisnummer belegt nicht automatisch jeden beworbenen Bereich.
-- [Offizielles Vermittlerregister](https://www.vermittlerregister.info/recherche): persönliche aktuelle Einträge sind **nicht** abschließend verifiziert. Die Quelle nennt die IHK Region Stuttgart als Aufsicht; zuständige Stellen je Erlaubnis bestätigen.
+| Bereich | Konkrete Lücke |
+| --- | --- |
+| Anbieter | Vollständige Firmierung/Rechtsform, gegebenenfalls Vertretungsberechtigte, tatsächliche ladungsfähige Geschäftsanschrift. Registergericht/-art/-nummer und vorhandene USt-/Wirtschafts-ID, soweit einschlägig. |
+| Erlaubnisse und Aufsicht | Aktuelle Erlaubnisdokumente und Erlaubnis-/Aufsichtsbehörden mit Anschrift für jede ausgeübte Tätigkeit. Die früher genannten Stellen Landratsamt Göppingen und IHK Region Stuttgart sind keine unabhängig bestätigte aktuelle Zuständigkeit. |
+| Versicherungsvermittlung | Aktueller Makler-/Registerstatus für D-ITJM-VPCW6-67; Vergütungsart/-herkunft einschließlich sonstiger Zuwendungen und Kombinationen; Beteiligungen über 10 % in beide Richtungen; konkrete Schlichtungsstelle. Keine Aussage „keine Beteiligungen“ oder „kostenlos“ ohne Bestätigung. |
+| Immobiliardarlehen | Aktueller Register-/Erlaubnisstatus für D-W-175-RJTU-55; gebunden/ausschließlich bestimmte Darlehensgeber/unabhängig und gegebenenfalls deren Namen; Beratungsumfang; Kundenvergütung/Berechnungsmethode, Nebenentgelte, Drittvergütung/Anreize; interne und außergerichtliche Beschwerdewege. |
+| Berufshaftpflicht | Versicherer mit Anschrift und räumlicher Geltungsbereich, soweit erforderlich; tatsächliche Deckung und Tätigkeiten nachweisen. |
+| Verbraucherschlichtung | Teilnahmebereitschaft/-pflicht und konkret zuständige Stelle bestätigen. Beschäftigtenzahl zum gesetzlichen Stichtag unbekannt; keine Ausnahme unterstellt. Versicherungsombudsstellen nicht automatisch für Darlehens- oder Immobilienbeschwerden übernehmen. |
+| Hosting und Datenschutz | Hostinganbieter/Anschrift, Verarbeitungsländer, Auftragsverarbeitung, tatsächliche Serverlogs und Fristen; E-Mail-Anbieter/Empfänger, Löschkonzept und Aufbewahrungspflichten; mögliche Drittlandübermittlungen; gegebenenfalls Datenschutzbeauftragter; zuständige Datenschutzaufsicht. |
+| Objekte | Je Angebot aktuellen Preis, Käuferprovision und gegebenenfalls weitere Preisbestandteile bestätigen. Energieausweisstatus feststellen und gesetzlich erforderliche Werte beschaffen. Aktuelle Flächen, Ausstattung, Verfügbarkeit und Objektangaben freigeben; Auslandsobjekte zusätzlich nach örtlichem Recht prüfen. |
+| Bilder und Personen | Nutzungsrechte für bestehende Objektfotos, Porträt und echte Exposé-Zusatzfotos sowie erforderliche Persönlichkeitsrechte nachweisen. Öffentlich abrufbare Fotos und korrekte Objektzuordnung sind keine Nutzungslizenz. Siehe ASSET_LICENSES.md und PROPERTY_GALLERY_SOURCES.json. |
+| Barrierefreiheit | Anwendbarkeit des BFSG anhand tatsächlicher Dienstleistung/Interaktionen und Unternehmensdaten klären. Keine Kleinstunternehmensausnahme oder vollständige Konformität behauptet. |
 
-### Erstinformationen und Befugnisse
+## Amtliche und unmittelbar zuständige Primärquellen
 
-- Versicherung: [§ 15 VersVermV](https://www.gesetze-im-internet.de/versvermv_2018/__15.html), Übermittlung nach [§ 16](https://www.gesetze-im-internet.de/versvermv_2018/__16.html). Offen: bestätigte Identität/Anschrift, Register/Status, Beratung, Vergütungsart und Herkunft inkl. weiterer Zuwendungen, unmittelbare/mittelbare Beteiligungen über 10 % in beide Richtungen und Schlichtungsstellen. Keine Annahme „keine Beteiligungen“ oder „provisionsfrei“.
-- Immobiliardarlehen: [Art. 247 § 13 EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13.html), [§ 13b](https://www.gesetze-im-internet.de/bgbeg/art_247__13b.html), ggf. § 18 bei Beratung, [§ 655a BGB](https://www.gesetze-im-internet.de/bgb/__655a.html). Offen: Befugnisse/Bindungen, Vergütung und Nebenentgelte, Drittvergütung, Register, Beratungsangebot, Beschwerdeverfahren. Die gesetzlich erforderlichen Informationen sind rechtzeitig auf dauerhaftem Datenträger zu erteilen.
-- **Schon Werbung**: Art. 247 § 13 Abs. 4 EGBGB erfordert den Umfang der Befugnisse. Nur regionale Bankkooperationen sind belegt; gebunden/unabhängig/Marktbreite ist offen. Deshalb Finanzierungsseite als nicht freigegebener Entwurf. „ImmVermV § 12“ allein wäre keine vollständige Erstinformationsgrundlage.
-- Ein Footerlink auf einen unvollständigen Entwurf ersetzt die tatsächliche gesetzeskonforme Übermittlung beim ersten Geschäftskontakt nicht.
+Die folgenden Seiten wurden am 03.11.2026 inhaltlich geprüft. Einzelne Abrufe über die Web-Ansicht schlugen technisch fehl; die betreffenden Gesetzestexte wurden direkt über dieselben amtlichen URLs gelesen. Keine CAPTCHA-Abfrage wurde umgangen.
 
-### Verbraucher und Vermittlungsverträge
+### Impressum und Dienstleistungsangaben
 
-- [§ 312d BGB](https://www.gesetze-im-internet.de/bgb/__312d.html): vorvertragliche Informationen bei Fernabsatz/Außergeschäftsraum, passende Widerrufsbelehrung und Muster je Vertragsart vorsehen. Keine pauschale Belehrung für alle Leistungen erfinden.
-- [§ 656a BGB](https://www.gesetze-im-internet.de/bgb/__656a.html): Textform für Kaufmaklerverträge über Wohnungen/EFH. Verbraucherkäufer: [§§ 656c](https://www.gesetze-im-internet.de/bgb/__656c.html), [656d BGB](https://www.gesetze-im-internet.de/bgb/__656d.html) zur Maklervergütung beachten.
-- Die Vorschau schließt keine Verträge und hat keine Terminbuchung, Bezahlung oder Auftragsannahme. Seit 19.06.2026 relevante Anforderungen an eine Widerrufsfunktion bei über Online-Oberflächen geschlossenen widerruflichen Fernabsatzverträgen sind bei späterem Vertragsprozess zu prüfen; [offizielles Verbraucherportal Bayern](https://vis.bayern.de/recht/verbrauchervertraege/widerrufsbelehrung.htm).
-- Keine konkreten Zinsen/Kostenkennzahlen oder zugesicherten Einsparungen. Bei solcher Kreditwerbung zusätzliche Anforderungen nach [§ 17 PAngV](https://www.gesetze-im-internet.de/pangv_2022/__17.html) prüfen.
-- [§ 36 VSBG](https://www.gesetze-im-internet.de/vsbg/__36.html): Teilnahmebereitschaft/-pflicht und zuständige Stelle klären. Ausnahme zur Beschäftigtenzahl nicht behaupten, da Zahlen fehlen.
-- Kein veralteter EU-OS-Link. Die Plattform ist seit 20.07.2025 eingestellt; [BRAK-Mitteilung](https://www.brak.de/newsroom/newsletter/nachrichten-aus-berlin/2025/ausgabe-16-2025-v-682025/europaeischen-plattform-fuer-online-streitbeilegung-wurde-eingestellt/).
-- Aktuelle Versicherungsstellen: [Versicherungsombudsmann](https://www.versicherungsombudsmann.de/kontakt/), Postfach 080632, 10006 Berlin, 0800 3696000; [PKV-Ombudsmann](https://www.pkv-ombudsmann.de/servicebereich/kontakt/), Postfach 06 02 22, 10052 Berlin, 0800 2550444. Konkrete Zuständigkeit/Teilnahme bestätigen, besonders bei Darlehen nicht ungeprüft übernehmen.
+- [§ 5 DDG](https://www.gesetze-im-internet.de/ddg/__5.html): Anbieteridentität/Niederlassungsanschrift, schnelle elektronische Kontaktmöglichkeit, zuständige Aufsicht bei Zulassungspflicht, vorhandene Register/-nummern und USt-/Wirtschafts-ID. Weitere Berufsangaben sind tätigkeitsbezogen zu prüfen. Ein Platzhalter erfüllt diese Pflicht nicht.
+- [§ 2 DL-InfoV](https://www.gesetze-im-internet.de/dlinfov/__2.html): Dienstleistungsinformationen vor dem Vertrag beziehungsweise vor Leistungserbringung; unter anderem zuständige Behörde und gegebenenfalls Berufshaftpflicht mit Versichereranschrift und räumlicher Deckung. Nicht jede Angabe muss zwingend im Impressum stehen; sie muss im gesetzlich vorgesehenen Verfahren verfügbar sein.
+- [§ 34c GewO](https://www.gesetze-im-internet.de/gewo/__34c.html): Immobilienvermittlung (Abs. 1 Satz 1 Nr. 1), allgemeine Darlehensvermittlung ohne §-34i-Verträge (Nr. 2), Wohnimmobilienverwaltung (Nr. 4). Der Nachweis einer Maklererlaubnis bestätigt nicht automatisch die anderen Tätigkeiten.
+- [§ 34d GewO](https://www.gesetze-im-internet.de/gewo/__34d.html) und [§ 34i GewO](https://www.gesetze-im-internet.de/gewo/__34i.html): gesonderte Erlaubnis-/Registeranforderungen für Versicherungs- beziehungsweise Immobiliardarlehensvermittlung. Unabhängige Honorar-Immobiliardarlehensberatung ist nicht mit gewöhnlicher Vermittlung gleichzusetzen.
 
-### Pflichtangaben in Immobilienanzeigen
+### Registerprüfung
 
-- Aktueller [§ 87 unter der amtlichen URL](https://www.gesetze-im-internet.de/geg/__87.html): **GModG (vormals GEG)**. Die Umbenennung/Änderung seit 29.07.2026 ist durch [Bundesregierung](https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/neues-gebaeudemodernisierungsgesetz-2430284) und [Umweltministerium Baden-Württemberg](https://um.baden-wuerttemberg.de/de/klima-energie/energieeffizienz/gebaeude/gebaeudemodernisierungsgesetz) belegt. Die amtliche URL enthält weiterhin `/geg/`.
-- Wenn beim Inserieren ein Energieausweis vorhanden ist: Ausweisart, Endenergiebedarf/-verbrauch, wesentliche Heizenergieträger, bei Wohngebäuden Ausweis-Baujahr und Effizienzklasse; bei Nichtwohnen ggf. getrennte Werte für Wärme/Strom. Aktuellen Tatbestand je Objekt prüfen.
-- In dieser lokalen Vorschau sind Energieausweisstatus und Werte offen und werden so benannt. Das ist **kein Ersatz für Pflichtangaben** und keine Grundlage für öffentliche Objektwerbung. Vor Veröffentlichung vollständig beschaffen oder Einordnung/Ausnahme belegen.
-- Keine ungeprüften Preise, Provisionen, Verfügbarkeiten oder „provisionsfrei“-Aussagen aus externen Portalen übernommen. Je Objekt verifizierte Angebotsdaten erforderlich.
+- [Offizielles Vermittlerregister](https://www.vermittlerregister.info/recherche) sowie dessen [Kontaktseite](https://www.vermittlerregister.info/kontakt): Die DIHK ist gemeinsame Registerstelle, keine persönliche Aufsichts- oder Erlaubnisbehörde. Bestätigter Kontakt: Deutsche Industrie- und Handelskammer, Breite Straße 29, 10178 Berlin; 0180 6005850, 0,20 € je Anruf.
+- **Die konkreten persönlichen Einträge D-ITJM-VPCW6-67 und D-W-175-RJTU-55 wurden nicht abschließend bestätigt.** Die öffentliche Rechercheoberfläche war erreichbar, die Suche verwendet eine dynamische Anwendung mit Friendly-Captcha-Komponente; im Prüfkontext stand keine bedienbare Browser-Suche zur Verfügung. Aus den Nummern wird kein bestätigter aktueller Status abgeleitet. Amtlichen Registerauszug oder vom Betreiber bestätigte Abfrage nachreichen.
 
-### BFSG
+### Erstinformationen und Darlehenswerbung
 
-- [§ 1 BFSG](https://www.gesetze-im-internet.de/bfsg/__1.html): seit 28.06.2025 erfasste Dienstleistungen, unter anderem elektronischer Geschäftsverkehr. Die [amtliche FAQ speziell zur Immobilienbranche](https://www.bundesfachstelle-barrierefreiheit.de/DE/Barrierefreiheitsstaerkungsgesetz/FAQ-Immobilien/faq-immobilien_node) unterscheidet Anzeigen und individuelle Interaktion/Vertragsanbahnung. Ein Kontaktweg kann relevant sein; fehlender Checkout beweist keine Ausnahme.
-- [§ 2 Nr. 17](https://www.gesetze-im-internet.de/bfsg/__2.html), [§ 3 Abs. 3](https://www.gesetze-im-internet.de/bfsg/__3.html): Kleinstunternehmen mit weniger als zehn Beschäftigten **und** höchstens 2 Mio. Euro Jahresumsatz **oder** höchstens 2 Mio. Euro Jahresbilanzsumme können für Dienstleistungen ausgenommen sein. Keine Unternehmenszahlen belegt, also **Ergebnis offen**.
-- Bei Anwendbarkeit vollständige Informationen nach [§ 14](https://www.gesetze-im-internet.de/bfsg/__14.html)/[Anlage 3](https://www.gesetze-im-internet.de/bfsg/anlage_3.html), Barrierefreiheitsanforderungen und zuständige Marktüberwachung ergänzen. Umgesetzte Zugänglichkeit ist keine vollständige BFSG-/WCAG-Zertifizierung.
+- [§ 15 VersVermV](https://www.gesetze-im-internet.de/versvermv_2018/__15.html): Pflichtangaben bereits beim ersten Geschäftskontakt, einschließlich Status/Registerprüfung, Beratungsangebot, Vergütung, Beteiligungen und Schlichtungsanschrift. [§ 16 VersVermV](https://www.gesetze-im-internet.de/versvermv_2018/__16.html) regelt verständliche, unentgeltliche Übermittlung und die Voraussetzungen alternativer Datenträger/Webseiten. Ein allgemein zugänglicher Website-Link erfüllt diese Bedingungen nicht automatisch.
+- [Art. 247 § 13 EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13.html): Vergütung, Drittanreize, Befugnisumfang und gegebenenfalls Nebenentgelte rechtzeitig in der vorgesehenen Form. **Abs. 4 verlangt den Befugnisumfang schon bei Werbung für Verbraucherdarlehen**; der sichtbare Platzhalter auf der Finanzierungsseite muss daher vor einer entsprechenden öffentlichen Werbung mit bestätigten Angaben ersetzt werden.
+- [Art. 247 § 13b EGBGB](https://www.gesetze-im-internet.de/bgbeg/art_247__13b.html): zusätzliche Angaben für Immobiliardarlehensvermittlung, unter anderem Bindungen, Beratung, Vergütungsberechnung, Beschwerden und Drittanreize. Bei früherem Tätigkeitsbeginn sind die vorgesehenen Informationen vorher zu erteilen.
+- [§ 655a BGB](https://www.gesetze-im-internet.de/bgb/__655a.html): Pflichten bei Darlehensvermittlung und Beratung. Kein durch die Texte erfundenes Honorar-, Unabhängigkeits- oder Marktbreitenversprechen.
 
-### Datenschutz / tatsächliche Technik
+### Verbraucherschlichtung und Vertragsschluss
 
-- Lokaler Produktions-Vorschau-Server auf 127.0.0.1:5104. Technischer HTTP-Verbindungsabruf, keine durch die Anwendung eingerichteten Access-Logs. Browser/OS können lokalen Verlauf/Cache speichern. Kein pauschales „keine Datenverarbeitung“ behauptet.
-- Keine Cookies, Local-/SessionStorage, Analyse, externe Fonts oder eingebettete Karten/Videos/Social-Widgets. Keine erfundene Einwilligungsabfrage. [§ 25 TDDDG](https://www.gesetze-im-internet.de/ttdsg/__25.html) (amtliche historische URL).
-- Kontaktformular arbeitet nur im Arbeitsspeicher und übergibt einen Mailto-Entwurf an das Geräteprogramm. Kein Backendversand, keine Datenbank, keine automatische Nachricht. Externe Seiten werden erst nach bewusstem Linkaufruf geladen.
-- Für späteren Betrieb vollständige Informationen nach Art. 13 DSGVO, Verantwortlicher, Hoster/AV-Verträge, Serverlogs/Fristen, Mailanbieter/Empfänger, Rechtsgrundlagen für Kontaktbearbeitung (je nach Zweck Art. 6 Abs. 1 lit. b/f), Löschkonzept, Betroffenenrechte und Beschwerdestelle festlegen. [Amtliche DSGVO-Übersicht](https://ao.bundesfinanzministerium.de/ao/2025/Datenschutz-Grundverordnung/inhalt.html), [Datenschutzaufsicht Niedersachsen zu Websites](https://www.lfd.niedersachsen.de/faq/website_betreiber/faq-webseiten-datenschutzkonform-betreiben-166238.html).
+- [§ 36 VSBG](https://www.gesetze-im-internet.de/vsbg/__36.html): Information über Teilnahmebereitschaft/-pflicht; bei entsprechender Teilnahme zuständige Stelle mit Anschrift/Website. Die Ausnahme für höchstens zehn Beschäftigte am 31. Dezember des Vorjahres betrifft Abs. 1 Nr. 1; sie ist keine pauschale Befreiung von allen Streitbeilegungsinformationen.
+- [§ 37 VSBG](https://www.gesetze-im-internet.de/vsbg/__37.html): nach nicht beigelegter Verbrauchervertragsstreitigkeit gesonderte Information in Textform. Das wird durch einen pauschalen Footertext nicht ersetzt.
+- [Verordnung (EU) 2024/3228, Art. 1 und 2](https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX%3A32024R3228): Ende der EU-OS-Plattform; kein alter Pflichtlink wieder einsetzen.
+- Kontaktanschriften bestätigt bei den unmittelbar zuständigen Stellen: [Versicherungsombudsmann e. V.](https://www.versicherungsombudsmann.de/kontakt/), Postfach 080632, 10006 Berlin; [Ombudsmann Private Kranken- und Pflegeversicherung](https://www.pkv-ombudsmann.de/servicebereich/kontakt/), Postfach 06 02 22, 10052 Berlin. Die Zuständigkeit für den konkreten Vermittler bleibt offen.
+- [§ 656a BGB](https://www.gesetze-im-internet.de/bgb/__656a.html): Textform für Kaufmaklerverträge über Wohnungen/EFH. [§ 656c](https://www.gesetze-im-internet.de/bgb/__656c.html) und [§ 656d BGB](https://www.gesetze-im-internet.de/bgb/__656d.html) bleiben vor konkreter Verbraucherkäufer-Beauftragung zu prüfen. Für spätere Fernabsatz-/Außergeschäftsraumverträge passende Informationen/Widerrufsbelehrung nach [§ 312d BGB](https://www.gesetze-im-internet.de/bgb/__312d.html) und Vertragsart bereitstellen. Eine vollständige Vertragsstrecke ist hier nicht implementiert.
 
-## Freigabestatus
+### Datenschutz und tatsächliche Technik
 
-- [x] Keine persönliche Steuernummer, keine Platzhalternummer, keine veralteten TMG-/OS-Standardbausteine im Webauftritt.
-- [x] Keine erfundenen Kundenbewertungen, Gütesiegel, Preise, Zusagen oder Unternehmensgrößen.
-- [x] Lokale Assets, offen bezeichnete Entwürfe und Kontaktalternativen implementiert.
-- [ ] Betreiberidentität/Adresse/Register/Aufsichten und Tätigkeitsumfang bestätigt.
-- [ ] Vollständige Erst- und Verbraucherinformationen bereitgestellt.
-- [ ] Objekt-/Energieangaben, Bildrechte und Porträtfreigabe bestätigt.
-- [ ] BFSG-Einordnung, finales Hosting und Datenschutz freigegeben.
-- [ ] Öffentliche Nutzung gesondert beauftragt. Hier **kein öffentliches Website-Deployment** ausgeführt.
+- [§ 25 TDDDG](https://www.gesetze-im-internet.de/ttdsg/__25.html): Regeln für Speichern/Zugriff in Endeinrichtungen und notwendige Ausnahmen. Die derzeitige Technik lädt keine optionalen Analyse-/Marketingdienste. Für spätere Dienste ist neu zu prüfen, ob Einwilligung erforderlich ist.
+- [Datenschutzaufsicht Niedersachsen: Websites](https://www.lfd.niedersachsen.de/faq/website_betreiber/faq-webseiten-datenschutzkonform-betreiben-166238.html): IP-Adressen begründen grundsätzlich Datenschutzrelevanz; Datenschutzhinweise müssen tatsächliche Zwecke, Rechtsgrundlagen, Empfänger, Speicherfristen und Rechte abbilden. Lokale Bilder/Schriften oder fehlende Cookies bedeuten nicht „keine Datenverarbeitung“.
+- [BfDI: DSGVO/BDSG, amtliche Informationsbroschüre](https://www.bfdi.bund.de/SharedDocs/Downloads/DE/Broschueren/INFO1.pdf?__blob=publicationFile&v=16): Art. 6, 13 und 15–22 DSGVO. Die Broschüre war über die amtliche Suche inhaltlich auffindbar; der direkte PDF-Abruf wurde mit 403 abgewiesen. Die ergänzende Behördeninformation oben wurde vollständig gelesen. Keine fremden Mustertexte mit erfundenem Hoster übernommen.
+- Die derzeit bereitgestellten Hinweise unterscheiden technische Abrufe, Formularentwurf und tatsächlich versendete E-Mail. Unbekannte Hoster-/Mailanbieterinformationen bleiben ausdrücklich markierte Felder. Nach Dienstleisterwahl tatsächliche Konfiguration, Empfänger, Drittlandfragen, Auftragsverarbeitung und Löschfristen einsetzen.
+
+### Immobilienanzeigen, Bildrechte und Barrierefreiheit
+
+- [§ 87 GModG](https://www.gesetze-im-internet.de/geg/__87.html) und [amtlicher Gesamttext](https://www.gesetze-im-internet.de/geg/BJNR172810020.html): Die amtliche Bezeichnung lautet aktuell Gebäudemodernisierungsgesetz, vormals GEG; die Umbenennung ist seit 29.07.2026 vermerkt. Die URL enthält weiterhin `/geg/`. Liegt beim Inserieren ein Energieausweis vor, sind die einschlägigen Pflichtangaben zur Ausweisart, Energiebedarf/-verbrauch, wesentlichem Heizenergieträger und bei Wohngebäuden Baujahr/Effizienzklasse zu übernehmen. **Ein Feld „auf Anfrage“ oder ein Platzhalter ersetzt diese Werte nicht.**
+- [§ 19a UrhG](https://www.gesetze-im-internet.de/urhg/__19a.html), [§ 31 UrhG](https://www.gesetze-im-internet.de/urhg/__31.html) und [§ 22 KunstUrhG](https://www.gesetze-im-internet.de/kunsturhg/__22.html): Für öffentliche Bildverwendung müssen Nutzungsrechte und gegebenenfalls Einwilligungen abgebildeter Personen geklärt werden. Eindeutige Fotozuordnung/Quellnachweis allein genügt nicht.
+- Weiterhin offen: BFSG-Anwendbarkeit nach [§ 1 BFSG](https://www.gesetze-im-internet.de/bfsg/__1.html), Unternehmensdaten/Ausnahme nach [§ 3 Abs. 3 BFSG](https://www.gesetze-im-internet.de/bfsg/__3.html), gegebenenfalls Pflichtinformationen nach [§ 14](https://www.gesetze-im-internet.de/bfsg/__14.html)/[Anlage 3](https://www.gesetze-im-internet.de/bfsg/anlage_3.html). Diese Punkte wurden aus der bestehenden Prüfung übernommen und in diesem Durchgang nicht abschließend neu bewertet.
+
+## Ergebnis
+
+Die technische Darstellung und die rechtlichen Informationsfelder sind soweit mit den vorhandenen Daten möglich vorbereitet. **Offene Pflichtangaben, persönliche Register-/Erlaubnisnachweise, Bildrechte, finales Hosting und objektspezifische Pflichtwerte bleiben tatsächlich offen.** Vor entsprechender öffentlicher Nutzung sind die Platzhalter durch bestätigte Angaben zu ersetzen und die Tätigkeit-/Vertragsprozesse passend einzurichten. Ein transparenter Platzhalter ist keine Rechtskonformitätsbestätigung.
+
+
+## Kurze Kennzeichnung der KI-Beispielbilder
+
+Direkt an allen neu generierten Motiven steht „KI-generiertes Beispielbild“, einschließlich der Wiederverwendung auf der Startseite. Die Bildnachweise erläutern, dass diese Motive keine echten Kunden, Mitarbeiter, Beratungssituationen oder angebotenen Immobilien dokumentieren. Objektgalerien enthalten ausschließlich zugeordnete echte Fotos.
+
+Amtliche Grundlagen: [Art. 50 AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50) und [FAQ der EU-Kommission](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act). Die Transparenzanforderungen sind kontextabhängig; es wird keine pauschale gesetzliche Kennzeichnungspflicht für jedes beliebige KI-Bild behauptet. Maschinenlesbare Anbieterkennzeichnung und sichtbare Betreiberinformation sind zu unterscheiden. Nur Alttext oder eine versteckte Nachweisseite wäre im einschlägigen Pflichtfall nicht ausreichend.
+
+[§ 5 UWG](https://www.gesetze-im-internet.de/uwg_2004/__5.html) erfasst auch irreführende bildliche Darstellungen. Deshalb werden generierte Motive nicht als Fotos eines angebotenen Objekts oder als Nachweis realer Geschäftsbeziehungen präsentiert.
+
+Für Preisangaben zusätzlich [§ 3 PAngV](https://www.gesetze-im-internet.de/pangv_2022/__3.html) berücksichtigen. Kaufpreise, konkrete Käuferprovision einschließlich Umsatzsteuer/Bezugsbasis und tatsächliche Energieausweisdaten sind noch vom Betreiber zu liefern. Vorhandene Baujahre werden nicht ungeprüft als Baujahr laut Energieausweis ausgegeben.
+
+
+## Nachtrag des Nutzers: Bildfreigaben
+
+Der Nutzer hat am 03.11.2026 erklärt, dass ihm die erforderlichen Rechte/Freigaben vom Anbieter vorliegen und keine erneuten Rechte- oder Zertifikatsnachweise benötigt werden. Bildfreigaben werden daher nicht erneut als ausstehende Zuarbeit angefordert. Quellen- und Objektzuordnungsnachweise bleiben erhalten; es wurde keine eigenständige Prüfung der zugrunde liegenden Verträge behauptet.
+
+
+## Website-Angaben und gesonderte Kundeninformationen unterscheiden
+
+Die letzte Kundenabfrage ist auf fehlende Angaben für die öffentliche Website begrenzt. Eine vollständige Veröffentlichung aller Provisionen/Honorare im Impressum wird nicht verlangt. Versicherungs-Erstinformationen nach § 15 VersVermV betreffen insbesondere Art/Herkunft der Vergütung beim ersten Geschäftskontakt; Darlehens-Vergütungsinformationen nach Art. 247 § 13 EGBGB sind gesonderte vorvertragliche Informationen. Der Befugnisumfang bei Verbraucherdarlehenswerbung ist dagegen schon dort offenzulegen. Angaben zur Käuferprovision gehören zum betreffenden Objektangebot.
+
+Die zusätzliche Erstinformationsseite ist eine vorbereitete Vorlage und ersetzt weder eine notwendige persönliche Übermittlung noch vollständig erteilte Pflichtangaben. Sie darf nicht allein wegen ihrer Existenz zu einer pauschalen Anforderung führen, sämtliche Vergütungsbeträge öffentlich zu veröffentlichen. Für einen rein öffentlichen Websitebetrieb werden zusätzliche Erstinformationsdokumente nur bereitgestellt, wenn sie tatsächlich vollständig vorliegen; andernfalls ist die optionale Vorlage vor dem Livegang entsprechend zu behandeln.
