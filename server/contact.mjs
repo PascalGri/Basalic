@@ -1,4 +1,5 @@
 import { RequestError } from './properties.mjs';
+import { contactDeliveryPaused } from '../src/contact-fields.js';
 
 const sendEmailUrl = 'https://api.resend.com/emails';
 const unavailable = 'Das Kontaktformular ist derzeit nicht verfügbar. Bitte schreiben Sie uns direkt per E-Mail.';
@@ -10,10 +11,11 @@ const topicRecipients = new Map([
 ]);
 
 export function createContactMailer({ apiKey = '', from = '', to = '' } = {}) {
-  const configured = Boolean(apiKey && from);
+  const configured = !contactDeliveryPaused && Boolean(apiKey && from);
   const attempts = [];
 
   async function send({ name, email, phone, topic, message }) {
+    if (contactDeliveryPaused) throw new RequestError(503, 'Der Versand über das Kontaktformular ist vorübergehend pausiert.');
     if (!configured) throw new RequestError(503, unavailable);
 
     const now = Date.now();

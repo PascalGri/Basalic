@@ -186,6 +186,15 @@
 #page-contact-form [aria-invalid="false"]{border-color:var(--contact-valid)}
 #page-contact-form [aria-invalid="false"] + .contact-field-feedback{color:var(--contact-valid)}
 .subpage .contact-form-panel button:disabled{cursor:wait;opacity:.65}
+.subpage .contact-form-panel button[data-contact-paused]{
+  background:var(--surface-2);
+  border-color:var(--line);
+  color:var(--muted);
+  cursor:not-allowed;
+  opacity:1;
+  transform:none;
+}
+.subpage .contact-form-panel button[data-contact-paused] .button-icon svg{transform:none}
 .subpage .legal-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:75px;padding-bottom:100px;align-items:start}
 .subpage .legal-page-nav{display:flex;flex-direction:column;position:sticky;top:110px;border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .subpage .legal-page-nav a{display:flex;justify-content:space-between;gap:15px;padding:16px 18px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--muted);font-size:11px}

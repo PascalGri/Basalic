@@ -1,16 +1,15 @@
-import { contactLimits, contactTopics, validateContact } from './contact-fields.js';
+import { contactDeliveryPaused, contactLimits, contactTopics, validateContact } from './contact-fields.js';
 import { isPagesPreview } from './site-paths.js';
 
 const endpoint = isPagesPreview ? import.meta.env.VITE_BASALIC_CONTACT_ENDPOINT : '/api/contact';
-const unavailable = 'Der Direktversand ist für diese Vorschau noch nicht eingerichtet. Bitte kontaktieren Sie uns per E-Mail oder Telefon.';
 const invalidFields = 'Bitte prüfen Sie die markierten Felder.';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const fieldFeedback = name => `<p id="contact-${name}-feedback" class="contact-field-feedback" role="status"></p>`;
 
 export function contactFormMarkup(topic, message, arrow) {
   return `<div class="contact-form-panel">
-    <h2>Was haben Sie vor?</h2>
-    <p>Schreiben Sie uns direkt. Wir melden uns per E-Mail oder, wenn Sie eine Nummer angeben, telefonisch.</p>
+    <h2>Was haben Sie vor?</h2>${contactDeliveryPaused ? '' : `
+    <p>Schreiben Sie uns direkt. Wir melden uns per E-Mail oder, wenn Sie eine Nummer angeben, telefonisch.</p>`}
     <form id="page-contact-form" method="post" novalidate>
       <label for="contact-topic">Worum geht es?</label>
       <select id="contact-topic" name="topic" required aria-describedby="contact-topic-feedback">
@@ -37,8 +36,8 @@ export function contactFormMarkup(topic, message, arrow) {
       <textarea id="contact-message" name="message" rows="5" maxlength="${contactLimits.message}" required aria-describedby="contact-message-feedback" placeholder="Erzählen Sie uns von Ihren Plänen.">${esc(message)}</textarea>
       ${fieldFeedback('message')}
       <p class="form-note">Bitte übermitteln Sie hier keine Gesundheits- oder Finanzunterlagen. <a href="/datenschutz">Datenschutzhinweise</a></p>
-      <button class="button" type="submit"><span class="button-label">Nachricht senden</span><span class="button-icon">${arrow}</span></button>
-      <p class="mail-help" id="page-mail-help" role="status">${endpoint ? '' : unavailable}</p>
+      <button class="button" type="submit"${contactDeliveryPaused ? ' disabled data-contact-paused' : ''}><span class="button-label">Nachricht senden</span><span class="button-icon">${arrow}</span></button>
+      <p class="mail-help" id="page-mail-help" role="status"></p>
     </form>
   </div>`;
 }
@@ -92,14 +91,14 @@ export function setupContactForm(form) {
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (button.disabled) return;
+    if (contactDeliveryPaused || button.disabled) return;
     const { values, errors } = validateContact(Object.fromEntries(new FormData(form)));
     if (showValidation({ values, errors })) {
       feedback(invalidFields, true);
       return;
     }
     if (!endpoint) {
-      feedback(unavailable, true);
+      feedback('Bitte nutzen Sie für Ihre Anfrage die angegebene E-Mail-Adresse oder Telefonnummer.', true);
       return;
     }
 

@@ -2,6 +2,7 @@ import { services } from './data.js';
 
 export const contactTopics = Object.freeze([...services.map(service => service.title), 'Allgemeine Anfrage']);
 export const contactLimits = Object.freeze({ name: 100, email: 200, phone: 50, message: 3000 });
+export const contactDeliveryPaused = true;
 
 const nameWord = /^\p{L}[\p{L}\p{M}]*(?:['’\p{Pd}]\p{L}[\p{L}\p{M}]*)*\.?$/u;
 const mailbox = /^[a-z\d!#$%&'*+/=?^_`{|}~.-]+$/i;
