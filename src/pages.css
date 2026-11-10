@@ -165,22 +165,26 @@
 .subpage .address-information strong{font-size:12px;font-weight:500}
 .subpage .address-information p{font-size:11px;color:var(--muted);margin:11px 0 0}
 .subpage .address-information a,.subpage .form-note a,.subpage .mail-help a{color:var(--text);text-underline-offset:3px}
-.subpage .contact-form-panel{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:35px}
+.subpage .contact-form-panel{--contact-valid:#2e693d;--contact-invalid:#a23f22;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:35px}
 .subpage .contact-form-panel>h2{font-size:28px;margin:0 0 13px}
 .subpage .contact-form-panel>p{font-size:12px;color:var(--muted);margin:0 0 30px}
-.subpage .contact-form-panel label{display:block;font-size:11px;margin:19px 0 9px;color:var(--text)}
+.subpage .contact-form-panel label{display:block;font-size:11px;margin:8px 0 9px;color:var(--text)}
 .subpage .contact-form-panel label span{font-size:10px;color:var(--muted)}
 .subpage .contact-form-panel input,.subpage .contact-form-panel select,.subpage .contact-form-panel textarea{display:block;min-width:0;width:100%;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--text);font:inherit;font-size:13px;padding:13px 14px;line-height:1.5}
 .subpage .contact-form-panel select{min-height:48px}
 .subpage .contact-form-panel textarea{resize:vertical;min-height:135px}
 .subpage .form-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .subpage .form-note,.subpage .mail-help{color:var(--muted);font-size:10px;line-height:1.75;margin:17px 0}
+.subpage .form-note{margin-top:8px}
 .subpage .contact-form-panel .button{margin-top:8px}
 .subpage .mail-help{margin-bottom:0}
 .subpage .mail-help:empty{margin:0}
-.subpage .contact-form-panel .contact-field-error,.subpage .mail-help.contact-send-error{color:#973526;font-size:13px}
-.subpage .contact-form-panel .contact-field-error{margin-top:6px}
-.subpage .contact-form-panel [aria-invalid="true"]{border-color:#973526}
+.subpage .contact-form-panel .contact-field-feedback,.subpage .mail-help.contact-send-error{color:var(--contact-invalid);font-size:13px}
+.subpage .contact-form-panel .contact-field-feedback{margin-top:4px;line-height:1.4;min-block-size:2.8em}
+.subpage .contact-form-panel #contact-topic-feedback{min-block-size:1.4em}
+#page-contact-form [aria-invalid="true"]{border-color:var(--contact-invalid)}
+#page-contact-form [aria-invalid="false"]{border-color:var(--contact-valid)}
+#page-contact-form [aria-invalid="false"] + .contact-field-feedback{color:var(--contact-valid)}
 .subpage .contact-form-panel button:disabled{cursor:wait;opacity:.65}
 .subpage .legal-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:75px;padding-bottom:100px;align-items:start}
 .subpage .legal-page-nav{display:flex;flex-direction:column;position:sticky;top:110px;border:1px solid var(--line);border-radius:18px;overflow:hidden}

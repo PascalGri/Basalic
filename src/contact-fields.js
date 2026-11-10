@@ -27,13 +27,13 @@ export function validateContact(input) {
   const errors = {};
   const nameWords = values.name.split(' ');
   if (values.name.length > contactLimits.name || nameWords.length < 2 || !nameWords.every(word => nameWord.test(word))) {
-    errors.name = 'Bitte geben Sie Ihren Vor- und Nachnamen ein.';
+    errors.name = 'Bitte Vor- und Nachnamen eingeben.';
   }
-  if (!isContactEmail(values.email)) errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+  if (!isContactEmail(values.email)) errors.email = 'Bitte geben Sie eine E-Mail-Adresse wie name@beispiel.de ein.';
   if (values.phone || (input?.phone != null && typeof input.phone !== 'string')) {
     const digits = values.phone.replace(/\D/g, '').length;
     if (values.phone.length > contactLimits.phone || digits < 5 || digits > 20 || !/^\+?[\d ()/.-]+$/.test(values.phone)) {
-      errors.phone = 'Bitte geben Sie eine gültige Telefonnummer ein.';
+      errors.phone = 'Telefonnummer eingeben, z. B. +49 170 1234567.';
     }
   }
   if (!contactTopics.includes(values.topic)) errors.topic = 'Bitte wählen Sie ein Thema aus.';
