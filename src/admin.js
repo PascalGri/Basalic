@@ -22,6 +22,8 @@ import { getImageData } from './media.js';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const icon = svg => `<span class="a-icon" aria-hidden="true">${svg}</span>`;
 const brand = `<span class="a-wordmark">basalic<span> &amp; partner</span></span>`;
+const supportEmail = 'info@schafundgrimm.de';
+const supportContact = `<p class="a-support">Bei technischen Problemen, Änderungswünschen oder Fragen schreiben Sie an <a href="mailto:${supportEmail}">${supportEmail}</a>.</p>`;
 const api = '/api/admin';
 const uploaded = /^\/property-media\/[a-z0-9-]+\.webp$/;
 const photoTypes = ['image/jpeg', 'image/png', 'image/webp'];
@@ -96,7 +98,8 @@ export async function mountAdmin(root) {
         ${unavailable ? `<p class="a-feedback a-error" role="alert">${esc(error)}</p>${action('retry', 'Erneut versuchen', restore, 'a-primary')}` : configured
           ? `<form id="a-login-form"><div class="a-field"><label for="a-password">Passwort</label><input id="a-password" name="password" type="password" autocomplete="current-password" required maxlength="1024"></div>
           <p class="a-feedback a-error" role="alert"${error ? '' : ' hidden'}>${esc(error)}</p><button class="a-button a-primary" type="submit">Anmelden ${icon(caretRight)}</button></form>`
-          : '<p class="a-feedback">Der Zugang ist noch nicht eingerichtet. Bitte wenden Sie sich an die Person, die Ihre Website betreut.</p>'}
+          : '<p class="a-feedback">Der Zugang ist noch nicht eingerichtet.</p>'}
+        ${supportContact}
         </div><p class="a-login-foot">Geschützter Bereich · Basalic &amp; Partner</p>
       </div></main>`;
   }
@@ -132,6 +135,7 @@ export async function mountAdmin(root) {
       </aside>
       <div class="a-body">
         <header class="a-top"><div class="a-crumb"><span>Verwaltung</span><i aria-hidden="true">/</i><strong>${locationLabel}</strong></div>${externalLink('/', 'Website öffnen', 'a-top-link')}</header>
+        <aside class="a-support-bar" aria-label="Hilfe und Kontakt">${supportContact}</aside>
         <main id="main" tabindex="-1" class="a-main">
           <div id="a-notice" role="status" aria-atomic="true" class="a-notice"${notice ? '' : ' hidden'}>${notice ? icon(check) + esc(notice) : ''}</div>
           ${content}
