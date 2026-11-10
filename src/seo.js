@@ -48,7 +48,7 @@ const baseRoutes = {
 };
 
 function socialPath(path) {
-  return `/assets/social/${path === '/' ? 'start' : path.slice(1).replaceAll('/', '--')}.webp`;
+  return `/assets/social/${path === '/' ? 'start' : path.slice(1).replaceAll('/', '--')}.jpg`;
 }
 
 function metadataForProperty(property) {
@@ -71,6 +71,7 @@ export const routeMetadata = Object.fromEntries(Object.entries({ ...baseRoutes, 
   title: `${metadata.title} · ${brand}`,
   previewTitle: metadata.previewTitle || metadata.title,
   image: socialPath(path),
+  imageType: 'image/jpeg',
   imageWidth: 1200,
   imageHeight: 630,
   generatedImage: metadata.imageName.startsWith('services/'),
@@ -97,6 +98,7 @@ export function metadataFor(path, property) {
       title: `${current.title} · ${brand}`,
       image: photo?.src || preview.image,
       imageAlt: photo ? current.imageAlt : preview.imageAlt,
+      imageType: photo ? 'image/webp' : preview.imageType,
       imageWidth: photo ? photo.width : preview.imageWidth,
       imageHeight: photo ? photo.height : preview.imageHeight,
     };
@@ -134,6 +136,7 @@ export function seoTagsFor(path, property) {
       'og:title': metadata.title,
       'og:description': metadata.description,
       'og:image': image,
+      'og:image:type': metadata.imageType,
       'og:image:alt': metadata.imageAlt,
       'og:image:width': metadata.imageWidth ? String(metadata.imageWidth) : '',
       'og:image:height': metadata.imageHeight ? String(metadata.imageHeight) : '',

@@ -21,7 +21,7 @@ if (pages) {
 const manifestPath = join(root, 'src/media-manifest.js');
 const widths = [320, 640, 960, 1440];
 const variantSignature = 'webp-q82-effort5-widths320,640,960,1440-v1';
-const socialSignature = 'aurora-webp86-v2';
+const socialSignature = 'aurora-jpeg88-444-v3';
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 const escapeXml = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[char]));
 
@@ -43,6 +43,12 @@ async function previousManifest() {
 
 async function exists(path) {
   try { return (await stat(path)).size > 0; } catch { return false; }
+}
+
+async function prepareAppleTouchIcon() {
+  const icon = await sharp(join(root, 'public/favicon.svg'), { density: 216 })
+    .resize(180, 180).flatten({ background: '#faf9f6' }).png().toBuffer();
+  await writeIfChanged(join(root, 'public/apple-touch-icon.png'), icon);
 }
 
 async function writeManifest(manifest) {
@@ -162,7 +168,8 @@ async function prepareSocial(routeMetadata, manifest) {
       { input: overlay, left: 0, top: 0 },
       { input: heading.data, left: image ? textX : Math.round(textX - heading.info.width / 2), top: Math.round((630 - heading.info.height) / 2) },
     );
-    const output = await sharp(socialBackdrop).composite(layers).webp({ quality: 86, effort: 5 }).toBuffer();
+    const output = await sharp(socialBackdrop).composite(layers)
+      .jpeg({ quality: 88, chromaSubsampling: '4:4:4', mozjpeg: true }).toBuffer();
     if (await writeIfChanged(outputPath, output)) outputs++;
   }
   manifest.social = social;
@@ -235,6 +242,7 @@ if (process.argv.includes('--page-heads')) {
   await preparePageHeads();
 } else {
   const { manifest, outputs } = await prepareImages();
+  await prepareAppleTouchIcon();
   const { routeMetadata } = await import(pathToFileURL(join(root, 'src/seo.js')).href);
   const socialOutputs = await prepareSocial(routeMetadata, manifest);
   const variants = Object.values(manifest.images).reduce((total, image) => total + image.variants.length, 0);

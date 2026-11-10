@@ -14,9 +14,9 @@ Namen werden ohne Dateiendung relativ zu `/assets/` angegeben, beispielsweise `f
 
 `src/seo.js` exportiert `routeMetadata`, `metadataFor(path)`, `seoTagsFor(path)` und `updateSeo(path)`. Die Bibliothek enthält individuelle Titel und Beschreibungen für die Hauptseiten, die Verkäuferseite `/immobilie-verkaufen` und alle 49 Objekte. Verkaufte Referenzen bleiben auch in den Metadaten als verkauft gekennzeichnet. Such- und Filterparameter werden nicht als eigene Seiten behandelt.
 
-Für jede der 62 Routen entsteht unter `public/assets/social/` ein 1200 × 630 Pixel großes Sharebild mit hellem Aurora-Hintergrund, Serifentitel und Basalic-Schriftzug. Wo ein passendes Motiv vorhanden ist, zeigt die Vorschau das zugeordnete lokale Foto. Die drei Service-Sharebilder mit KI-Motiv tragen die sichtbare Kennzeichnung „KI-generiertes Beispielbild“. Die Startseite und Seiten ohne Bildmotiv verwenden die Aurora als alleinigen Hintergrund.
+Für jede der 62 Routen entsteht unter `public/assets/social/` ein JPEG mit 1200 × 630 Pixeln für Linkvorschauen, mit hellem Aurora-Hintergrund, Serifentitel und Basalic-Schriftzug. Wo ein passendes Motiv vorhanden ist, zeigt die Vorschau das zugeordnete lokale Foto. Die drei Service-Sharebilder mit KI-Motiv tragen die sichtbare Kennzeichnung „KI-generiertes Beispielbild“. Die Startseite und Seiten ohne Bildmotiv verwenden die Aurora als alleinigen Hintergrund. Ältere WebP-Adressen bleiben für bereits geteilte Links abrufbar.
 
-Die HTML-Vorlage bindet das Aurora-Favicon als 96 × 96 Pixel großes PNG unter `/favicon.png` ein. Die Vektorfassung liegt unter `/favicon.svg`. Die PNG-Datei steht Google für die Suchergebnisse zur Verfügung, sobald Google die öffentlich erreichbare Startseite und das Favicon erneut gecrawlt hat.
+Die HTML-Vorlage bindet das Aurora-Favicon als PNG unter `/favicon.png` mit 96 × 96 Pixeln ein. Aus der Vektorfassung unter `/favicon.svg` entsteht außerdem `/apple-touch-icon.png` mit 180 × 180 Pixeln für iOS. Die PNG-Datei des Favicons steht Google für die Suchergebnisse zur Verfügung, sobald Google die öffentlich erreichbare Startseite und das Favicon erneut gecrawlt hat.
 
 `npm run build` führt drei Schritte aus:
 

@@ -1783,374 +1783,374 @@ export const mediaManifest = {
   },
   "social": {
     "/": {
-      "src": "/assets/social/start.webp",
-      "fingerprint": "53494917ebf0200265f8d29405a57c97daba1179b3cdbc24ba5ba44184c78191",
+      "src": "/assets/social/start.jpg",
+      "fingerprint": "4d883986ec5b38906dd6b455283a16c3d004ae42b6bcd1c6c28b9f38311d66de",
       "width": 1200,
       "height": 630
     },
     "/immobilien": {
-      "src": "/assets/social/immobilien.webp",
-      "fingerprint": "e69f36c7d09e556f3afa7419f07fc56dfbdba7f419534a001959c95bc360295e",
+      "src": "/assets/social/immobilien.jpg",
+      "fingerprint": "b18980eb64aad2099d3c1f072afee3bcc888dd189765d109b621cea74175f8a9",
       "width": 1200,
       "height": 630
     },
     "/immobilie-verkaufen": {
-      "src": "/assets/social/immobilie-verkaufen.webp",
-      "fingerprint": "62445d7725516dadbabf3b56ee20660e445a356756bbb34b27f72d3408a4190e",
+      "src": "/assets/social/immobilie-verkaufen.jpg",
+      "fingerprint": "00cce07209b0c78cc461225e318f3f65e316153059d46cb208b5d656a2b555b7",
       "width": 1200,
       "height": 630
     },
     "/mietverwaltung": {
-      "src": "/assets/social/mietverwaltung.webp",
-      "fingerprint": "f0bc25ed26d7fa4f0681e4c973ed319e8995d9e0bb7103dae69c4a5206f2d2cf",
+      "src": "/assets/social/mietverwaltung.jpg",
+      "fingerprint": "b0da92ab506017a01e163f01ea48a58ed30a2f66db0c03eb8d0858af49c38024",
       "width": 1200,
       "height": 630
     },
     "/finanzierung": {
-      "src": "/assets/social/finanzierung.webp",
-      "fingerprint": "703a647fa1e543a1b0ddba3fbe3ca7c5c67ce6e588b3be2b936fbb519dd16ed5",
+      "src": "/assets/social/finanzierung.jpg",
+      "fingerprint": "6c14a051001bf753b9be71fab3e1e519fe0e214c9847449731a4cf1a6d3c47a3",
       "width": 1200,
       "height": 630
     },
     "/vorsorge": {
-      "src": "/assets/social/vorsorge.webp",
-      "fingerprint": "49a1c15c37d0ef5a6f8f3e5e252f6d1decbd62fcb472cd66f5753d6307696f3e",
+      "src": "/assets/social/vorsorge.jpg",
+      "fingerprint": "6c3a5c5033dff7a2706acf9bc2cdb08df9f33bb0f4efe705d585d23430ab834e",
       "width": 1200,
       "height": 630
     },
     "/ueber-uns": {
-      "src": "/assets/social/ueber-uns.webp",
-      "fingerprint": "5765101940e2afea846af3eb4f42b1be05431e1d6428b8b93f5bedc06aecf528",
+      "src": "/assets/social/ueber-uns.jpg",
+      "fingerprint": "6ca92b08a1392353acbbcbb6f68e0fafa8f86b150e79b5f720a64f2361ed435b",
       "width": 1200,
       "height": 630
     },
     "/kontakt": {
-      "src": "/assets/social/kontakt.webp",
-      "fingerprint": "b1d9f5d6e324bd749c050ecc9617baa31ba47b39e9efe94a3ac1855dc790269a",
+      "src": "/assets/social/kontakt.jpg",
+      "fingerprint": "c7676abf8fdff519728e00251c7262fedd5ecf279074a93a29a51f5ef735f1af",
       "width": 1200,
       "height": 630
     },
     "/impressum": {
-      "src": "/assets/social/impressum.webp",
-      "fingerprint": "9c951dabcbb16f7debf7a1de50d1ac0bbc128131765f54419c33330ee6c0062c",
+      "src": "/assets/social/impressum.jpg",
+      "fingerprint": "ae1416963bfa44440c6e7414c6f9e63ce9ac0fbb9c6887b9c96e686ff26bd6f5",
       "width": 1200,
       "height": 630
     },
     "/datenschutz": {
-      "src": "/assets/social/datenschutz.webp",
-      "fingerprint": "49d4b1008d1cd93f8e123c2a8b524fafa5f43f2d83450895826273d127e342af",
+      "src": "/assets/social/datenschutz.jpg",
+      "fingerprint": "7a1e41b9230caa43be3f6d89df4b7767a3634d65640dc1257ef4793dc5895a22",
       "width": 1200,
       "height": 630
     },
     "/erstinformationen": {
-      "src": "/assets/social/erstinformationen.webp",
-      "fingerprint": "a80d6e3d2ae3e1bf30053afb2b80b264cf116af026f3c84ca1a5910841cb3d1b",
+      "src": "/assets/social/erstinformationen.jpg",
+      "fingerprint": "07cc9cb096dc0f99018fa1cae60f721752b0c9e8d51b0189eaed84f9569e7c68",
       "width": 1200,
       "height": 630
     },
     "/barrierefreiheit": {
-      "src": "/assets/social/barrierefreiheit.webp",
-      "fingerprint": "899d5d2c7d8cdeec2c50d97631f445d2f62a4b84d9e920a20463368db950a8a7",
+      "src": "/assets/social/barrierefreiheit.jpg",
+      "fingerprint": "78d1a633c094517842ecc8e9b232cac1cd9ccbf85d513d444d4bf017fa197a14",
       "width": 1200,
       "height": 630
     },
     "/bildnachweise": {
-      "src": "/assets/social/bildnachweise.webp",
-      "fingerprint": "6230c98b5a8d16e71e1c760b5ba4b75fcffb8ddd91c099fdb2c5fcbc4a9e31e7",
+      "src": "/assets/social/bildnachweise.jpg",
+      "fingerprint": "933eecbca22347b58b9314978a7e221ea72b64474ccfa59089d6aeb8033d934a",
       "width": 1200,
       "height": 630
     },
     "/immobilien/faurndau": {
-      "src": "/assets/social/immobilien--faurndau.webp",
-      "fingerprint": "0c453e68cb727b209d6faf41b9924618d8ba1b4a801e65c2c3abc6a2fc4c6b6e",
+      "src": "/assets/social/immobilien--faurndau.jpg",
+      "fingerprint": "31bd58feecf3a070218b465809d8215b6d0289f9452de5bf5c1a490264efa852",
       "width": 1200,
       "height": 630
     },
     "/immobilien/muehlhausen": {
-      "src": "/assets/social/immobilien--muehlhausen.webp",
-      "fingerprint": "8acc529cccb7ba03640fa47c9c062765c770d8c443418738ad64462ad55356d6",
+      "src": "/assets/social/immobilien--muehlhausen.jpg",
+      "fingerprint": "e95f9c9d89286c732ab3c4d132ea3a02ff51ae2867b5564ba53436780647a7fd",
       "width": 1200,
       "height": 630
     },
     "/immobilien/neidlingen": {
-      "src": "/assets/social/immobilien--neidlingen.webp",
-      "fingerprint": "695067359cd0f9a1c7d37eb39a363662415eb773d0eba9c0772313d5f661559d",
+      "src": "/assets/social/immobilien--neidlingen.jpg",
+      "fingerprint": "613d8cebfaf45efc5215df9f5bacfd4aaa9184bcee867b5856857f04f589e81e",
       "width": 1200,
       "height": 630
     },
     "/immobilien/bezgenriet": {
-      "src": "/assets/social/immobilien--bezgenriet.webp",
-      "fingerprint": "804f6e10d14885fa35cd94733171cfa51c7a7676b109155477b3cf8061797efd",
+      "src": "/assets/social/immobilien--bezgenriet.jpg",
+      "fingerprint": "3658f41c7548913fc885a684b649c5806e40cbb41e4d898a3b7c737a2758a4e9",
       "width": 1200,
       "height": 630
     },
     "/immobilien/schwaebisch-hall": {
-      "src": "/assets/social/immobilien--schwaebisch-hall.webp",
-      "fingerprint": "df07513265c3a4a699b9a1d60852c1e420939dff1f65bd9bd67c2eddcdf8a110",
+      "src": "/assets/social/immobilien--schwaebisch-hall.jpg",
+      "fingerprint": "104ee639be2a1201d2539a82297885722508bad9262636a06fcbb4da704a0471",
       "width": 1200,
       "height": 630
     },
     "/immobilien/salach": {
-      "src": "/assets/social/immobilien--salach.webp",
-      "fingerprint": "ce1be36d143e3ebec507abaf1cbae8aa921e243ef39721383e76f47f0cd9420b",
+      "src": "/assets/social/immobilien--salach.jpg",
+      "fingerprint": "66dbb60f7c4e640841bac06fcea0f3751c487ea5d53c8ca2b6422522bc007790",
       "width": 1200,
       "height": 630
     },
     "/immobilien/plochingen": {
-      "src": "/assets/social/immobilien--plochingen.webp",
-      "fingerprint": "85c0ce6817aa24b1454109b9a2f514c97fdf96ec0882b5e1834bdf0c7f6300c5",
+      "src": "/assets/social/immobilien--plochingen.jpg",
+      "fingerprint": "694674a08873aa0387553fd1e43fb5323235f1df291b173975dbb644796ac821",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-plochingen": {
-      "src": "/assets/social/immobilien--referenz-plochingen.webp",
-      "fingerprint": "5711d2a9a1be0ab394ee7dd2bef971f0afa9c6637c08b235d7c57a604cec331c",
+      "src": "/assets/social/immobilien--referenz-plochingen.jpg",
+      "fingerprint": "753dfe02bfbdfdfd0ba154ac6542a7e6438b046b4abfbd9139ebdcaebbe8a71d",
       "width": 1200,
       "height": 630
     },
     "/immobilien/istrien": {
-      "src": "/assets/social/immobilien--istrien.webp",
-      "fingerprint": "9b4a18b870400aabcba56ba1bff1e9bbf878d7c5946d0f6497ee5602440b07c4",
+      "src": "/assets/social/immobilien--istrien.jpg",
+      "fingerprint": "a03090db0e0b4516eaf1298da7de6cd6de696b7414b6d9a0e7b0e13693ebc833",
       "width": 1200,
       "height": 630
     },
     "/immobilien/sarajevo": {
-      "src": "/assets/social/immobilien--sarajevo.webp",
-      "fingerprint": "0b2524203dd1a2cb39acccf436cec652187174bf601ecc9b73b361a1b3f12514",
+      "src": "/assets/social/immobilien--sarajevo.jpg",
+      "fingerprint": "e847a37b1f4b017cfccba8fb3b1ab67d97debcef286b1b23c932b9b227df0c44",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen": {
-      "src": "/assets/social/immobilien--referenz-eislingen.webp",
-      "fingerprint": "dd89fc5cf4b02865c45c93ef8a9dcae29e0e8dea88e7be36e7af2f398cedf63b",
+      "src": "/assets/social/immobilien--referenz-eislingen.jpg",
+      "fingerprint": "99097826b505fdb0fe7ac4b7af084deb291551c417bbff1e486ac1a68d94a382",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-uhingen": {
-      "src": "/assets/social/immobilien--referenz-uhingen.webp",
-      "fingerprint": "74920d0f4e88b70617f6773505788fb8aa760b733e7e8ef39efd3a34b2ecb6ca",
+      "src": "/assets/social/immobilien--referenz-uhingen.jpg",
+      "fingerprint": "36e6a741f40fb9b1d7021ed09a2785bb5b0d1179c2626be9cb50dbd22cf5a8df",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-garten": {
-      "src": "/assets/social/immobilien--referenz-eislingen-garten.webp",
-      "fingerprint": "62ef4ee5ec199d8e6c75e666dbce31bf2f60a9288c1d75414748fbe5c28635eb",
+      "src": "/assets/social/immobilien--referenz-eislingen-garten.jpg",
+      "fingerprint": "a8ff1fea3298dadcf4f8a11bf5ccd12ef2274e38e46610dd6cc4e136f40b2fb3",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-waldenbuch-wohnung": {
-      "src": "/assets/social/immobilien--referenz-waldenbuch-wohnung.webp",
-      "fingerprint": "d25e1f08606197a17d2234ae5b4de7ac69e424778c0e2c50605fd611561a2b90",
+      "src": "/assets/social/immobilien--referenz-waldenbuch-wohnung.jpg",
+      "fingerprint": "b497488b0f1b5072b0193d4c580e5ebec8207b730ba644e75113a47a9c579a49",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-74": {
-      "src": "/assets/social/immobilien--referenz-eislingen-74.webp",
-      "fingerprint": "c0328d82892c4314626d6792397d15214ac50901cd79d261719814ff030eb6af",
+      "src": "/assets/social/immobilien--referenz-eislingen-74.jpg",
+      "fingerprint": "a340142e359ff3d04d3cc328cef358cc38dac95f41f957b471766c6c580c899b",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-ditzingen": {
-      "src": "/assets/social/immobilien--referenz-ditzingen.webp",
-      "fingerprint": "4628e45b0c5b39f32474c3108f3477f648ee3b76340e9197039bbde694e40255",
+      "src": "/assets/social/immobilien--referenz-ditzingen.jpg",
+      "fingerprint": "435a45f108cdc09b6a5f47856bd8a0949c8ec85bb77bcbed5ac1b07c6c95238f",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-waldenbuch-haus": {
-      "src": "/assets/social/immobilien--referenz-waldenbuch-haus.webp",
-      "fingerprint": "e9ba55470999818bf41d380fb29302947d1717f1bcf6108199762da161323ec2",
+      "src": "/assets/social/immobilien--referenz-waldenbuch-haus.jpg",
+      "fingerprint": "3cb0199214cba597db89f5558a60eb1bea29a28c7ca93ab32781195e9b2948ef",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-nordstadt-74": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-nordstadt-74.webp",
-      "fingerprint": "f92717fd460844f27b16e42e2f22b62072f00851fa2eb71295d8d1524d6217e9",
+      "src": "/assets/social/immobilien--referenz-goeppingen-nordstadt-74.jpg",
+      "fingerprint": "ad4a3c9aabd4a814108b6d59eb9941b6965c507f3e6e39b7134129aab9631700",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-ebersbach": {
-      "src": "/assets/social/immobilien--referenz-ebersbach.webp",
-      "fingerprint": "aa35411d14e30f09093d0517f3583d70caa7bf7edfc5552117953208ead23d5f",
+      "src": "/assets/social/immobilien--referenz-ebersbach.jpg",
+      "fingerprint": "11a8ad23c0d110c5b9b5923e11429fc6babc1359eddc0d33b91b1cde44da500e",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-leinfelden-echterdingen": {
-      "src": "/assets/social/immobilien--referenz-leinfelden-echterdingen.webp",
-      "fingerprint": "031ab82823c72bff12add2777e556aadd91d78ca9d927d9d9ac6ff6e041bef0a",
+      "src": "/assets/social/immobilien--referenz-leinfelden-echterdingen.jpg",
+      "fingerprint": "ba60acf630ed540cfd12b83a83f852ec32287082b745940620f4b621328a0316",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-wangen-oberwaelden": {
-      "src": "/assets/social/immobilien--referenz-wangen-oberwaelden.webp",
-      "fingerprint": "0ac22bc5d35293dc15e8f1acc7ab48a00257cd51078040cad1310475eaa55a76",
+      "src": "/assets/social/immobilien--referenz-wangen-oberwaelden.jpg",
+      "fingerprint": "7eee5e09ddc6f9c88d8408f53663497cb961dafe4a04c7059d06ae5ef17880bf",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-gingen": {
-      "src": "/assets/social/immobilien--referenz-gingen.webp",
-      "fingerprint": "9982d7a09eccb9998e0d811d8b2510b5fc391e79c9c5630c85ab8d9b3967a925",
+      "src": "/assets/social/immobilien--referenz-gingen.jpg",
+      "fingerprint": "0289351a0cddd161506980af4585cdf7d115a8dfc46d521f04ba39d07b4bab95",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-ludwigsburg": {
-      "src": "/assets/social/immobilien--referenz-ludwigsburg.webp",
-      "fingerprint": "2a86382e42ac53091f35c8aed58b10c05648d33f7e4139450721e16b6a14a72a",
+      "src": "/assets/social/immobilien--referenz-ludwigsburg.jpg",
+      "fingerprint": "3370ab9b2a5d44b8f681e127444cf321807919b8379a583a6eeef84d914d2454",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-nordstadt-garten": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-nordstadt-garten.webp",
-      "fingerprint": "244e59a56afa5b78606bb8a5e2b6c3510da9ec98ac0dbc88fd71ac77b1d3b85c",
+      "src": "/assets/social/immobilien--referenz-goeppingen-nordstadt-garten.jpg",
+      "fingerprint": "a9459e7e1ab00ec54e28995ccf94967c703215d81564c09e393697ee0885dabe",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-penthouse-123": {
-      "src": "/assets/social/immobilien--referenz-eislingen-penthouse-123.webp",
-      "fingerprint": "c56f94c9f7731f46e97c9176ce7b0c81018934a20dc7fa90ac377265ddf9acc0",
+      "src": "/assets/social/immobilien--referenz-eislingen-penthouse-123.jpg",
+      "fingerprint": "8b5281a329b0521435bbb4ccf68fdfb49aef6064b200f9d2abd03dd59ad7e439",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-faurndau-wohnung": {
-      "src": "/assets/social/immobilien--referenz-faurndau-wohnung.webp",
-      "fingerprint": "ed701ec49093813aa8c8de071d0e29bfe38a6394a928903e583b841c3c739f79",
+      "src": "/assets/social/immobilien--referenz-faurndau-wohnung.jpg",
+      "fingerprint": "7ecd2c0294735b229c0e0e2b50d1a2d874489ccc57bbf2a051865191f749ea0d",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-plattenhardt-penthouse": {
-      "src": "/assets/social/immobilien--referenz-plattenhardt-penthouse.webp",
-      "fingerprint": "dbd1093619ea495082f3de98d5ae45b8fe05f3f84b7127d822ff41de5a985e67",
+      "src": "/assets/social/immobilien--referenz-plattenhardt-penthouse.jpg",
+      "fingerprint": "565b10c0e75124bc35ba8b525d7fa49c907c3a142e1adc00223c844afd3ab1d7",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-wangen-zweifamilienhaus": {
-      "src": "/assets/social/immobilien--referenz-wangen-zweifamilienhaus.webp",
-      "fingerprint": "770c76be87f4b4097cb6be5f3a0a2c23232165f249a1b18a39cedf922c0c0bdb",
+      "src": "/assets/social/immobilien--referenz-wangen-zweifamilienhaus.jpg",
+      "fingerprint": "4a64f2044faa5ded583bff89208389a4562e1d63402f3b0d1a048127a9068710",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-gartenwohnung-88": {
-      "src": "/assets/social/immobilien--referenz-gartenwohnung-88.webp",
-      "fingerprint": "b58bb4293a5ccc23da96aab429cd19d07f34c6fb1fe9505ecb16efbc5b1134a8",
+      "src": "/assets/social/immobilien--referenz-gartenwohnung-88.jpg",
+      "fingerprint": "fca86052fd57de3cf4f6899fff94e23fbd7edb45e0cb5114e608790ffcb4a103",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-75": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-75.webp",
-      "fingerprint": "c1d6cd5092916080a19ddb8df5e95ae332560c2d5cf8018a06ec6a7225eb55b4",
+      "src": "/assets/social/immobilien--referenz-goeppingen-75.jpg",
+      "fingerprint": "c5b5751be24bc6c236202493f4292fcd1d8d447239e54098a93d720425a2ffdd",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-103": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-103.webp",
-      "fingerprint": "95de3f2ee716df5b3e4cdf563565bb2eefe7d24d2a865f455e2371bf1db6c05b",
+      "src": "/assets/social/immobilien--referenz-goeppingen-103.jpg",
+      "fingerprint": "1e182b323c6b36ab190b5796cde29c0df6cc40f6ec80990c8e5a2296ed1afc1e",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-101": {
-      "src": "/assets/social/immobilien--referenz-eislingen-101.webp",
-      "fingerprint": "b742c66827bc58f3e9b7e50509c6d060d963f7de91bd63ba50c36ef18f5a79a1",
+      "src": "/assets/social/immobilien--referenz-eislingen-101.jpg",
+      "fingerprint": "b7bdecccd1b55ccdbd637dbdae76360d955fdbf0046364a2f6e5cb045fd0e713",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-plattenhardt-erdgeschoss": {
-      "src": "/assets/social/immobilien--referenz-plattenhardt-erdgeschoss.webp",
-      "fingerprint": "765bf53afbdb59a280c2b4746233af3fe21ef37c95a58a42504a4e38ff45eedb",
+      "src": "/assets/social/immobilien--referenz-plattenhardt-erdgeschoss.jpg",
+      "fingerprint": "59252d0951e1c86c6cbd364d4fa524f78b6fb1af36ba67121a12539a329090ce",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-penthouse-44": {
-      "src": "/assets/social/immobilien--referenz-eislingen-penthouse-44.webp",
-      "fingerprint": "85683d65f7a2f6538aeab001130727c374fa27cb8d5abba29e151585efb2e96f",
+      "src": "/assets/social/immobilien--referenz-eislingen-penthouse-44.jpg",
+      "fingerprint": "0a8847790ee0e31ed225b8f4c9efedd53447433d18ba5cdd1d58c0c36e83655f",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-plattenhardt-appartement": {
-      "src": "/assets/social/immobilien--referenz-plattenhardt-appartement.webp",
-      "fingerprint": "3679d5c034b527cac28b7ff44d7ffbb225309a990d50e73425a6bbe70822f33c",
+      "src": "/assets/social/immobilien--referenz-plattenhardt-appartement.jpg",
+      "fingerprint": "1a6767f22155b3a8561ef9a694f4a752a0db3ad4a0394db1bddd352129b5092b",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-tamm": {
-      "src": "/assets/social/immobilien--referenz-tamm.webp",
-      "fingerprint": "056d4553a2d8a492cdf0f56742074e510178afb0cd6acdd3d1ee27c568dcdac0",
+      "src": "/assets/social/immobilien--referenz-tamm.jpg",
+      "fingerprint": "6c7a8d659b72b8b5adf395b4d56184a10f428f49b120cc00564d74e18884ab7c",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-plattenhardt-79": {
-      "src": "/assets/social/immobilien--referenz-plattenhardt-79.webp",
-      "fingerprint": "7844a32f36b2aa21032e7b34873a43e5de42cc1b06f091763e8bd25f0aca8962",
+      "src": "/assets/social/immobilien--referenz-plattenhardt-79.jpg",
+      "fingerprint": "5a499cb1f77bf6c05cf823a462bd7ad439f85c91e72e85ebaa06801ebfa2def6",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-metzingen": {
-      "src": "/assets/social/immobilien--referenz-metzingen.webp",
-      "fingerprint": "71d712e5335fcabee27083589e385262be7354316b33cd90da906af8cadb4adf",
+      "src": "/assets/social/immobilien--referenz-metzingen.jpg",
+      "fingerprint": "8e1094e095cf79888679767f7676ea6e7201d2b0d5057ed7570314e955a77e01",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-duernau": {
-      "src": "/assets/social/immobilien--referenz-duernau.webp",
-      "fingerprint": "d57ded6b3c16ae537c2072d2ad3456bc2ebf24d1b04cae98d4d304e799e2fbd0",
+      "src": "/assets/social/immobilien--referenz-duernau.jpg",
+      "fingerprint": "489d1c741eea640a051f6e1867e31c35a7d08dd13e42c284f91aef91b2c417bd",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-appartement": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-appartement.webp",
-      "fingerprint": "ec8ea9ee1f134ce5ffd1f3ee6f0ab17d1158a3f25ee8909b1574b3282f0f559c",
+      "src": "/assets/social/immobilien--referenz-goeppingen-appartement.jpg",
+      "fingerprint": "dafa2d531634d4ac20fba3597da69691129e4715c4b039ffe0f210ff836d1575",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-wangen-bungalow-95": {
-      "src": "/assets/social/immobilien--referenz-wangen-bungalow-95.webp",
-      "fingerprint": "4fbac00b9875a24de52fa11043c986dd03f8142de9150e16e08908b11098e4b5",
+      "src": "/assets/social/immobilien--referenz-wangen-bungalow-95.jpg",
+      "fingerprint": "ea6de0cab92fb7eacb4990fa66c98d41351905d0bcd3e36360aff0498dc6a56a",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-zell": {
-      "src": "/assets/social/immobilien--referenz-zell.webp",
-      "fingerprint": "5c0693f23de3fdb33b9c7ab9d76fa5b28993310211ad98f92305ae29215a3b01",
+      "src": "/assets/social/immobilien--referenz-zell.jpg",
+      "fingerprint": "78b3bd2b65de57d219e1b34de6875b46e486d863c87d8d9a1b9d1a849e525ee1",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-wangen-grundstueck": {
-      "src": "/assets/social/immobilien--referenz-wangen-grundstueck.webp",
-      "fingerprint": "87259313c24a37cda71a105acb9374e204ed52787594da17594015a08d0392e0",
+      "src": "/assets/social/immobilien--referenz-wangen-grundstueck.jpg",
+      "fingerprint": "e5f373fd2a00c33bcf2df1a8cc93146e0b3dffb14a2aa2761231ce52a228e7ab",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-erdgeschoss-77": {
-      "src": "/assets/social/immobilien--referenz-eislingen-erdgeschoss-77.webp",
-      "fingerprint": "1b8fb2ad47627303e32b55ee3c738b1a3ceb8660e1b7b8fd3138dceacea2700c",
+      "src": "/assets/social/immobilien--referenz-eislingen-erdgeschoss-77.jpg",
+      "fingerprint": "a8e58923a244a509296dc3c36cf7b15ce93ef942dc731e90112e5f68b8f94cdd",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-eislingen-erdgeschoss-garten": {
-      "src": "/assets/social/immobilien--referenz-eislingen-erdgeschoss-garten.webp",
-      "fingerprint": "b06293cc00cd6d5bfe99ab5a2b2bd567de0641448aaf0ca55450f96f5a571f87",
+      "src": "/assets/social/immobilien--referenz-eislingen-erdgeschoss-garten.jpg",
+      "fingerprint": "174aa755dda30e8ebc32fe90c743024fb593221dcd70c678ed51fb6d481ed919",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-muellheim": {
-      "src": "/assets/social/immobilien--referenz-muellheim.webp",
-      "fingerprint": "219633927122d4eacba3e226b360ee1811eafcad65c1d295f0e0959a4bc3c9d7",
+      "src": "/assets/social/immobilien--referenz-muellheim.jpg",
+      "fingerprint": "25b80b2cc9f793e8a5822c3956caa1df29a19d4a978827acbff01bf4180a6721",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-ottenbach": {
-      "src": "/assets/social/immobilien--referenz-ottenbach.webp",
-      "fingerprint": "70c76814564ee9d41dfdee14aa38413d08e5f44433beb4d74440a4f0f2b48320",
+      "src": "/assets/social/immobilien--referenz-ottenbach.jpg",
+      "fingerprint": "f2c337590816f36dc85446f1a979e7115ad2d0c8fdde334e187390c66c2bf47d",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-murrhardt": {
-      "src": "/assets/social/immobilien--referenz-murrhardt.webp",
-      "fingerprint": "d58e1651232b8bc6fb67cf226c9e30c2718fcf209c8f70257fa4bc6f887ee8b6",
+      "src": "/assets/social/immobilien--referenz-murrhardt.jpg",
+      "fingerprint": "aa1ee43c1a1c068a174ccb7ec2b3939d88910dbe696ee6bd5b776b30ad7e67d1",
       "width": 1200,
       "height": 630
     },
     "/immobilien/referenz-goeppingen-zweifamilienhaus": {
-      "src": "/assets/social/immobilien--referenz-goeppingen-zweifamilienhaus.webp",
-      "fingerprint": "514dd9ef682008bbce315a234fde38284dab89d3ea2e5a22e73485b12ffc1112",
+      "src": "/assets/social/immobilien--referenz-goeppingen-zweifamilienhaus.jpg",
+      "fingerprint": "1d17080f156fa719d9fd92b2d666401088876095e31551f0436725361aac96c5",
       "width": 1200,
       "height": 630
     }

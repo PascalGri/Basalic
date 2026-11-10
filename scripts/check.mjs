@@ -202,9 +202,11 @@ for (const route of routes) {
   assert.equal(dom('meta[name="description"]').attr('content'), metadata.description, `${route}: individuelle Suchbeschreibung`);
   assert.equal(dom('meta[property="og:title"]').attr('content'), metadata.title, `${route}: Titel für Teilenvorschau`);
   assert.equal(dom('meta[property="og:image"]').attr('content'), `${seoConfig.siteUrl}${metadata.image}`, `${route}: Open-Graph-Vorschaubild`);
+  assert.equal(dom('meta[property="og:image:type"]').attr('content'), 'image/jpeg', `${route}: MIME-Typ der Teilenvorschau`);
   assert.equal(dom('meta[name="twitter:image"]').attr('content'), `${seoConfig.siteUrl}${metadata.image}`, `${route}: Twitter-Vorschaubild`);
   assert.equal(dom('meta[name="twitter:card"]').attr('content'), 'summary_large_image', `${route}: große Teilenvorschau`);
   assert.equal(dom('link[rel="icon"][type="image/png"][sizes="96x96"]').attr('href'), '/favicon.png', `${route}: PNG-Favicon für Browser und Suchmaschinen`);
+  assert.equal(dom('link[rel="apple-touch-icon"][sizes="180x180"]').attr('href'), '/apple-touch-icon.png', `${route}: iPhone-Symbol`);
   assert.equal(dom('meta[name="robots"]').attr('content'), seoConfig.allowIndexing ? 'index,follow,max-image-preview:large' : 'noindex,nofollow,noarchive', `${route}: bewusste Indexierungseinstellung`);
   if (!seoConfig.siteUrl) assert.equal(dom('link[rel="canonical"]').length, 0, `${route}: keine erfundene Produktionsdomain`);
   assert.ok(!servedTitles.has(metadata.title), `${route}: eindeutiger Seitentitel`);
@@ -243,6 +245,7 @@ for (const [name, image] of Object.entries(mediaManifest.images)) {
 const socialUrls = [...new Set(Object.values(routeMetadata).map(page => page.image))];
 for (const url of socialUrls) {
   const image = await sharp(join(root, 'public', url)).metadata();
+  assert.equal(image.format, 'jpeg', `${url}: Format der Teilenvorschau`);
   assert.equal(image.width, 1200, `${url}: Breite der Teilenvorschau`);
   assert.equal(image.height, 630, `${url}: Höhe der Teilenvorschau`);
 }
@@ -254,12 +257,19 @@ assert.match(favicon.headers.get('content-type'), /^image\/png\b/, 'PNG-Favicon 
 const { width: faviconWidth, height: faviconHeight } = await sharp(Buffer.from(await favicon.arrayBuffer())).metadata();
 assert.equal(faviconWidth, 96, 'PNG-Favicon 96 Pixel breit');
 assert.equal(faviconHeight, 96, 'PNG-Favicon quadratisch');
+const touchIcon = await request('/apple-touch-icon.png');
+assert.equal(touchIcon.status, 200, 'iPhone-Symbol erreichbar');
+assert.match(touchIcon.headers.get('content-type'), /^image\/png\b/, 'iPhone-Symbol korrekt ausgeliefert');
+const { width: iconWidth, height: iconHeight } = await sharp(Buffer.from(await touchIcon.arrayBuffer())).metadata();
+assert.equal(iconWidth, 180, 'iPhone-Symbol 180 Pixel breit');
+assert.equal(iconHeight, 180, 'iPhone-Symbol quadratisch');
 
 const imageUrls = [...manifest.assets.map(asset => `/assets/${asset.file}`), ...additionalImages, ...responsiveUrls, ...socialUrls];
 for (const url of imageUrls) {
   const response = await request(url);
   assert.equal(response.status, 200, `HTTP ${url}`);
-  assert.match(response.headers.get('content-type'), /image\/webp/, `${url}: korrekter MIME-Typ statt HTML-Fallback`);
+  const expectedType = url.endsWith('.jpg') ? 'image/jpeg' : 'image/webp';
+  assert.ok(response.headers.get('content-type')?.startsWith(expectedType), `${url}: korrekter MIME-Typ statt HTML-Fallback`);
 }
 console.log(`OK: 49 Objekte (7 Angebote + 2 Auslandsinfos + 40 verkauft), 54 ursprüngliche Bilddateien, ${serviceImages.length} neue Leistungsmotive und ${usedGalleryFiles.size} belegte Zusatzfotos, ${routes.length} HTTP-Routen mit individuellen Metadaten, ${responsiveUrls.length} responsive Bildvarianten, ${socialUrls.length} Teilenvorschauen, ${modules.length} JavaScript-Module, ${hashAnchors.length} statische Sprunglinks und keine Platzhalterlinks.`);
 console.log('Prüfgrenze: HTTP bestätigt die SPA-Auslieferung. Gerenderte Inhalte, dynamische Ziele, Tastatur, Filter, Animationen und Kontaktaktionen benötigen den separaten Browserbericht.');

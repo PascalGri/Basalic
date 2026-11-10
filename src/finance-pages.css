@@ -88,7 +88,12 @@
 .subpage .gallery-count { border-radius: 30px; }
 .subpage .object-hero figcaption { font-size: 12px; }
 .subpage .object-detail { gap: 64px; padding-top: 64px; padding-bottom: 64px; }
-.subpage .object-facts dd { font-family: var(--serif); font-size: 34px; }
+.subpage .object-facts dd {
+  font-family: var(--serif);
+  font-size: 34px;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
 .subpage .object-information > h2 { font-size: 36px; }
 .subpage .object-contact { top: 112px; padding: 30px; }
 .subpage .object-contact h2 { font-size: 38px; }
